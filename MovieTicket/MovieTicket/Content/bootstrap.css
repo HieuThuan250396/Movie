@@ -10,10 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-html, body, .main{height:100vh;} 
-#outer{
-min-height:100vh;
-}
+
 body {
   margin: 0;
 }

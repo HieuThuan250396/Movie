@@ -1,13 +1,15 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    
+
     <!-- Custom Theme files -->
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
@@ -16,7 +18,7 @@
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -25,9 +27,8 @@
     <div class="full">
         <div class="menu">
             <ul>
-                <li><a href="~/Views/Home/Index"><div class="hm"><i class="home1"></i><i class="home2"></i></div></a></li>
-                <li><a href="~/Views/Videos/Index"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
-                
+                <li><a href="~/Home/Index"><div class="hm"><i class="home1"></i><i class="home2"></i></div></a></li>
+                <li><a href="~/Videos/Index" class="active"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
                 <li><a href="reviews.html"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>
                 <li><a href="404.html"><div class="bk"><i class="booking"></i><i class="booking1"></i></div></a></li>
                 <li><a href="contact.html"><div class="cnt"><i class="contact"></i><i class="contact1"></i></div></a></li>
@@ -52,7 +53,7 @@
                         <a href="~/Account/Register">Đăng ký</a>
                     </div>
                     <div class="clearfix"></div>
-                    
+
                 </div>
                 @RenderBody()
                 <div class="clearfix"></div>
