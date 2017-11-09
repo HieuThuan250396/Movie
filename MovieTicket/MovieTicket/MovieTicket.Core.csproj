@@ -80,12 +80,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -195,6 +207,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -212,6 +227,78 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\CSS\bootstrap.min.css" />
+    <Content Include="Areas\Admin\CSS\calendar.css" />
+    <Content Include="Areas\Admin\CSS\clndr.css" />
+    <Content Include="Areas\Admin\CSS\custom.css" />
+    <Content Include="Areas\Admin\CSS\custom_1.css" />
+    <Content Include="Areas\Admin\CSS\examples.css" />
+    <Content Include="Areas\Admin\CSS\font-awesome.css" />
+    <Content Include="Areas\Admin\CSS\graph.css" />
+    <Content Include="Areas\Admin\CSS\main.css" />
+    <Content Include="Areas\Admin\CSS\owl.carousel.css" />
+    <Content Include="Areas\Admin\CSS\style.css" />
+    <Content Include="Areas\Admin\CSS\swipebox.css" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\images\404.png" />
+    <Content Include="Areas\Admin\images\arr.png" />
+    <Content Include="Areas\Admin\images\dark.png" />
+    <Content Include="Areas\Admin\images\ga.jpg" />
+    <Content Include="Areas\Admin\images\ga1.jpg" />
+    <Content Include="Areas\Admin\images\ga2.jpg" />
+    <Content Include="Areas\Admin\images\ga3.jpg" />
+    <Content Include="Areas\Admin\images\ga4.jpg" />
+    <Content Include="Areas\Admin\images\ga5.jpg" />
+    <Content Include="Areas\Admin\images\ga6.jpg" />
+    <Content Include="Areas\Admin\images\ga7.jpg" />
+    <Content Include="Areas\Admin\images\ga8.jpg" />
+    <Content Include="Areas\Admin\images\icons.svg" />
+    <Content Include="Areas\Admin\images\in.jpg" />
+    <Content Include="Areas\Admin\images\in1.jpg" />
+    <Content Include="Areas\Admin\images\in10.jpg" />
+    <Content Include="Areas\Admin\images\in11.jpg" />
+    <Content Include="Areas\Admin\images\in2.jpg" />
+    <Content Include="Areas\Admin\images\in3.jpg" />
+    <Content Include="Areas\Admin\images\in4.jpg" />
+    <Content Include="Areas\Admin\images\in5.jpg" />
+    <Content Include="Areas\Admin\images\in6.jpg" />
+    <Content Include="Areas\Admin\images\in7.jpg" />
+    <Content Include="Areas\Admin\images\in8.jpg" />
+    <Content Include="Areas\Admin\images\in9.jpg" />
+    <Content Include="Areas\Admin\images\link.png" />
+    <Content Include="Areas\Admin\images\lo.png" />
+    <Content Include="Areas\Admin\images\na.jpg" />
+    <Content Include="Areas\Admin\images\na1.jpg" />
+    <Content Include="Areas\Admin\images\na2.jpg" />
+    <Content Include="Areas\Admin\images\pic3.jpg" />
+    <Content Include="Areas\Admin\images\pr.jpg" />
+    <Content Include="Areas\Admin\images\search.png" />
+    <Content Include="Areas\Admin\images\tick1.png" />
+    <Content Include="Areas\Admin\images\wo.jpg" />
+    <Content Include="Areas\Admin\JS\bootstrap.min.js" />
+    <Content Include="Areas\Admin\JS\Chart.js" />
+    <Content Include="Areas\Admin\JS\clndr.js" />
+    <Content Include="Areas\Admin\JS\custom.js" />
+    <Content Include="Areas\Admin\JS\data.js" />
+    <Content Include="Areas\Admin\JS\gmaps.js" />
+    <Content Include="Areas\Admin\JS\jquery.calendario.js" />
+    <Content Include="Areas\Admin\JS\jquery.flot.js" />
+    <Content Include="Areas\Admin\JS\jquery.flot.pie.js" />
+    <Content Include="Areas\Admin\JS\jquery.flot.selection.js" />
+    <Content Include="Areas\Admin\JS\jquery.flot.stack.js" />
+    <Content Include="Areas\Admin\JS\jquery.metisMenu.js" />
+    <Content Include="Areas\Admin\JS\jquery.min.js" />
+    <Content Include="Areas\Admin\JS\jquery.nicescroll.js" />
+    <Content Include="Areas\Admin\JS\jquery.slimscroll.min.js" />
+    <Content Include="Areas\Admin\JS\jquery.swipebox.min.js" />
+    <Content Include="Areas\Admin\JS\moment-2.2.1.js" />
+    <Content Include="Areas\Admin\JS\owl.carousel.js" />
+    <Content Include="Areas\Admin\JS\pie-chart.js" />
+    <Content Include="Areas\Admin\JS\screenfull.js" />
+    <Content Include="Areas\Admin\JS\scripts.js" />
+    <Content Include="Areas\Admin\JS\site.js" />
+    <Content Include="Areas\Admin\JS\skycons.js" />
+    <Content Include="Areas\Admin\JS\underscore-min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
@@ -271,6 +358,18 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\fonts\Montserrat-Regular.ttf" />
+    <Content Include="Areas\Admin\fonts\Muli-Regular.ttf" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Login.cshtml" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -327,6 +426,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

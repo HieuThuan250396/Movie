@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTicket", "MovieTicket\MovieTicket.csproj", "{D0A3B009-A0FA-4C06-81E2-8AAFA155D5FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTicket.Core", "MovieTicket\MovieTicket.Core.csproj", "{D0A3B009-A0FA-4C06-81E2-8AAFA155D5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTicket.Repository", "MovieTicket.Repository\MovieTicket.Repository.csproj", "{9C1B116E-0044-46A1-9619-CC8D5D6E3A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTicket.Service", "MovieTicket.Service\MovieTicket.Service.csproj", "{7CCD5BFB-130B-42F4-AC1B-9DBE39D0E5E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D0A3B009-A0FA-4C06-81E2-8AAFA155D5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0A3B009-A0FA-4C06-81E2-8AAFA155D5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0A3B009-A0FA-4C06-81E2-8AAFA155D5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C1B116E-0044-46A1-9619-CC8D5D6E3A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1B116E-0044-46A1-9619-CC8D5D6E3A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1B116E-0044-46A1-9619-CC8D5D6E3A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1B116E-0044-46A1-9619-CC8D5D6E3A45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCD5BFB-130B-42F4-AC1B-9DBE39D0E5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCD5BFB-130B-42F4-AC1B-9DBE39D0E5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCD5BFB-130B-42F4-AC1B-9DBE39D0E5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCD5BFB-130B-42F4-AC1B-9DBE39D0E5E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
