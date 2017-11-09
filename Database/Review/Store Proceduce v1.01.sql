@@ -5,11 +5,14 @@ go
 create proc sp_addPhim (@matheloai int, @daodien nvarchar(50), @tenphim nvarchar(50), @ngaykhoichieu date, @ngayketthuc date,
 @mota nvarchar(200), @hinh nvarchar(100), @nhasanxuat nvarchar(50), @thoiluong int, @trailer nvarchar(50))
 as
+begin 
 	declare @maphim int = 1
 	while exists(select * from Phim where maphim = @maphim)
 		set @maphim += 1
 
 	insert into Phim values(@maphim, @matheloai, @daodien, @tenphim, @ngaykhoichieu, @ngayketthuc, @mota, @hinh, @nhasanxuat, @thoiluong, @trailer)
+end
+go
 
 exec sp_addphim @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
 @thoiluong = 0, @trailer = ''
@@ -19,6 +22,7 @@ go
 create proc sp_editPhim (@maphim int, @matheloai int, @daodien nvarchar(50), @tenphim nvarchar(50), @ngaykhoichieu date, @ngayketthuc date,
 @mota nvarchar(200), @hinh nvarchar(100), @nhasanxuat nvarchar(50), @thoiluong int, @trailer nvarchar(50))
 as
+begin 
 	update Phim 
 	set 
 		matheloai = @matheloai,
@@ -32,13 +36,15 @@ as
 		thoiluong = @thoiluong,
 		trailer = @trailer
 	where maphim = @maphim
+end 
+go
 
 exec sp_editPhim @maphim = 0, @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
 @thoiluong = 0, @trailer = ''
 go
 
 -- Delete phim
-create proc sp_deletePhim @maphim int
+/*create proc sp_deletePhim @maphim int
 as
 	if getdate() >= (select dateadd(month, 3, ngayketthuc) from Phim where maphim = @maphim)
 		delete from Phim where maphim = @maphim
@@ -46,16 +52,93 @@ as
 		raiserror('Can not delete phim because time error', 16, 1)
 
 exec sp_deletePhim 0
+go*/
+
+
+-- Load phim con dang chieu
+create proc sp_loadPhimDangChieu
+as
+begin
+	select *
+	from Phim 
+	where ngaykhoichieu <= getdate() and getdate() <= ngayketthuc
+end
 go
+
+
+-- Load phim con dang chieu
+create proc sp_loadPhimSapChieu
+as
+begin
+	select *
+	from Phim 
+	where ngaykhoichieu > getdate()
+end
+go
+
+-- Load phim con dang chieu
+create proc sp_loadPhimDaChieu
+as
+begin
+	select *
+	from Phim 
+	where ngayketthuc < getdate()
+end
+go
+
+-- Load chi tiet phim
+create proc sp_loadChiTietPhim( @maphim int)
+as
+begin
+	select *
+	from Phim 
+	where maphim = @maphim
+end
+go
+
+-- Load phim theo the loai
+create proc sp_loadPhimTheoTheLoai( @matheloai int)
+as
+begin
+	select *
+	from Phim 
+	where matheloai = @matheloai
+end
+go
+
+-- Load phim theo ten
+create proc sp_loadPhimTheoTen( @tenphim nvarchar(50))
+as
+begin
+	select *
+	from Phim 
+	where tenphim like '%' + @tenphim + '%'
+end
+go
+
+-- Load tat ca
+create proc sp_loadTatCaPhim
+as
+begin
+	select *
+	from Phim 
+end
+go
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Add the loai
 create proc sp_addTheLoai @tentheloai nvarchar(50)
 as
+begin
 	declare @matheloai int = 1
 	while exists (select * from TheLoai where matheloai = @matheloai)
 		set @matheloai += 1
 
 	insert into TheLoai values(@matheloai, @tentheloai)
+end
+
+go
 
 exec sp_addTheLoai ''
 go
@@ -63,38 +146,82 @@ go
 -- Edit the loai
 create proc sp_editTheLoai (@matheloai int, @tentheloai nvarchar(50))
 as
+begin
 	update TheLoai 
 	set 
 		tentheloai = @tentheloai
 	where
 		matheloai = @matheloai
+end
+	
+go 
 
 exec sp_editTheLoai @matheloai = 0, @tentheloai = ''
 go
 
 -- Delete the loai
-create proc sp_deleteTheLoai @matheloai int
+/*create proc sp_deleteTheLoai @matheloai int
 as
 	delete from TheLoai where matheloai = @matheloai
 
 exec sp_deleteTheLoai 0
+go*/
+
+-- Load the loai
+
+create proc sp_loadTheLoai (@matheloai int)
+as
+begin
+	select tentheloai
+	from theloai
+	where matheloai = @matheloai
+end
+	
+go 
+
+exec sp_loadTheLoai @matheloai = 0
 go
+
+-- Load tat ca the loai 
+
+create proc sp_loadTatCaTheLoai
+as
+begin
+	select tentheloai
+	from theloai
+end
+	
+go 
+
+exec sp_loadTatCaTheLoai
+go
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------++
 
 -- Add phong chieu
 create proc sp_addPhongChieu (@tenphong nvarchar(50), @soghecontrong int, @soghebandau int)
 as
+begin
 	declare @maphong int = 1
 	while exists (select * from PhongChieu where maphong = @maphong)
 		set @maphong += 1
 
 	insert into TheLoai values(@maphong, @tenphong, @soghecontrong, @soghebandau)
 
+end
+
+go
+	
 exec sp_addTheLoai ''
 go
+
+
 
 -- Edit phong chieu
 create proc sp_editPhongChieu (@maphong int, @tenphong nvarchar(50), @soghecontrong int, @soghebandau int)
 as
+begin
 	update PhongChieu 
 	set 
 		tenphong = @tenphong,
@@ -102,6 +229,7 @@ as
 		soghebandau = @soghebandau
 	where
 		maphong = @maphong
+end
 
 exec sp_editPhongChieu @maphong = 0, @tenphong = '', @soghecontrong = 0, @soghebandau = 0
 go
@@ -113,6 +241,17 @@ as
 
 exec sp_deleteTheLoai 0
 go*/
+
+-- Load phong chieu
+create proc sp_loadTatCaPhongChieu
+as
+begin
+	select * from PhongChieu
+end
+
+go
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Add khuyen mai
 create proc sp_addKhuyenMai (@ngaybatdau date, @ngayketthuc date, @giatri float)
@@ -144,7 +283,7 @@ exec sp_editKhuyenMai @makm = 0, @ngaybatdau = '', @ngayketthuc = '', @giatri = 
 go
 
 -- Delete khuyen mai
-create proc sp_deleteKhuyenMai (@makm int)
+/*create proc sp_deleteKhuyenMai (@makm int)
 as
 	if getdate() >= (select ngayketthuc from KhuyenMai where makm = @makm)
 		delete from KhuyenMai where makm = @makm
@@ -152,16 +291,28 @@ as
 		raiserror('Cant delete because of time', 16, 1)
 
 exec sp_deleteKhuyenMai 0
+go*/
+
+create proc sp_loadTatCaKhuyenMai
+as
+begin
+	select * from Khuyenmai
+end
+
 go
+
+---------------------------------------------------------------------------------------------------------------------------------
 
 -- Add loai ve
 create proc sp_addLoaiVe (@tenloaive nvarchar(50), @giave float)
 as
+begin
 	declare @maloaive int = 1
 	while exists(select * from LoaiVe where maloaive = @maloaive)
 		set @maloaive += 1
 
 	insert into LoaiVe values (@maloaive, @tenloaive, @giave)
+end
 
 exec sp_addLoaiVe @tenloaive = '', @giave = 0
 go
@@ -169,25 +320,40 @@ go
 -- Edit loai ve
 create proc sp_editLoaiVe (@maloaive int, @tenloaive nvarchar(50), @giave float)
 as
+begin
 	update LoaiVe 
 	set 
 		tenloaive = @tenloaive,
 		giave = @giave
 	where
 		maloaive = @maloaive
+end
 
 exec sp_editLoaiVe @maloaive = 0, @tenloaive = '', @giave = 0
 go
 
 -- Delete loai ve
-create proc sp_deleteLoaiVe (@maloaive int)
+/*create proc sp_deleteLoaiVe (@maloaive int)
 as
+begin
 	delete from LoaiVe where maloaive = @maloaive
+end
+
+exec sp_deleteLoaiVe 0
+go*/
+
+-- Load loai ve
+create proc sp_loadTatCaLoaiVe
+as
+	select * from LoaiVe
 
 exec sp_deleteLoaiVe 0
 go
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -- Add khach hang
+
 create proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
 @dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
@@ -229,13 +395,68 @@ exec sp_editKhachHang @makhachhang = 0, @ho = '', @tenlot = '', @ten = '', @ngay
 @quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
 go
 
--- Delete khach hang
+/*-- Delete khach hang
 create proc sp_deleteKhachHang @makhachhang int
 as
 	delete from KhachHang where makhachhang = @makhachhang
 
 exec sp_deleteKhachHang 0
 go
+*/
+
+-- load Tat ca khach hang
+create proc sp_loadTatCaKhachHang
+as 
+begin 
+	select *
+	from KhachHang
+end 
+go
+
+-- load Chi tiet khach hang theo id
+create proc sp_loadChiTietKhacHang(@makhachhang int)
+as 
+begin 
+	select *
+	from KhachHang
+	where makhachhang = @makhachhang
+end 
+go
+
+-- load Thong tin dang nhap
+alter proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau nvarchar(50))
+as 
+begin 
+	declare @matkhau1 nvarchar(50), @kq int
+	
+	select @matkhau1 = matkhau 
+	from KhachHang
+	where dienthoai = @dienthoai
+
+	if @matkhau1 is null
+	begin
+		raiserror('khong ton tai sdt', 16, 1)
+		set @kq = -1
+	end
+	else
+	begin
+		if @matkhau = @matkhau1
+		begin
+			set @kq = 1
+		end
+		else 
+		begin
+			raiserror('khong dung mat khau', 16, 1)
+			set @kq = 0
+		end
+	end
+	select @kq
+end 
+go
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Add ve
 create proc sp_addVe (@masuatchieu int, @makhachhang int, @giodat datetime, @maloaive int, @makm int)
@@ -298,4 +519,72 @@ as
 	delete from Ve where mave = @mave
 
 exec sp_deleteVe 0
+go
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
+as
+begin 
+	declare @masuatchieu int = 1, @mave int = 1
+	while exists(select * from SuatChieu where masuatchieu = @masuatchieu)
+		set @masuatchieu += 1
+	
+	declare  @ngayketthuc date, @thoiluong int
+
+	select @ngayketthuc = ngayketthuc, @thoiluong = thoiluong
+	from Phim
+	where maphim = @maphim
+
+	if @ngayketthuc is NULL
+		RAISERROR('Khong ton tai phim', 16, 4)
+	else 
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu)
+
+	while(@mave<=30)
+	begin 
+		declare @maloaive INT, @ngaygiochieu DATETIME, @giave int 
+		set @ngaygiochieu = cast(@ngaychieu as datetime) + cast(@giochieu as datetime)
+		if 11 <= @mave and @mave <= 20
+		begin
+			set @maloaive = 2
+			set @giave = 70000
+		end
+		else
+		begin 
+			set @maloaive = 1
+			set @giave = 50000
+		end
+		insert into Ve(mave, masuatchieu, makhachhang, maloaive, giochieu, tinhtrang, giodat, makm, giave) values (@mave, @masuatchieu, null, @maloaive, @ngaygiochieu, 0, null, null, @giave )
+		set @mave = @mave + 1
+	end
+	
+end
+go
+
+create proc sp_editSuatChieu
+as
+begin
+
+end
+go
+
+create proc sp_loadSuatChieu
+as
+begin
+
+end
+go
+
+create proc sp_loadSuatChieuTheoPhim
+as
+begin
+
+end
+go
+
+create proc sp_loadSuatChieuNgay
+as
+begin
+
+end
 go
