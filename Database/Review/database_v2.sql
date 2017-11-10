@@ -160,7 +160,20 @@ CREATE TABLE [dbo].[Ve](
 	[mave] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+GO
+/****** Object:  Administrator [dbo].[Administrator]    Script Date: 10/28/2017 1:12:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Administrator](
+	[taikhoan] [varchar](20) NOT NULL,
+	[matkhau] [varchar](20) NOT NULL
+ CONSTRAINT [PK_Administrator] PRIMARY KEY CLUSTERED 
+(
+	[taikhoan] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[Phim]  WITH CHECK ADD  CONSTRAINT [FK_Phim_TheLoai] FOREIGN KEY([matheloai])
 REFERENCES [dbo].[TheLoai] ([matheloai])
@@ -206,3 +219,4 @@ CREATE UNIQUE INDEX index_khachhang
 ON KhachHang (makhachhang)
 
 
+-----------------------
