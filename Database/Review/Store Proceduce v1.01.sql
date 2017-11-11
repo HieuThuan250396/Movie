@@ -200,14 +200,14 @@ go
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------++
 
 -- Add phong chieu
-create proc sp_addPhongChieu (@tenphong nvarchar(50), @soghecontrong int)
+create proc sp_addPhongChieu (@tenphong nvarchar(50))
 as
 begin
 	declare @maphong int = 1
 	while exists (select * from PhongChieu where maphong = @maphong)
 		set @maphong += 1
 
-	insert into TheLoai values(@maphong, @tenphong, @soghecontrong, 30)
+	insert into TheLoai values(@maphong, @tenphong,30)
 
 end
 
@@ -219,19 +219,18 @@ go
 
 
 -- Edit phong chieu
-create proc sp_editPhongChieu (@maphong int, @tenphong nvarchar(50), @soghecontrong int, @soghebandau int)
+create proc sp_editPhongChieu (@maphong int, @tenphong nvarchar(50), @soghebandau int)
 as
 begin
 	update PhongChieu 
 	set 
 		tenphong = @tenphong,
-		soghecontrong = @soghecontrong,
 		soghebandau = @soghebandau
 	where
 		maphong = @maphong
 end
 
-exec sp_editPhongChieu @maphong = 0, @tenphong = '', @soghecontrong = 0, @soghebandau = 0
+exec sp_editPhongChieu @maphong = 0, @tenphong = '',@soghebandau = 0
 go
 
 /*-- Delete phong chieu
@@ -458,7 +457,7 @@ go
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- add suat chieu
-create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
+create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date, @soghecontrong int)
 as
 begin 
 	declare @masuatchieu int = 1, @mave int = 1
@@ -467,16 +466,16 @@ begin
 	
 	declare  @ngayketthuc date, @thoiluong int
 
-	select @ngayketthuc = ngayketthuc, @thoiluong = thoiluong
+	select @ngayketthuc = ngayketthuc, @thoiluong = thoiluong, @soghecontrong  = (select count(*) from Ve where Ve.makhachhang Is Null)
 	from Phim
 	where maphim = @maphim
 
 	if @ngayketthuc is NULL
 		RAISERROR('Khong ton tai phim', 16, 4)
 	else 
-		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu)
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, @soghecontrong)
 
-	while(@mave<=30)
+	while(@mave<=(select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong = @maphong ))
 	begin 
 		declare @maloaive INT, @ngaygiochieu DATETIME, @giave int 
 		set @ngaygiochieu = cast(@ngaychieu as datetime) + cast(@giochieu as datetime)
@@ -490,14 +489,14 @@ begin
 			set @maloaive = 1
 			set @giave = 50000
 		end
-		insert into Ve(mave, masuatchieu, makhachhang, maloaive, giochieu, tinhtrang, giodat, makm, giave) values (@mave, @masuatchieu, null, @maloaive, @ngaygiochieu, 0, null, null, @giave )
+		insert into Ve(mave, masuatchieu, makhachhang, maloaive, tinhtrang, giodat, makm, giave) values (@mave, @masuatchieu, null, @maloaive, 0, null, null, @giave )
 		set @mave = @mave + 1
 	end
 	
 end
 go
 ---edit suat chieu 
-create proc sp_editSuatChieu(@masuatchieu int, @maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
+create proc sp_editSuatChieu(@masuatchieu int, @maphim int, @maphong int, @giochieu time(7), @ngaychieu date, @soghecontrong int)
 as
 begin
 	update SuatChieu 
@@ -505,7 +504,8 @@ begin
 			maphim  = @maphim,
 			maphong = @maphong,
 			giochieu = @giochieu,
-			ngaychieu = @ngaychieu
+			ngaychieu = @ngaychieu,
+			soghecontrong = @soghecontrong
 		where
 			masuatchieu = @masuatchieu
 end
@@ -539,7 +539,7 @@ go
 
 
 
--- Add ve
+-- Add ve // kiem tra lam lai
 create proc sp_addVe (@masuatchieu int, @makhachhang int, @giodat datetime, @maloaive int, @makm int)
 as
 	
@@ -575,25 +575,32 @@ exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @
 go
 
 -- Edit ve
-create proc sp_editVe (@mave int, @masuatchieu int, @makhachhang int, @giave float, @giochieu datetime, @tinhtrang bit, @giodat datetime, 
-@maloaive int, @makm int)
+create proc sp_datveVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
 as
 begin
 	update Ve 
 	set 
-		masuatchieu = @masuatchieu,
 		makhachhang = @makhachhang,
-		giave = @giave,
-		giochieu = @giochieu,
-		tinhtrang = @tinhtrang,
-		giodat = @giodat,
-		maloaive = @maloaive,
-		makm = @makm
+		giodat = getdate(),
+		makm = @makm,
+		tinhtrang = 1
 	where
-		mave = @mave
+		mave = @mave and masuatchieu = @masuatchieu
+end
+go
+create proc sp_huyVe (@mave int, @masuatchieu int)
+as
+begin
+	update Ve 
+	set 
+		makhachhang = NULL,
+		giodat =NULL,
+		makm = NULL,
+		tinhtrang = 0
+	where
+		mave = @mave and masuatchieu = @masuatchieu
 end
 
-exec sp_editVe @mave = 0, @masuatchieu = 0, @makhachhang = 0, @giave = 0, @giochieu = '', @tinhtrang = 0, @giodat = '', @maloaive = 0, @makm = 0
 go
 
 /*
