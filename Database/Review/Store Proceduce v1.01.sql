@@ -346,7 +346,6 @@ create proc sp_loadTatCaLoaiVe
 as
 	select * from LoaiVe
 
-exec sp_deleteLoaiVe 0
 go
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -423,7 +422,7 @@ end
 go
 
 -- load Thong tin dang nhap
-alter proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau nvarchar(50))
+create proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau nvarchar(50))
 as 
 begin 
 	declare @matkhau1 nvarchar(50), @kq int
@@ -568,8 +567,7 @@ as
 
 
 	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @giochieu, @tinhtrang, @giodat, @maloaive, @makm)
-	update PhongChieu set soghecontrong -= 1
-
+	update SuatChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
 
 exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
 go
@@ -588,6 +586,7 @@ begin
 		mave = @mave and masuatchieu = @masuatchieu
 end
 go
+--tra ve 
 create proc sp_huyVe (@mave int, @masuatchieu int)
 as
 begin
@@ -613,3 +612,69 @@ exec sp_deleteVe 0
 go*/
 
 
+-- Add nhanvien
+create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(20), @vaitro char(2))
+as
+	declare @manv int = 1
+	while exists(select * from NhanVien where manv = @manv)
+		set @manv += 1
+	insert into NhanVien values(@manv, @taikhoan, @matkhau, @vaitro)
+
+go
+
+-- Edit nhanvien
+create proc sp_editNhanVien (@manv int, @taikhoan varchar(20), @matkhau varchar(20), @vaitro char(2))
+as
+	update NhanVien 
+	set 
+		taikhoan = @taikhoan,
+		matkhau = @matkhau,
+		vaitro = @vaitro
+	where
+		manv = @manv
+go
+--load dsNhanvien 
+create proc sp_loadDsNhanVien
+as
+begin
+	select * 
+	from NhanVien
+end
+--load nhan vien chi tiet
+go
+create proc sp_loadNhanVien(@manv int)
+as
+begin
+	select * 
+	from NhanVien
+	where NhanVien.manv = @manv
+end
+go
+create proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
+as 
+begin 
+	declare @matkhau1 nvarchar(50), @kq int
+	
+	select @matkhau1 = matkhau 
+	from NhanVien
+	where taikhoan = @taikhoan
+
+	if @matkhau1 is null
+	begin
+		raiserror('khong ton tai tai khoan', 16, 1)
+		set @kq = -1
+	end
+	else
+	begin
+		if @matkhau = @matkhau1
+		begin
+			set @kq = 1
+		end
+		else 
+		begin
+			raiserror('khong dung mat khau', 16, 1)
+			set @kq = 0
+		end
+	end
+	select @kq
+end 
