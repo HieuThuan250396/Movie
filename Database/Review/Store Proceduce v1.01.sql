@@ -14,8 +14,8 @@ begin
 end
 go
 
-exec sp_addphim @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
-@thoiluong = 0, @trailer = ''
+--exec sp_addphim @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
+--@thoiluong = 0, @trailer = ''
 go
 
 -- Edit phim
@@ -39,8 +39,8 @@ begin
 end 
 go
 
-exec sp_editPhim @maphim = 0, @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
-@thoiluong = 0, @trailer = ''
+--exec sp_editPhim @maphim = 0, @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
+--@thoiluong = 0, @trailer = ''
 go
 
 -- Delete phim
@@ -140,7 +140,7 @@ end
 
 go
 
-exec sp_addTheLoai ''
+--exec sp_addTheLoai ''
 go
 
 -- Edit the loai
@@ -156,7 +156,7 @@ end
 	
 go 
 
-exec sp_editTheLoai @matheloai = 0, @tentheloai = ''
+--exec sp_editTheLoai @matheloai = 0, @tentheloai = ''
 go
 
 -- Delete the loai
@@ -179,7 +179,7 @@ end
 	
 go 
 
-exec sp_loadTheLoai @matheloai = 0
+--exec sp_loadTheLoai @matheloai = 0
 go
 
 -- Load tat ca the loai 
@@ -193,7 +193,7 @@ end
 	
 go 
 
-exec sp_loadTatCaTheLoai
+--exec sp_loadTatCaTheLoai
 go
 
 
@@ -207,13 +207,13 @@ begin
 	while exists (select * from PhongChieu where maphong = @maphong)
 		set @maphong += 1
 
-	insert into TheLoai values(@maphong, @tenphong,30)
+	insert into PhongChieu values(@maphong, @tenphong,30, 30)
 
 end
 
 go
 	
-exec sp_addTheLoai ''
+--exec sp_addTheLoai ''
 go
 
 
@@ -230,7 +230,7 @@ begin
 		maphong = @maphong
 end
 
-exec sp_editPhongChieu @maphong = 0, @tenphong = '',@soghebandau = 0
+--exec sp_editPhongChieu @maphong = 0, @tenphong = '',@soghebandau = 0
 go
 
 /*-- Delete phong chieu
@@ -264,7 +264,7 @@ as
 
 	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri)
 
-exec sp_addKhuyenMai @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
+--exec sp_addKhuyenMai @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
 go
 
 -- Edit khuyen mai
@@ -278,7 +278,7 @@ as
 	where
 		makm = @makm
 
-exec sp_editKhuyenMai @makm = 0, @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
+--exec sp_editKhuyenMai @makm = 0, @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
 go
 
 -- Delete khuyen mai
@@ -289,7 +289,7 @@ as
 	else
 		raiserror('Cant delete because of time', 16, 1)
 
-exec sp_deleteKhuyenMai 0
+--exec sp_deleteKhuyenMai 0
 go*/
 
 create proc sp_loadTatCaKhuyenMai
@@ -313,7 +313,7 @@ begin
 	insert into LoaiVe values (@maloaive, @tenloaive, @giave)
 end
 
-exec sp_addLoaiVe @tenloaive = '', @giave = 0
+--exec sp_addLoaiVe @tenloaive = '', @giave = 0
 go
 
 -- Edit loai ve
@@ -328,7 +328,7 @@ begin
 		maloaive = @maloaive
 end
 
-exec sp_editLoaiVe @maloaive = 0, @tenloaive = '', @giave = 0
+--exec sp_editLoaiVe @maloaive = 0, @tenloaive = '', @giave = 0
 go
 
 -- Delete loai ve
@@ -363,8 +363,8 @@ as
 	insert into KhachHang values (@makhachhang, @ho, @tenlot, @ten, @ngaysinh, @gioitinh, @sonha, @tenduong, @quan, 
 	@thanhpho, @dienthoai, @email, @matkhau)
 
-exec sp_addKhachHang @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
-@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
+--exec sp_addKhachHang @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
+--@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
 go
 
 -- Edit khach hang
@@ -389,8 +389,8 @@ as
 	where
 		makhachhang = @makhachhang
 
-exec sp_editKhachHang @makhachhang = 0, @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
-@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
+--exec sp_editKhachHang @makhachhang = 0, @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
+--@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
 go
 
 /*-- Delete khach hang
@@ -456,7 +456,7 @@ go
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- add suat chieu
-create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date, @soghecontrong int)
+create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
 as
 begin 
 	declare @masuatchieu int = 1, @mave int = 1
@@ -465,14 +465,14 @@ begin
 	
 	declare  @ngayketthuc date, @thoiluong int
 
-	select @ngayketthuc = ngayketthuc, @thoiluong = thoiluong, @soghecontrong  = (select count(*) from Ve where Ve.makhachhang Is Null)
+	select @ngayketthuc = ngayketthuc, @thoiluong = thoiluong
 	from Phim
 	where maphim = @maphim
 
 	if @ngayketthuc is NULL
 		RAISERROR('Khong ton tai phim', 16, 4)
 	else 
-		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, @soghecontrong)
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu)
 
 	while(@mave<=(select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong = @maphong ))
 	begin 
@@ -495,7 +495,7 @@ begin
 end
 go
 ---edit suat chieu 
-create proc sp_editSuatChieu(@masuatchieu int, @maphim int, @maphong int, @giochieu time(7), @ngaychieu date, @soghecontrong int)
+create proc sp_editSuatChieu(@masuatchieu int, @maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
 as
 begin
 	update SuatChieu 
@@ -503,8 +503,7 @@ begin
 			maphim  = @maphim,
 			maphong = @maphong,
 			giochieu = @giochieu,
-			ngaychieu = @ngaychieu,
-			soghecontrong = @soghecontrong
+			ngaychieu = @ngaychieu
 		where
 			masuatchieu = @masuatchieu
 end
@@ -557,7 +556,7 @@ as
 		if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
 			raiserror('Thoi gian su dung khuyen mai khong dung.', 16, 1)
 		else
-			declare @giatri datetime = (select giatri from KhuyenMai where makm = @makm)
+			declare @giatri float = (select giatri from KhuyenMai where makm = @makm)
 			set @giave -= @giatri
 	end
 	-- set giochieu
@@ -567,9 +566,9 @@ as
 
 
 	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @giochieu, @tinhtrang, @giodat, @maloaive, @makm)
-	update SuatChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
+	update PhongChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
 
-exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
+--exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
 go
 
 -- Edit ve
