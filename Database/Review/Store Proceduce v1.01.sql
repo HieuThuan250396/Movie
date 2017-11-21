@@ -1,6 +1,7 @@
 use qldv
 go
-
+set xact_abort on 
+go
 -- Add phim 
 create proc sp_addPhim (@matheloai int, @daodien nvarchar(50), @tenphim nvarchar(50), @ngaykhoichieu date, @ngayketthuc date,
 @mota nvarchar(200), @hinh nvarchar(100), @nhasanxuat nvarchar(50), @thoiluong int, @trailer nvarchar(50))
@@ -172,7 +173,7 @@ go*/
 create proc sp_loadTheLoai (@matheloai int)
 as
 begin
-	select tentheloai
+	select *
 	from theloai
 	where matheloai = @matheloai
 end
@@ -187,7 +188,7 @@ go
 create proc sp_loadTatCaTheLoai
 as
 begin
-	select tentheloai
+	select *
 	from theloai
 end
 	
