@@ -10,20 +10,19 @@
 namespace MovieTicket.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TheLoai
+    public partial class sp_loadPhimDangChieu_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TheLoai()
-        {
-            this.Phims = new HashSet<Phim>();
-        }
-    
+        public int maphim { get; set; }
         public int matheloai { get; set; }
-        public string tentheloai { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phim> Phims { get; set; }
+        public string daodien { get; set; }
+        public string tenphim { get; set; }
+        public System.DateTime ngaykhoichieu { get; set; }
+        public System.DateTime ngayketthuc { get; set; }
+        public string mota { get; set; }
+        public string hinh { get; set; }
+        public string nhasanxuat { get; set; }
+        public int thoiluong { get; set; }
+        public string trailer { get; set; }
     }
 }

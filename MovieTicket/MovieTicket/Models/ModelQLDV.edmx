@@ -42,8 +42,9 @@
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
-            <PropertyRef Name="taikhoan" />
+            <PropertyRef Name="manv" />
           </Key>
+          <Property Name="manv" Type="int" Nullable="false" />
           <Property Name="taikhoan" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="matkhau" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="vaitro" Type="char" MaxLength="2" Nullable="false" />
@@ -101,6 +102,27 @@
           <Property Name="giave" Type="int" Nullable="false" />
           <Property Name="tinhtrang" Type="bit" Nullable="false" />
           <Property Name="giodat" Type="datetime" />
+          <Property Name="maloaive" Type="int" Nullable="false" />
+          <Property Name="makm" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VeDangDat">
+          <Key>
+            <PropertyRef Name="mave" />
+            <PropertyRef Name="masuatchieu" />
+            <PropertyRef Name="makhachhang" />
+            <PropertyRef Name="giave" />
+            <PropertyRef Name="tinhtrang" />
+            <PropertyRef Name="giodat" />
+            <PropertyRef Name="maloaive" />
+          </Key>
+          <Property Name="mave" Type="int" Nullable="false" />
+          <Property Name="masuatchieu" Type="int" Nullable="false" />
+          <Property Name="makhachhang" Type="int" Nullable="false" />
+          <Property Name="giave" Type="int" Nullable="false" />
+          <Property Name="tinhtrang" Type="bit" Nullable="false" />
+          <Property Name="giodat" Type="datetime" Nullable="false" />
           <Property Name="maloaive" Type="int" Nullable="false" />
           <Property Name="makm" Type="int" />
         </EntityType>
@@ -190,6 +212,162 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_addKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ho" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenlot" Type="nvarchar" Mode="In" />
+          <Parameter Name="ten" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="date" Mode="In" />
+          <Parameter Name="gioitinh" Type="char" Mode="In" />
+          <Parameter Name="sonha" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenduong" Type="nvarchar" Mode="In" />
+          <Parameter Name="quan" Type="nvarchar" Mode="In" />
+          <Parameter Name="thanhpho" Type="nvarchar" Mode="In" />
+          <Parameter Name="dienthoai" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_addKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ngaybatdau" Type="date" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="date" Mode="In" />
+          <Parameter Name="giatri" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_addLoaiVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenloaive" Type="nvarchar" Mode="In" />
+          <Parameter Name="giave" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_addNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="varchar" Mode="In" />
+          <Parameter Name="matkhau" Type="varchar" Mode="In" />
+          <Parameter Name="vaitro" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_addPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matheloai" Type="int" Mode="In" />
+          <Parameter Name="daodien" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenphim" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaykhoichieu" Type="date" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="date" Mode="In" />
+          <Parameter Name="mota" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="nhasanxuat" Type="nvarchar" Mode="In" />
+          <Parameter Name="thoiluong" Type="int" Mode="In" />
+          <Parameter Name="trailer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_addTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tentheloai" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_datveVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mave" Type="int" Mode="In" />
+          <Parameter Name="masuatchieu" Type="int" Mode="In" />
+          <Parameter Name="makhachhang" Type="int" Mode="In" />
+          <Parameter Name="makm" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_editKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makhachhang" Type="int" Mode="In" />
+          <Parameter Name="ho" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenlot" Type="nvarchar" Mode="In" />
+          <Parameter Name="ten" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="date" Mode="In" />
+          <Parameter Name="gioitinh" Type="char" Mode="In" />
+          <Parameter Name="sonha" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenduong" Type="nvarchar" Mode="In" />
+          <Parameter Name="quan" Type="nvarchar" Mode="In" />
+          <Parameter Name="thanhpho" Type="nvarchar" Mode="In" />
+          <Parameter Name="dienthoai" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_editKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makm" Type="int" Mode="In" />
+          <Parameter Name="ngaybatdau" Type="date" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="date" Mode="In" />
+          <Parameter Name="giatri" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_editLoaiVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maloaive" Type="int" Mode="In" />
+          <Parameter Name="tenloaive" Type="nvarchar" Mode="In" />
+          <Parameter Name="giave" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_editNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="int" Mode="In" />
+          <Parameter Name="taikhoan" Type="varchar" Mode="In" />
+          <Parameter Name="matkhau" Type="varchar" Mode="In" />
+          <Parameter Name="vaitro" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_editPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maphim" Type="int" Mode="In" />
+          <Parameter Name="matheloai" Type="int" Mode="In" />
+          <Parameter Name="daodien" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenphim" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaykhoichieu" Type="date" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="date" Mode="In" />
+          <Parameter Name="mota" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="nhasanxuat" Type="nvarchar" Mode="In" />
+          <Parameter Name="thoiluong" Type="int" Mode="In" />
+          <Parameter Name="trailer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_editPhongChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maphong" Type="int" Mode="In" />
+          <Parameter Name="tenphong" Type="nvarchar" Mode="In" />
+          <Parameter Name="soghebandau" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_editSuatChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="masuatchieu" Type="int" Mode="In" />
+          <Parameter Name="maphim" Type="int" Mode="In" />
+          <Parameter Name="maphong" Type="int" Mode="In" />
+          <Parameter Name="giochieu" Type="time" Mode="In" />
+          <Parameter Name="ngaychieu" Type="date" Mode="In" />
+          <Parameter Name="soghecontrong" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_editTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matheloai" Type="int" Mode="In" />
+          <Parameter Name="tentheloai" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_huyVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mave" Type="int" Mode="In" />
+          <Parameter Name="masuatchieu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadChiTietKhacHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makhachhang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadChiTietPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maphim" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadDsNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadPhimDaChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadPhimDangChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadPhimSapChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadPhimTheoTen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenphim" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_loadPhimTheoTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matheloai" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadSuatChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadSuatChieuNgay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadSuatChieuTheoPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maphim" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadTatCaKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaLoaiVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaPhongChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matheloai" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_loadThongTinDangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dienthoai" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_loadThongTinDangNhapNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="varchar" Mode="In" />
+          <Parameter Name="matkhau" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="qldvModelStoreContainer">
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" Schema="dbo" store:Type="Tables" />
@@ -200,6 +378,18 @@
           <EntitySet Name="SuatChieu" EntityType="Self.SuatChieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TheLoai" EntityType="Self.TheLoai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ve" EntityType="Self.Ve" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VeDangDat" EntityType="Self.VeDangDat" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VeDangDat].[mave] AS [mave], 
+    [VeDangDat].[masuatchieu] AS [masuatchieu], 
+    [VeDangDat].[makhachhang] AS [makhachhang], 
+    [VeDangDat].[giave] AS [giave], 
+    [VeDangDat].[tinhtrang] AS [tinhtrang], 
+    [VeDangDat].[giodat] AS [giodat], 
+    [VeDangDat].[maloaive] AS [maloaive], 
+    [VeDangDat].[makm] AS [makm]
+    FROM [dbo].[VeDangDat] AS [VeDangDat]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Phim_TheLoai" Association="Self.FK_Phim_TheLoai">
             <End Role="TheLoai" EntitySet="TheLoai" />
             <End Role="Phim" EntitySet="Phim" />
@@ -274,8 +464,9 @@
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
-            <PropertyRef Name="taikhoan" />
+            <PropertyRef Name="manv" />
           </Key>
+          <Property Name="manv" Type="Int32" Nullable="false" />
           <Property Name="taikhoan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="matkhau" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="vaitro" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
@@ -346,6 +537,25 @@
           <NavigationProperty Name="KhuyenMai" Relationship="Self.FK_Ve_KhuyenMai" FromRole="Ve" ToRole="KhuyenMai" />
           <NavigationProperty Name="LoaiVe" Relationship="Self.FK_Ve_LoaiVe" FromRole="Ve" ToRole="LoaiVe" />
           <NavigationProperty Name="SuatChieu" Relationship="Self.FK_Ve_SuatChieu" FromRole="Ve" ToRole="SuatChieu" />
+        </EntityType>
+        <EntityType Name="VeDangDat">
+          <Key>
+            <PropertyRef Name="mave" />
+            <PropertyRef Name="masuatchieu" />
+            <PropertyRef Name="makhachhang" />
+            <PropertyRef Name="giave" />
+            <PropertyRef Name="tinhtrang" />
+            <PropertyRef Name="giodat" />
+            <PropertyRef Name="maloaive" />
+          </Key>
+          <Property Name="mave" Type="Int32" Nullable="false" />
+          <Property Name="masuatchieu" Type="Int32" Nullable="false" />
+          <Property Name="makhachhang" Type="Int32" Nullable="false" />
+          <Property Name="giave" Type="Int32" Nullable="false" />
+          <Property Name="tinhtrang" Type="Boolean" Nullable="false" />
+          <Property Name="giodat" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="maloaive" Type="Int32" Nullable="false" />
+          <Property Name="makm" Type="Int32" />
         </EntityType>
         <Association Name="FK_Ve_KhachHang">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
@@ -443,6 +653,7 @@
           <EntitySet Name="SuatChieux" EntityType="Self.SuatChieu" />
           <EntitySet Name="TheLoais" EntityType="Self.TheLoai" />
           <EntitySet Name="Ves" EntityType="Self.Ve" />
+          <EntitySet Name="VeDangDats" EntityType="Self.VeDangDat" />
           <AssociationSet Name="FK_Ve_KhachHang" Association="Self.FK_Ve_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="Ve" EntitySet="Ves" />
@@ -471,7 +682,339 @@
             <End Role="SuatChieu" EntitySet="SuatChieux" />
             <End Role="Ve" EntitySet="Ves" />
           </AssociationSet>
+          <FunctionImport Name="sp_addKhachHang">
+            <Parameter Name="ho" Mode="In" Type="String" />
+            <Parameter Name="tenlot" Mode="In" Type="String" />
+            <Parameter Name="ten" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="sonha" Mode="In" Type="String" />
+            <Parameter Name="tenduong" Mode="In" Type="String" />
+            <Parameter Name="quan" Mode="In" Type="String" />
+            <Parameter Name="thanhpho" Mode="In" Type="String" />
+            <Parameter Name="dienthoai" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addKhuyenMai">
+            <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+            <Parameter Name="giatri" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addLoaiVe">
+            <Parameter Name="tenloaive" Mode="In" Type="String" />
+            <Parameter Name="giave" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addNhanVien">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+            <Parameter Name="vaitro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addPhim">
+            <Parameter Name="matheloai" Mode="In" Type="Int32" />
+            <Parameter Name="daodien" Mode="In" Type="String" />
+            <Parameter Name="tenphim" Mode="In" Type="String" />
+            <Parameter Name="ngaykhoichieu" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+            <Parameter Name="mota" Mode="In" Type="String" />
+            <Parameter Name="hinh" Mode="In" Type="String" />
+            <Parameter Name="nhasanxuat" Mode="In" Type="String" />
+            <Parameter Name="thoiluong" Mode="In" Type="Int32" />
+            <Parameter Name="trailer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_addTheLoai">
+            <Parameter Name="tentheloai" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_datveVe">
+            <Parameter Name="mave" Mode="In" Type="Int32" />
+            <Parameter Name="masuatchieu" Mode="In" Type="Int32" />
+            <Parameter Name="makhachhang" Mode="In" Type="Int32" />
+            <Parameter Name="makm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editKhachHang">
+            <Parameter Name="makhachhang" Mode="In" Type="Int32" />
+            <Parameter Name="ho" Mode="In" Type="String" />
+            <Parameter Name="tenlot" Mode="In" Type="String" />
+            <Parameter Name="ten" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="sonha" Mode="In" Type="String" />
+            <Parameter Name="tenduong" Mode="In" Type="String" />
+            <Parameter Name="quan" Mode="In" Type="String" />
+            <Parameter Name="thanhpho" Mode="In" Type="String" />
+            <Parameter Name="dienthoai" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editKhuyenMai">
+            <Parameter Name="makm" Mode="In" Type="Int32" />
+            <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+            <Parameter Name="giatri" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editLoaiVe">
+            <Parameter Name="maloaive" Mode="In" Type="Int32" />
+            <Parameter Name="tenloaive" Mode="In" Type="String" />
+            <Parameter Name="giave" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editNhanVien">
+            <Parameter Name="manv" Mode="In" Type="Int32" />
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+            <Parameter Name="vaitro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editPhim">
+            <Parameter Name="maphim" Mode="In" Type="Int32" />
+            <Parameter Name="matheloai" Mode="In" Type="Int32" />
+            <Parameter Name="daodien" Mode="In" Type="String" />
+            <Parameter Name="tenphim" Mode="In" Type="String" />
+            <Parameter Name="ngaykhoichieu" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+            <Parameter Name="mota" Mode="In" Type="String" />
+            <Parameter Name="hinh" Mode="In" Type="String" />
+            <Parameter Name="nhasanxuat" Mode="In" Type="String" />
+            <Parameter Name="thoiluong" Mode="In" Type="Int32" />
+            <Parameter Name="trailer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editPhongChieu">
+            <Parameter Name="maphong" Mode="In" Type="Int32" />
+            <Parameter Name="tenphong" Mode="In" Type="String" />
+            <Parameter Name="soghebandau" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editSuatChieu">
+            <Parameter Name="masuatchieu" Mode="In" Type="Int32" />
+            <Parameter Name="maphim" Mode="In" Type="Int32" />
+            <Parameter Name="maphong" Mode="In" Type="Int32" />
+            <Parameter Name="giochieu" Mode="In" Type="Time" />
+            <Parameter Name="ngaychieu" Mode="In" Type="DateTime" />
+            <Parameter Name="soghecontrong" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_editTheLoai">
+            <Parameter Name="matheloai" Mode="In" Type="Int32" />
+            <Parameter Name="tentheloai" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_huyVe">
+            <Parameter Name="mave" Mode="In" Type="Int32" />
+            <Parameter Name="masuatchieu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadChiTietKhacHang" ReturnType="Collection(qldvModel.sp_loadChiTietKhacHang_Result)">
+            <Parameter Name="makhachhang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadChiTietPhim" ReturnType="Collection(qldvModel.sp_loadChiTietPhim_Result)">
+            <Parameter Name="maphim" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadDsNhanVien" ReturnType="Collection(qldvModel.sp_loadDsNhanVien_Result)" />
+          <FunctionImport Name="sp_loadNhanVien" ReturnType="Collection(qldvModel.sp_loadNhanVien_Result)">
+            <Parameter Name="manv" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadPhimDaChieu" ReturnType="Collection(qldvModel.sp_loadPhimDaChieu_Result)" />
+          <FunctionImport Name="sp_loadPhimDangChieu" ReturnType="Collection(qldvModel.sp_loadPhimDangChieu_Result)" />
+          <FunctionImport Name="sp_loadPhimSapChieu" ReturnType="Collection(qldvModel.sp_loadPhimSapChieu_Result)" />
+          <FunctionImport Name="sp_loadPhimTheoTen" ReturnType="Collection(qldvModel.sp_loadPhimTheoTen_Result)">
+            <Parameter Name="tenphim" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadPhimTheoTheLoai" ReturnType="Collection(qldvModel.sp_loadPhimTheoTheLoai_Result)">
+            <Parameter Name="matheloai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadSuatChieu" ReturnType="Collection(qldvModel.sp_loadSuatChieu_Result)" />
+          <FunctionImport Name="sp_loadSuatChieuNgay" ReturnType="Collection(qldvModel.sp_loadSuatChieuNgay_Result)" />
+          <FunctionImport Name="sp_loadSuatChieuTheoPhim" ReturnType="Collection(qldvModel.sp_loadSuatChieuTheoPhim_Result)">
+            <Parameter Name="maphim" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadTatCaKhachHang" ReturnType="Collection(qldvModel.sp_loadTatCaKhachHang_Result)" />
+          <FunctionImport Name="sp_loadTatCaKhuyenMai" ReturnType="Collection(qldvModel.sp_loadTatCaKhuyenMai_Result)" />
+          <FunctionImport Name="sp_loadTatCaLoaiVe" ReturnType="Collection(qldvModel.sp_loadTatCaLoaiVe_Result)" />
+          <FunctionImport Name="sp_loadTatCaPhim" ReturnType="Collection(qldvModel.sp_loadTatCaPhim_Result)" />
+          <FunctionImport Name="sp_loadTatCaPhongChieu" ReturnType="Collection(qldvModel.sp_loadTatCaPhongChieu_Result)" />
+          <FunctionImport Name="sp_loadTatCaTheLoai" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_loadTheLoai" ReturnType="Collection(String)">
+            <Parameter Name="matheloai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadThongTinDangNhap" ReturnType="Collection(Int32)">
+            <Parameter Name="dienthoai" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadThongTinDangNhapNV" ReturnType="Collection(Int32)">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_loadChiTietKhacHang_Result">
+          <Property Type="Int32" Name="makhachhang" Nullable="false" />
+          <Property Type="String" Name="ho" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenlot" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ten" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaysinh" Nullable="false" />
+          <Property Type="String" Name="gioitinh" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="sonha" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenduong" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="quan" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="thanhpho" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="dienthoai" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="matkhau" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_loadChiTietPhim_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadDsNhanVien_Result">
+          <Property Type="Int32" Name="manv" Nullable="false" />
+          <Property Type="String" Name="taikhoan" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="matkhau" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="vaitro" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="sp_loadNhanVien_Result">
+          <Property Type="Int32" Name="manv" Nullable="false" />
+          <Property Type="String" Name="taikhoan" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="matkhau" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="vaitro" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="sp_loadPhimDaChieu_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadPhimDangChieu_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadPhimSapChieu_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadPhimTheoTen_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadPhimTheoTheLoai_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadSuatChieu_Result">
+          <Property Type="Int32" Name="masuatchieu" Nullable="false" />
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="maphong" Nullable="false" />
+          <Property Type="Time" Name="giochieu" Nullable="false" />
+          <Property Type="Time" Name="gioketthuc" Nullable="false" />
+          <Property Type="DateTime" Name="ngaychieu" Nullable="false" />
+          <Property Type="Int32" Name="soghecontrong" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadSuatChieuNgay_Result">
+          <Property Type="Int32" Name="masuatchieu" Nullable="false" />
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="maphong" Nullable="false" />
+          <Property Type="Time" Name="giochieu" Nullable="false" />
+          <Property Type="Time" Name="gioketthuc" Nullable="false" />
+          <Property Type="DateTime" Name="ngaychieu" Nullable="false" />
+          <Property Type="Int32" Name="soghecontrong" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadSuatChieuTheoPhim_Result">
+          <Property Type="Int32" Name="masuatchieu" Nullable="false" />
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="maphong" Nullable="false" />
+          <Property Type="Time" Name="giochieu" Nullable="false" />
+          <Property Type="Time" Name="gioketthuc" Nullable="false" />
+          <Property Type="DateTime" Name="ngaychieu" Nullable="false" />
+          <Property Type="Int32" Name="soghecontrong" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadTatCaKhachHang_Result">
+          <Property Type="Int32" Name="makhachhang" Nullable="false" />
+          <Property Type="String" Name="ho" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenlot" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ten" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaysinh" Nullable="false" />
+          <Property Type="String" Name="gioitinh" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="sonha" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenduong" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="quan" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="thanhpho" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="dienthoai" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="matkhau" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_loadTatCaKhuyenMai_Result">
+          <Property Type="Int32" Name="makm" Nullable="false" />
+          <Property Type="DateTime" Name="ngaybatdau" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="giatri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadTatCaLoaiVe_Result">
+          <Property Type="Int32" Name="maloaive" Nullable="false" />
+          <Property Type="String" Name="tenloaive" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="giave" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadTatCaPhim_Result">
+          <Property Type="Int32" Name="maphim" Nullable="false" />
+          <Property Type="Int32" Name="matheloai" Nullable="false" />
+          <Property Type="String" Name="daodien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tenphim" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ngaykhoichieu" Nullable="false" />
+          <Property Type="DateTime" Name="ngayketthuc" Nullable="false" />
+          <Property Type="String" Name="mota" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="hinh" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nhasanxuat" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="thoiluong" Nullable="false" />
+          <Property Type="String" Name="trailer" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_loadTatCaPhongChieu_Result">
+          <Property Type="Int32" Name="maphong" Nullable="false" />
+          <Property Type="String" Name="tenphong" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="soghebandau" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -519,6 +1062,7 @@
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="qldvModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="manv" ColumnName="manv" />
                 <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
                 <ScalarProperty Name="matkhau" ColumnName="matkhau" />
                 <ScalarProperty Name="vaitro" ColumnName="vaitro" />
@@ -586,6 +1130,284 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VeDangDats">
+            <EntityTypeMapping TypeName="qldvModel.VeDangDat">
+              <MappingFragment StoreEntitySet="VeDangDat">
+                <ScalarProperty Name="mave" ColumnName="mave" />
+                <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
+                <ScalarProperty Name="makhachhang" ColumnName="makhachhang" />
+                <ScalarProperty Name="giave" ColumnName="giave" />
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
+                <ScalarProperty Name="giodat" ColumnName="giodat" />
+                <ScalarProperty Name="maloaive" ColumnName="maloaive" />
+                <ScalarProperty Name="makm" ColumnName="makm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_addKhachHang" FunctionName="qldvModel.Store.sp_addKhachHang" />
+          <FunctionImportMapping FunctionImportName="sp_addKhuyenMai" FunctionName="qldvModel.Store.sp_addKhuyenMai" />
+          <FunctionImportMapping FunctionImportName="sp_addLoaiVe" FunctionName="qldvModel.Store.sp_addLoaiVe" />
+          <FunctionImportMapping FunctionImportName="sp_addNhanVien" FunctionName="qldvModel.Store.sp_addNhanVien" />
+          <FunctionImportMapping FunctionImportName="sp_addPhim" FunctionName="qldvModel.Store.sp_addPhim" />
+          <FunctionImportMapping FunctionImportName="sp_addTheLoai" FunctionName="qldvModel.Store.sp_addTheLoai" />
+          <FunctionImportMapping FunctionImportName="sp_datveVe" FunctionName="qldvModel.Store.sp_datveVe" />
+          <FunctionImportMapping FunctionImportName="sp_editKhachHang" FunctionName="qldvModel.Store.sp_editKhachHang" />
+          <FunctionImportMapping FunctionImportName="sp_editKhuyenMai" FunctionName="qldvModel.Store.sp_editKhuyenMai" />
+          <FunctionImportMapping FunctionImportName="sp_editLoaiVe" FunctionName="qldvModel.Store.sp_editLoaiVe" />
+          <FunctionImportMapping FunctionImportName="sp_editNhanVien" FunctionName="qldvModel.Store.sp_editNhanVien" />
+          <FunctionImportMapping FunctionImportName="sp_editPhim" FunctionName="qldvModel.Store.sp_editPhim" />
+          <FunctionImportMapping FunctionImportName="sp_editPhongChieu" FunctionName="qldvModel.Store.sp_editPhongChieu" />
+          <FunctionImportMapping FunctionImportName="sp_editSuatChieu" FunctionName="qldvModel.Store.sp_editSuatChieu" />
+          <FunctionImportMapping FunctionImportName="sp_editTheLoai" FunctionName="qldvModel.Store.sp_editTheLoai" />
+          <FunctionImportMapping FunctionImportName="sp_huyVe" FunctionName="qldvModel.Store.sp_huyVe" />
+          <FunctionImportMapping FunctionImportName="sp_loadChiTietKhacHang" FunctionName="qldvModel.Store.sp_loadChiTietKhacHang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadChiTietKhacHang_Result">
+                <ScalarProperty Name="makhachhang" ColumnName="makhachhang" />
+                <ScalarProperty Name="ho" ColumnName="ho" />
+                <ScalarProperty Name="tenlot" ColumnName="tenlot" />
+                <ScalarProperty Name="ten" ColumnName="ten" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+                <ScalarProperty Name="sonha" ColumnName="sonha" />
+                <ScalarProperty Name="tenduong" ColumnName="tenduong" />
+                <ScalarProperty Name="quan" ColumnName="quan" />
+                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
+                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadChiTietPhim" FunctionName="qldvModel.Store.sp_loadChiTietPhim">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadChiTietPhim_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadDsNhanVien" FunctionName="qldvModel.Store.sp_loadDsNhanVien">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadDsNhanVien_Result">
+                <ScalarProperty Name="manv" ColumnName="manv" />
+                <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="vaitro" ColumnName="vaitro" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadNhanVien" FunctionName="qldvModel.Store.sp_loadNhanVien">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadNhanVien_Result">
+                <ScalarProperty Name="manv" ColumnName="manv" />
+                <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="vaitro" ColumnName="vaitro" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadPhimDaChieu" FunctionName="qldvModel.Store.sp_loadPhimDaChieu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadPhimDaChieu_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadPhimDangChieu" FunctionName="qldvModel.Store.sp_loadPhimDangChieu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadPhimDangChieu_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadPhimSapChieu" FunctionName="qldvModel.Store.sp_loadPhimSapChieu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadPhimSapChieu_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadPhimTheoTen" FunctionName="qldvModel.Store.sp_loadPhimTheoTen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadPhimTheoTen_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadPhimTheoTheLoai" FunctionName="qldvModel.Store.sp_loadPhimTheoTheLoai">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadPhimTheoTheLoai_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadSuatChieu" FunctionName="qldvModel.Store.sp_loadSuatChieu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadSuatChieu_Result">
+                <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="maphong" ColumnName="maphong" />
+                <ScalarProperty Name="giochieu" ColumnName="giochieu" />
+                <ScalarProperty Name="gioketthuc" ColumnName="gioketthuc" />
+                <ScalarProperty Name="ngaychieu" ColumnName="ngaychieu" />
+                <ScalarProperty Name="soghecontrong" ColumnName="soghecontrong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadSuatChieuNgay" FunctionName="qldvModel.Store.sp_loadSuatChieuNgay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadSuatChieuNgay_Result">
+                <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="maphong" ColumnName="maphong" />
+                <ScalarProperty Name="giochieu" ColumnName="giochieu" />
+                <ScalarProperty Name="gioketthuc" ColumnName="gioketthuc" />
+                <ScalarProperty Name="ngaychieu" ColumnName="ngaychieu" />
+                <ScalarProperty Name="soghecontrong" ColumnName="soghecontrong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadSuatChieuTheoPhim" FunctionName="qldvModel.Store.sp_loadSuatChieuTheoPhim">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadSuatChieuTheoPhim_Result">
+                <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="maphong" ColumnName="maphong" />
+                <ScalarProperty Name="giochieu" ColumnName="giochieu" />
+                <ScalarProperty Name="gioketthuc" ColumnName="gioketthuc" />
+                <ScalarProperty Name="ngaychieu" ColumnName="ngaychieu" />
+                <ScalarProperty Name="soghecontrong" ColumnName="soghecontrong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaKhachHang" FunctionName="qldvModel.Store.sp_loadTatCaKhachHang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaKhachHang_Result">
+                <ScalarProperty Name="makhachhang" ColumnName="makhachhang" />
+                <ScalarProperty Name="ho" ColumnName="ho" />
+                <ScalarProperty Name="tenlot" ColumnName="tenlot" />
+                <ScalarProperty Name="ten" ColumnName="ten" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+                <ScalarProperty Name="sonha" ColumnName="sonha" />
+                <ScalarProperty Name="tenduong" ColumnName="tenduong" />
+                <ScalarProperty Name="quan" ColumnName="quan" />
+                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
+                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaKhuyenMai" FunctionName="qldvModel.Store.sp_loadTatCaKhuyenMai">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaKhuyenMai_Result">
+                <ScalarProperty Name="makm" ColumnName="makm" />
+                <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="giatri" ColumnName="giatri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaLoaiVe" FunctionName="qldvModel.Store.sp_loadTatCaLoaiVe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaLoaiVe_Result">
+                <ScalarProperty Name="maloaive" ColumnName="maloaive" />
+                <ScalarProperty Name="tenloaive" ColumnName="tenloaive" />
+                <ScalarProperty Name="giave" ColumnName="giave" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaPhim" FunctionName="qldvModel.Store.sp_loadTatCaPhim">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaPhim_Result">
+                <ScalarProperty Name="maphim" ColumnName="maphim" />
+                <ScalarProperty Name="matheloai" ColumnName="matheloai" />
+                <ScalarProperty Name="daodien" ColumnName="daodien" />
+                <ScalarProperty Name="tenphim" ColumnName="tenphim" />
+                <ScalarProperty Name="ngaykhoichieu" ColumnName="ngaykhoichieu" />
+                <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+                <ScalarProperty Name="mota" ColumnName="mota" />
+                <ScalarProperty Name="hinh" ColumnName="hinh" />
+                <ScalarProperty Name="nhasanxuat" ColumnName="nhasanxuat" />
+                <ScalarProperty Name="thoiluong" ColumnName="thoiluong" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaPhongChieu" FunctionName="qldvModel.Store.sp_loadTatCaPhongChieu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaPhongChieu_Result">
+                <ScalarProperty Name="maphong" ColumnName="maphong" />
+                <ScalarProperty Name="tenphong" ColumnName="tenphong" />
+                <ScalarProperty Name="soghebandau" ColumnName="soghebandau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaTheLoai" FunctionName="qldvModel.Store.sp_loadTatCaTheLoai" />
+          <FunctionImportMapping FunctionImportName="sp_loadTheLoai" FunctionName="qldvModel.Store.sp_loadTheLoai" />
+          <FunctionImportMapping FunctionImportName="sp_loadThongTinDangNhap" FunctionName="qldvModel.Store.sp_loadThongTinDangNhap" />
+          <FunctionImportMapping FunctionImportName="sp_loadThongTinDangNhapNV" FunctionName="qldvModel.Store.sp_loadThongTinDangNhapNV" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

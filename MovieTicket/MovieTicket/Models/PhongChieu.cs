@@ -11,8 +11,7 @@ namespace MovieTicket.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class PhongChieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +26,7 @@ namespace MovieTicket.Models
         public string tenphong { get; set; }
         [DisplayName("Số ghế ban đầu")]
         public int soghebandau { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuatChieu> SuatChieux { get; set; }
     }

@@ -13,21 +13,23 @@ namespace MovieTicket.Models
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class LoaiVe
+    public partial class VeDangDat
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LoaiVe()
-        {
-            this.Ves = new HashSet<Ve>();
-        }
-        [DisplayName("Mã loại vé")]
-        public int maloaive { get; set; }
-        [DisplayName("Tên loại vé")]
-        public string tenloaive { get; set; }
+        [DisplayName("Mã vé")]
+        public int mave { get; set; }
+        [DisplayName("Mã suất chiếu")]
+        public int masuatchieu { get; set; }
+        [DisplayName("Mã khách hàng")]
+        public int makhachhang { get; set; }
         [DisplayName("Giá vé")]
         public int giave { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ve> Ves { get; set; }
+        [DisplayName("Tình trạng")]
+        public bool tinhtrang { get; set; }
+        [DisplayName("Giờ đặt")]
+        public System.DateTime giodat { get; set; }
+        [DisplayName("Mã loại vé")]
+        public int maloaive { get; set; }
+        [DisplayName("Mã khuyến mãi ")]
+        public Nullable<int> makm { get; set; }
     }
 }

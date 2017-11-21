@@ -11,8 +11,7 @@ namespace MovieTicket.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class KhachHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,6 +19,7 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
+
         [DisplayName("Mã khách hàng")]
         public int makhachhang { get; set; }
         [DisplayName("Họ")]
@@ -46,8 +46,6 @@ namespace MovieTicket.Models
         public string email { get; set; }
         [DisplayName("Mật khẩu")]
         public string matkhau { get; set; }
-
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
     }

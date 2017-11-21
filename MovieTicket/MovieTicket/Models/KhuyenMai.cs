@@ -20,6 +20,7 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
+
         [DisplayName("Mã khuyến mãi")]
         public int makm { get; set; }
         [DisplayName("Ngày bắt đầu")]
@@ -28,7 +29,7 @@ namespace MovieTicket.Models
         public System.DateTime ngayketthuc { get; set; }
         [DisplayName("Giá trị")]
         public double giatri { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
     }
