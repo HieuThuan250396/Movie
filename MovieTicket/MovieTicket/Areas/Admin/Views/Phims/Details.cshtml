@@ -1,0 +1,102 @@
+﻿@model MovieTicket.Models.Phim
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="validation-system">
+    <div class="validation-form">
+        <h2>Details</h2>
+
+        <div>
+            <h4>Phim</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.daodien)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.daodien)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tenphim)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tenphim)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ngaykhoichieu)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ngaykhoichieu)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ngayketthuc)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ngayketthuc)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.mota)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.mota)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.hinh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.hinh)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.nhasanxuat)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nhasanxuat)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.thoiluong)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.thoiluong)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.trailer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.trailer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TheLoai.tentheloai)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TheLoai.tentheloai)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.maphim }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

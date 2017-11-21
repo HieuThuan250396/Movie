@@ -1,0 +1,75 @@
+﻿@model MovieTicket.Models.Ve
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ve</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.giave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tinhtrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tinhtrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giodat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giodat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.ho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.ho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhuyenMai.makm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhuyenMai.makm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiVe.tenloaive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiVe.tenloaive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuatChieu.masuatchieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuatChieu.masuatchieu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.mave }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

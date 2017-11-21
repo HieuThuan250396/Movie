@@ -12,7 +12,8 @@ namespace MovieTicket.Controllers
         // GET: Videos
         public ActionResult Index()
         {
-            List<Phim> video = new List<Phim> { new Phim("123", "Lorem Ipsum", "gridallbum1"), 
+            List<Phim> video = new List<Phim> { };
+            /*{ new Phim("123", "Lorem Ipsum", "gridallbum1"), 
                                                 new Phim("124", "Lorem Ipsum", "gridallbum2"),
                                                 new Phim("125", "Lorem Ipsum", "gridallbum3"),
                                                 new Phim("126", "Lorem Ipsum", "gridallbum4"),
@@ -24,7 +25,7 @@ namespace MovieTicket.Controllers
                                                 new Phim("132", "Lorem Ipsum", "gridallbum10"),
                                                 new Phim("133", "Lorem Ipsum", "gridallbum11"),
                                                 new Phim("134", "Lorem Ipsum", "gridallbum1")};
-            ViewData["ListPhim"] = video;
+            */ViewData["ListPhim"] = video;
             return View();
         }
     }

@@ -10,10 +10,18 @@ ul, ol {margin: 0;padding: 0;}
 p {margin: 0;}
 
 html, body{
-  	font-family:'Montserrat-Regular';
+  	font-family:'TUV-Montserrat-Regular';
     font-size: 100%;
   	background:#F3F3F4;
   	overflow-x: hidden;
+}
+@font-face{
+	font-family:'TUV-Montserrat-Regular';
+	src:url(../fonts/TUV-Montserrat-Regular.ttf) format('truetype');
+}
+@font-face{
+	font-family:'TUV-Montserrat-Bold';
+	src:url(../fonts/TUV-Montserrat-Bold.ttf) format('truetype');
 }
 @font-face{
 	font-family:'Montserrat-Regular';
@@ -345,7 +353,7 @@ a.dropdown-toggle.dropdown-at {
 
 .content-main {
     background-color: #F3F3F4;
-	    padding-top: 1em;
+    min-height: inherit;
 }
 .navbar-right-left{
 	float: right;
@@ -358,7 +366,8 @@ a.dropdown-toggle.dropdown-at {
 }
 .navbar-left-right{
 	float: left;
-	margin-left: 6%;
+	margin-left: 1%;
+    margin-bottom: 1em;
 }
 .border-bottom {
     background-color: #fff;
@@ -366,7 +375,7 @@ a.dropdown-toggle.dropdown-at {
 .full-left {
     float: left;
     width: 40%;
-    margin-left: 3%;
+    margin-left: 2%;
    margin-top: 1.3em;
 }
 .full-left button{
@@ -476,7 +485,7 @@ i.fa.fa-globe {
 }
 .dropdown-menu {
     min-width: 160px;
-	left:-2em;
+	left:-6.1em;
 }
 .menu1{
 	top:172%;
@@ -1202,8 +1211,8 @@ i.fa.fa-twitter {
 .form-control {
     box-shadow: none;
     outline: none;
-    border-radius: 0px;
     font-family: 'Muli-Regular';
+    border-radius: 3px;
 }
 .form-control:focus {
     border-color: #ccc;
@@ -1306,7 +1315,7 @@ input#disabledTextInput,select#disabledSelect {
 	-o-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.10);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 .validation-system {
@@ -1362,7 +1371,7 @@ label.control-label {
 }
 /*--signin--*/
 .login {
-	padding: 8em 0 0;
+	padding: 4em 0 0;
 }
 .login-bottom{
 	width: 40%;
@@ -2839,4 +2848,12 @@ ul.dropdown-menu.dropdown-menu-right {
 .top-content label {
     font-size: 1.6em;
 }
+}
+.nav_1{
+    padding: 1em;
+    margin-right: 1em;
+}
+
+.table tr~tr:hover{
+	background: #F5F5F5;
 }

@@ -1,0 +1,35 @@
+﻿@model MovieTicket.Models.LoaiVe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoaiVe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenloaive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenloaive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giave)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maloaive }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

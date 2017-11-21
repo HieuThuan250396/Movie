@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MovieTicket.Models.KhuyenMai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaybatdau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngayketthuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.giatri)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaybatdau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngayketthuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.giatri)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.makm }) |
+            @Html.ActionLink("Details", "Details", new { id=item.makm }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.makm })
+        </td>
+    </tr>
+}
+
+</table>

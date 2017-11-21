@@ -3,7 +3,7 @@
 }
 #page-wrapper {
     /*--padding: 0 15px;--*/
-    min-height: 568px;
+    min-height: 535px;
     
 }
 
@@ -115,3 +115,6 @@
     }
 }
 
+.hidden-password{
+    visibility:hidden
+}

@@ -13,16 +13,16 @@ using MovieTicket.Models;
 namespace MovieTicket.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountClientController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountClientController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountClientController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
