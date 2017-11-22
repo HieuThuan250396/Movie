@@ -13,13 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ho)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tenlot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ten)
+            Họ tên
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ngaysinh)
@@ -28,16 +22,7 @@
             @Html.DisplayNameFor(model => model.gioitinh)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sonha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tenduong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.thanhpho)
+            Địa chỉ
         </th>
         <th>
             @Html.DisplayNameFor(model => model.dienthoai)
@@ -54,31 +39,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ho)
+            @Html.DisplayFor(modelItem => item.ho) @Html.DisplayFor(modelItem => item.tenlot) @Html.DisplayFor(modelItem => item.ten)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tenlot)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ngaysinh)
+            @Html.DisplayFor(modelItem => item.ngaysinh.Day)-@Html.DisplayFor(modelItem => item.ngaysinh.Month)-@Html.DisplayFor(modelItem => item.ngaysinh.Year)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.gioitinh)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sonha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tenduong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.thanhpho)
+        @Html.DisplayFor(modelItem => item.sonha) @Html.DisplayFor(modelItem => item.tenduong), @Html.DisplayFor(modelItem => item.quan), @Html.DisplayFor(modelItem => item.thanhpho)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.dienthoai)
@@ -91,8 +61,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.makhachhang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.makhachhang }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.makhachhang })
+            @Html.ActionLink("Details", "Details", new { id=item.makhachhang })
+            <!--@Html.ActionLink("Delete", "Delete", new { id=item.makhachhang })-->
         </td>
     </tr>
 }

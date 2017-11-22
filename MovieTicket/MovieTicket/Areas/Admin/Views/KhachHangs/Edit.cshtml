@@ -44,15 +44,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ngaysinh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                
                 @Html.EditorFor(model => model.ngaysinh, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngaysinh, "", new { @class = "text-danger" })
+
+                @Html.ValidationMessageFor(model => model.ngaysinh, "", new { @class = "text-danger", @value = Model.ngaysinh})
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.gioitinh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.gioitinh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("gioitinh",
+                    new SelectList(Enum.GetValues(typeof(Gender))),
+                    "Chọn giới tính",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.gioitinh, "", new { @class = "text-danger" })
             </div>
         </div>

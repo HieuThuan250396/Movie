@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.SqlClient;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,17 +19,19 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/KhachHangs
         public ActionResult Index()
         {
-            return View(db.KhachHangs.ToList());
+            return View(db.Database.SqlQuery<KhachHang>("exec sp_loadTatCaKhachHang").ToList());
         }
 
         // GET: Admin/KhachHangs/Details/5
         public ActionResult Details(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
+            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhacHang {0}", id).First<KhachHang>();
+
             if (khachHang == null)
             {
                 return HttpNotFound();
@@ -48,13 +52,21 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "makhachhang,ho,tenlot,ten,ngaysinh,gioitinh,sonha,tenduong,quan,thanhpho,dienthoai,email,matkhau")] KhachHang khachHang)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.KhachHangs.Add(khachHang);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Database.SqlQuery<KhachHang>("exec sp_addKhachHang {0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", khachHang.ho.ToString(),khachHang.tenlot.ToString(), khachHang.ten.ToString(), khachHang.ngaysinh,khachHang.gioitinh.ToString(), khachHang.sonha.ToString(), khachHang.tenduong.ToString(), khachHang.quan.ToString(), khachHang.thanhpho.ToString(), khachHang.dienthoai.ToString(),khachHang.email.ToString(), khachHang.matkhau.ToString()).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
+            }
+            catch(EntityCommandExecutionException ex)
+            {
+                
                 return RedirectToAction("Index");
             }
-
             return View(khachHang);
         }
 
@@ -65,7 +77,8 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
+            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhacHang {0}", id).First<KhachHang>();
+            
             if (khachHang == null)
             {
                 return HttpNotFound();
@@ -80,40 +93,58 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "makhachhang,ho,tenlot,ten,ngaysinh,gioitinh,sonha,tenduong,quan,thanhpho,dienthoai,email,matkhau")] KhachHang khachHang)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(khachHang).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            try
             {
-                db.Entry(khachHang).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Database.SqlQuery<KhachHang>
+                        ("exec sp_editKhachHang {0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
+                        khachHang.makhachhang.ToString(),khachHang.ho.ToString(), 
+                        khachHang.tenlot.ToString(), khachHang.ten.ToString(), khachHang.ngaysinh,
+                        khachHang.gioitinh.ToString(), khachHang.sonha.ToString(), khachHang.tenduong.ToString(),
+                        khachHang.quan.ToString(), khachHang.thanhpho.ToString(), khachHang.dienthoai.ToString(),
+                        khachHang.email.ToString(), khachHang.matkhau.ToString()).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
             return View(khachHang);
         }
 
-        // GET: Admin/KhachHangs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            if (khachHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(khachHang);
-        }
+        //// GET: Admin/KhachHangs/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    KhachHang khachHang = db.KhachHangs.Find(id);
+        //    if (khachHang == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(khachHang);
+        //}
 
-        // POST: Admin/KhachHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            db.KhachHangs.Remove(khachHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/KhachHangs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    KhachHang khachHang = db.KhachHangs.Find(id);
+        //    db.KhachHangs.Remove(khachHang);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -123,5 +154,8 @@ namespace MovieTicket.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        
+
+        
     }
 }

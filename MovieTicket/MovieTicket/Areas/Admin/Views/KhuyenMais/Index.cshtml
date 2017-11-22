@@ -27,10 +27,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ngaybatdau)
+            @Html.DisplayFor(modelItem => item.ngaybatdau.Day)-@Html.DisplayFor(modelItem => item.ngaybatdau.Month)-@Html.DisplayFor(modelItem => item.ngaybatdau.Year)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ngayketthuc)
+            @Html.DisplayFor(modelItem => item.ngayketthuc.Day)-@Html.DisplayFor(modelItem => item.ngayketthuc.Month)-@Html.DisplayFor(modelItem => item.ngayketthuc.Year)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.giatri)

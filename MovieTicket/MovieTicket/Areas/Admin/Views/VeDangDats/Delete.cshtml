@@ -1,4 +1,4 @@
-﻿@model MovieTicket.Models.NhanVien
+﻿@model MovieTicket.Models.VeDangDat
 
 @{
     ViewBag.Title = "Delete";
@@ -9,31 +9,15 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>NhanVien</h4>
+    <h4>VeDangDat</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.taikhoan)
+            @Html.DisplayNameFor(model => model.makm)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.taikhoan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.matkhau)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.matkhau)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.vaitro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.vaitro)
+            @Html.DisplayFor(model => model.makm)
         </dd>
 
     </dl>

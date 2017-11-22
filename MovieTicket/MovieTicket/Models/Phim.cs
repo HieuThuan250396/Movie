@@ -12,6 +12,7 @@ namespace MovieTicket.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Phim
     {
@@ -21,30 +22,60 @@ namespace MovieTicket.Models
             this.SuatChieux = new HashSet<SuatChieu>();
         }
 
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mã phim")]
         public int maphim { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mã thể loại")]
         public int matheloai { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Đạo diễn")]
         public string daodien { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Tên phim")]
         public string tenphim { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Ngày khởi chiếu")]
         public System.DateTime ngaykhoichieu { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Ngày kết thúc")]
         public System.DateTime ngayketthuc { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mô tả")]
         public string mota { get; set; }
+
+        [DataType(DataType.Url)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Hình")]
         public string hinh { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Nhà sản xuất")]
         public string nhasanxuat { get; set; }
+
+        [DataType(DataType.Duration)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Thời lượng")]
         public int thoiluong { get; set; }
+
+        [DataType(DataType.Url)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Trailer")]
         public string trailer { get; set; }
+        
         [DisplayName("Thể loại")]
         public virtual TheLoai TheLoai { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuatChieu> SuatChieux { get; set; }
     }

@@ -11,7 +11,9 @@ namespace MovieTicket.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Ve
     {
         [DisplayName("Mã vé")]
@@ -20,6 +22,8 @@ namespace MovieTicket.Models
         public int masuatchieu { get; set; }
         [DisplayName("Mã khách hàng")]
         public Nullable<int> makhachhang { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [DisplayName("Giá vé")]
         public int giave { get; set; }
         [DisplayName("Tình trạng")]

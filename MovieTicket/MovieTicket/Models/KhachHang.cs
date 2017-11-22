@@ -11,7 +11,10 @@ namespace MovieTicket.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
     public partial class KhachHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,34 +22,59 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
-
+       
         [DisplayName("Mã khách hàng")]
         public int makhachhang { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Text)]
         [DisplayName("Họ")]
         public string ho { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Text)]
         [DisplayName("Tên lót")]
         public string tenlot { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Text)]
         [DisplayName("Tên")]
         public string ten { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Ngày sinh")]
         public System.DateTime ngaysinh { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Giới tính")]
         public string gioitinh { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Số nhà")]
         public string sonha { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Tên đường")]
         public string tenduong { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Quận")]
         public string quan { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Thành phố")]
         public string thanhpho { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Số điện thoại")]
         public string dienthoai { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.EmailAddress)]
         [DisplayName("Email")]
         public string email { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mật khẩu")]
         public string matkhau { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
+        public Gender gender { get; set; }
+        
     }
+}
+public enum Gender
+{
+    Na,
+    Nu
 }

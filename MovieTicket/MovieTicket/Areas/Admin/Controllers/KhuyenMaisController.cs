@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,7 +18,8 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/KhuyenMais
         public ActionResult Index()
         {
-            return View(db.KhuyenMais.ToList());
+            //return View(db.KhuyenMais.ToList());
+            return View(db.Database.SqlQuery<KhuyenMai>("exec sp_loadTatCaKhuyenMai").ToList());
         }
 
         // GET: Admin/KhuyenMais/Details/5
@@ -27,7 +29,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            KhuyenMai khuyenMai = db.Database.SqlQuery<KhuyenMai>("exec sp_loadChiTietKhuyenMai {0}", id).First<KhuyenMai>();
             if (khuyenMai == null)
             {
                 return HttpNotFound();
@@ -48,13 +50,20 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri")] KhuyenMai khuyenMai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.KhuyenMais.Add(khuyenMai);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.KhuyenMais.Add(khuyenMai);
+                    db.Database.SqlQuery<KhuyenMai>("exec sp_addKhuyenMai {0},{1},{2}",khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
-
             return View(khuyenMai);
         }
 
@@ -80,12 +89,21 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri")] KhuyenMai khuyenMai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(khuyenMai).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.Entry(khuyenMai).State = EntityState.Modified;
+                    db.Database.SqlQuery<KhuyenMai>("exec sp_editKhuyenMai {0},{1},{2},{3}", khuyenMai.makm, khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch(EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
+            
             return View(khuyenMai);
         }
 

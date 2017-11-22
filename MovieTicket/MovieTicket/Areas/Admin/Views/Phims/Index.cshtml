@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<MovieTicket.Models.Phim>
+﻿@model IEnumerable<MovieTicket.Models.Phim>
 
 @using PagedList.Mvc;
 @{
@@ -11,7 +11,7 @@
     {
         <p>
             <!--@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)-->
-            @Html.TextBox("SearchString", "Tìm theo tên phim", ViewBag.CurrentFilter as string, new {@value="Tìm theo tên phim", @onfocus = "this.value='';", @onblur = "if (this.value == '') {this.value = 'Tìm theo tên phim';}" })
+            @Html.TextBox("SearchString", "Tìm theo tên phim", ViewBag.CurrentFilter as string, new { @autocomplete = "off", @value ="Tìm theo tên phim", @onfocus = "this.value='';", @onblur = "if (this.value == '') {this.value = 'Tìm theo tên phim';}" })
             <input type="submit" value="" class="fa fa-search">
         </p>
     }
@@ -27,35 +27,35 @@
 <table class="table" style="table-layout: fixed; width:100%">
     <tr>
         <th>
-            Đạo diễn
+            @Html.DisplayNameFor(model => model.daodien)
         </th>
         <th>
-            @Html.ActionLink("Tên phim","Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }, new { @style = "color:#777" })
+            @Html.DisplayNameFor(model => model.tenphim)
         </th>
         <th>
-            @Html.ActionLink("Ngày khởi chiếu", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter }, new { @style = "color:#777" })
+            @Html.DisplayNameFor(model => model.ngaykhoichieu)
         </th>
         <th>
-            Ngày kết thúc
+            @Html.DisplayNameFor(model => model.ngayketthuc)
         </th>
-        <th>
+        @*<th>
             Mô tả
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.hinh)
         </th>
         <th>
-            Hình
+            @Html.DisplayNameFor(model => model.nhasanxuat)
         </th>
         <th>
-            Nhà sản xuất
+            @Html.DisplayNameFor(model => model.thoiluong)
         </th>
         <th>
-            Thời lượng
+            @Html.DisplayNameFor(model => model.trailer)
         </th>
-        <th>
-            Trailer
-        </th>
-        <th>
+        @*<th>
             Tên thể loại
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -69,14 +69,14 @@
                 @Html.DisplayFor(modelItem => item.tenphim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ngaykhoichieu)
+                @Html.DisplayFor(modelItem => item.ngaykhoichieu.Day)-@Html.DisplayFor(modelItem => item.ngaykhoichieu.Month)-@Html.DisplayFor(modelItem => item.ngaykhoichieu.Year)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ngayketthuc)
+                @Html.DisplayFor(modelItem => item.ngayketthuc.Day)-@Html.DisplayFor(modelItem => item.ngayketthuc.Month)-@Html.DisplayFor(modelItem => item.ngayketthuc.Year)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.mota)
-            </td>
+            </td>*@
             <td style="word-wrap:break-word">
                 @Html.DisplayFor(modelItem => item.hinh)
             </td>
@@ -86,23 +86,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.thoiluong)
             </td>
-            <td  style="word-wrap:break-word">
+            <td style="word-wrap:break-word">
                 @Html.DisplayFor(modelItem => item.trailer)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TheLoai.tentheloai)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.maphim }) |
-                @Html.ActionLink("Details", "Details", new { id = item.maphim }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.maphim })
+                @Html.ActionLink("Details", "Details", new { id = item.maphim }) @*|
+                @Html.ActionLink("Delete", "Delete", new { id = item.maphim })*@
             </td>
         </tr>
     }
 
 </table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

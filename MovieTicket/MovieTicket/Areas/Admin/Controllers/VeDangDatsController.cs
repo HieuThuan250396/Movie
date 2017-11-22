@@ -10,116 +10,107 @@ using MovieTicket.Models;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
-    public class SuatChieuxController : Controller
+    public class VeDangDatsController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();
 
-        // GET: Admin/SuatChieux
+        // GET: Admin/VeDangDats
         public ActionResult Index()
         {
-            var suatChieux = db.SuatChieux.Include(s => s.Phim).Include(s => s.PhongChieu);
-            return View(suatChieux.ToList());
+            return View(db.VeDangDats.ToList());
         }
 
-        // GET: Admin/SuatChieux/Details/5
+        // GET: Admin/VeDangDats/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            if (suatChieu == null)
+            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            if (veDangDat == null)
             {
                 return HttpNotFound();
             }
-            return View(suatChieu);
+            return View(veDangDat);
         }
 
-        // GET: Admin/SuatChieux/Create
+        // GET: Admin/VeDangDats/Create
         public ActionResult Create()
         {
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien");
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong");
             return View();
         }
 
-        // POST: Admin/SuatChieux/Create
+        // POST: Admin/VeDangDats/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "masuatchieu,maphim,maphong,giochieu,gioketthuc,ngaychieu,soghecontrong")] SuatChieu suatChieu)
+        public ActionResult Create([Bind(Include = "mave,masuatchieu,makhachhang,giave,tinhtrang,giodat,maloaive,makm")] VeDangDat veDangDat)
         {
             if (ModelState.IsValid)
             {
-                db.SuatChieux.Add(suatChieu);
+                db.VeDangDats.Add(veDangDat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
-            return View(suatChieu);
+            return View(veDangDat);
         }
 
-        // GET: Admin/SuatChieux/Edit/5
+        // GET: Admin/VeDangDats/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            if (suatChieu == null)
+            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            if (veDangDat == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
-            return View(suatChieu);
+            return View(veDangDat);
         }
 
-        // POST: Admin/SuatChieux/Edit/5
+        // POST: Admin/VeDangDats/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "masuatchieu,maphim,maphong,giochieu,gioketthuc,ngaychieu,soghecontrong")] SuatChieu suatChieu)
+        public ActionResult Edit([Bind(Include = "mave,masuatchieu,makhachhang,giave,tinhtrang,giodat,maloaive,makm")] VeDangDat veDangDat)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(suatChieu).State = EntityState.Modified;
+                db.Entry(veDangDat).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
-            return View(suatChieu);
+            return View(veDangDat);
         }
 
-        // GET: Admin/SuatChieux/Delete/5
+        // GET: Admin/VeDangDats/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            if (suatChieu == null)
+            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            if (veDangDat == null)
             {
                 return HttpNotFound();
             }
-            return View(suatChieu);
+            return View(veDangDat);
         }
 
-        // POST: Admin/SuatChieux/Delete/5
+        // POST: Admin/VeDangDats/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            db.SuatChieux.Remove(suatChieu);
+            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            db.VeDangDats.Remove(veDangDat);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

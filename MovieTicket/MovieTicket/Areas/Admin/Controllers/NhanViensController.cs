@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,17 +18,18 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/NhanViens
         public ActionResult Index()
         {
-            return View(db.NhanViens.ToList());
+            return View(db.Database.SqlQuery<NhanVien>("exec sp_loadDsNhanVien").ToList());
         }
 
         // GET: Admin/NhanViens/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhanVien nhanVien = db.NhanViens.Find(id);
+            // = db.NhanViens.Find(id);
+            NhanVien nhanVien = db.Database.SqlQuery<NhanVien>("exec sp_loadNhanVien {0}", id).First<NhanVien>();
             if (nhanVien == null)
             {
                 return HttpNotFound();
@@ -46,26 +48,34 @@ namespace MovieTicket.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "taikhoan,matkhau,vaitro")] NhanVien nhanVien)
+        public ActionResult Create([Bind(Include = "manv,taikhoan,matkhau,vaitro")] NhanVien nhanVien)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.NhanViens.Add(nhanVien);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.NhanViens.Add(nhanVien);
+                    db.Database.SqlQuery<NhanVien>("exec sp_addNhanVien {0},{1},{2}", nhanVien.taikhoan, nhanVien.matkhau, nhanVien.vaitro ).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
+
                 return RedirectToAction("Index");
             }
-
             return View(nhanVien);
         }
 
         // GET: Admin/NhanViens/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhanVien nhanVien = db.NhanViens.Find(id);
+            NhanVien nhanVien = db.Database.SqlQuery<NhanVien>("exec sp_loadNhanVien {0}", id).First<NhanVien>();
             if (nhanVien == null)
             {
                 return HttpNotFound();
@@ -78,42 +88,51 @@ namespace MovieTicket.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "taikhoan,matkhau,vaitro")] NhanVien nhanVien)
+        public ActionResult Edit([Bind(Include = "manv,taikhoan,matkhau,vaitro")] NhanVien nhanVien)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(nhanVien).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.NhanViens.Add(nhanVien);
+                    db.Database.SqlQuery<NhanVien>("exec sp_editNhanVien {0},{1},{2}", nhanVien.taikhoan, nhanVien.matkhau, nhanVien.vaitro ).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
+
                 return RedirectToAction("Index");
             }
             return View(nhanVien);
         }
 
         // GET: Admin/NhanViens/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            if (nhanVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhanVien);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    NhanVien nhanVien = db.NhanViens.Find(id);
+        //    if (nhanVien == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(nhanVien);
+        //}
 
-        // POST: Admin/NhanViens/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            db.NhanViens.Remove(nhanVien);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/NhanViens/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    NhanVien nhanVien = db.NhanViens.Find(id);
+        //    db.NhanViens.Remove(nhanVien);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -122,12 +141,6 @@ namespace MovieTicket.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult Login()
-        {
-            
-            return View();
         }
     }
 }
