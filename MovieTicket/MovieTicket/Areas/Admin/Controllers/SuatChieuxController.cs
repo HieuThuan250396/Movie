@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,8 +18,8 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/SuatChieux
         public ActionResult Index()
         {
-            var suatChieux = db.SuatChieux.Include(s => s.Phim).Include(s => s.PhongChieu);
-            return View(suatChieux.ToList());
+            //var suatChieux = db.SuatChieux.Include(s => s.Phim).Include(s => s.PhongChieu);
+            return View(db.Database.SqlQuery<SuatChieu>("exec sp_loadSuatChieu").ToList());
         }
 
         // GET: Admin/SuatChieux/Details/5
@@ -28,7 +29,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
+            SuatChieu suatChieu = db.Database.SqlQuery<SuatChieu>("exec sp_loadChiTietSuatChieu {0}", id).First<SuatChieu>();
             if (suatChieu == null)
             {
                 return HttpNotFound();
@@ -39,7 +40,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/SuatChieux/Create
         public ActionResult Create()
         {
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien");
+            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim");
             ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong");
             return View();
         }
@@ -51,15 +52,25 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "masuatchieu,maphim,maphong,giochieu,gioketthuc,ngaychieu,soghecontrong")] SuatChieu suatChieu)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                db.SuatChieux.Add(suatChieu);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+
+                    //db.SuatChieux.Add(suatChieu);sp_addSuatChieu
+                    //var maphim = db.Phims.Where(s => s.tenphim.Equals(suatChieu.maphim)).Single();
+                    //var maphong = db.PhongChieux.Where(s => s.tenphong.Equals(suatChieu.maphong)).Single();
+                    db.Database.SqlQuery<SuatChieu>("exec sp_addSuatChieu {0}, {1}, {2}, {3}", suatChieu.maphim, suatChieu.maphong, suatChieu.giochieu, suatChieu.ngaychieu).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
-
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
+            
             return View(suatChieu);
         }
 
@@ -70,12 +81,12 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
+            SuatChieu suatChieu = db.Database.SqlQuery<SuatChieu>("exec sp_loadChiTietSuatChieu {0}", id).First<SuatChieu>();
             if (suatChieu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
+            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim", suatChieu.maphim);
             ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
             return View(suatChieu);
         }
@@ -87,13 +98,20 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "masuatchieu,maphim,maphong,giochieu,gioketthuc,ngaychieu,soghecontrong")] SuatChieu suatChieu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(suatChieu).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Database.SqlQuery<SuatChieu>("exec sp_editSuatChieu {0}, {1}, {2}, {3}, {4}, {5}",suatChieu.masuatchieu, suatChieu.maphim, suatChieu.maphong, suatChieu.giochieu, suatChieu.gioketthuc, suatChieu.ngaychieu).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "daodien", suatChieu.maphim);
+            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim", suatChieu.maphim);
             ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
             return View(suatChieu);
         }

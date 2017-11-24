@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Thêm khách hàng", "Create", "", htmlAttributes: new { @class = "fa fa-plus-circle create" })
 </p>
 <table class="table">
     <tr>
@@ -57,12 +57,14 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.matkhau)
+            @*@Html.DisplayFor(modelItem => item.matkhau)*@
+            @Html.Raw("\u2022\u2022\u2022\u2022\u2022\u2022\u2022")
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.makhachhang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.makhachhang })
-            <!--@Html.ActionLink("Delete", "Delete", new { id=item.makhachhang })-->
+            @Html.ActionLink(" ", "Edit", new { id = item.makhachhang }, new { @class = "fa fa-edit option"})
+            @Html.ActionLink(" ", "Details", new { id = item.makhachhang }, new { @class = "fa fa-info-circle option"})
+
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.makhachhang })*@
         </td>
     </tr>
 }

@@ -107,31 +107,31 @@ namespace MovieTicket.Areas.Admin.Controllers
             return View(khuyenMai);
         }
 
-        // GET: Admin/KhuyenMais/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
-            if (khuyenMai == null)
-            {
-                return HttpNotFound();
-            }
-            return View(khuyenMai);
-        }
+        //// GET: Admin/KhuyenMais/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+        //    if (khuyenMai == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(khuyenMai);
+        //}
 
-        // POST: Admin/KhuyenMais/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
-            db.KhuyenMais.Remove(khuyenMai);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/KhuyenMais/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+        //    db.KhuyenMais.Remove(khuyenMai);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

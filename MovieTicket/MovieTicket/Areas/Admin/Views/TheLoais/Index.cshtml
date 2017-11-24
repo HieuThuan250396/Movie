@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Thêm thể loại", "Create", "", htmlAttributes: new { @class = "fa fa-plus-circle create" })
 </p>
 <table class="table">
     <tr>
@@ -25,8 +25,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.matheloai }) |
-            @Html.ActionLink("Details", "Details", new { id=item.matheloai }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.matheloai })
+            @Html.ActionLink("Details", "Details", new { id=item.matheloai }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id=item.matheloai })*@
         </td>
     </tr>
 }

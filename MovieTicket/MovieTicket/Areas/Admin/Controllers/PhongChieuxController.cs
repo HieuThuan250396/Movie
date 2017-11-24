@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,7 +18,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/PhongChieux
         public ActionResult Index()
         {
-            return View(db.PhongChieux.ToList());
+            return View(db.Database.SqlQuery<PhongChieu>("exec sp_loadTatCaPhongChieu").ToList());
         }
 
         // GET: Admin/PhongChieux/Details/5
@@ -27,7 +28,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhongChieu phongChieu = db.PhongChieux.Find(id);
+            PhongChieu phongChieu = db.Database.SqlQuery<PhongChieu>("exec sp_loadChiTietPhongChieu {0}", id).First<PhongChieu>();
             if (phongChieu == null)
             {
                 return HttpNotFound();
@@ -48,24 +49,34 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "maphong,tenphong,soghebandau")] PhongChieu phongChieu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.PhongChieux.Add(phongChieu);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.PhongChieux.Add(phongChieu);
+                    db.Database.SqlQuery<PhongChieu>("exec sp_addPhongChieu {0}", phongChieu.tenphong).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
-
+            
             return View(phongChieu);
         }
 
         // GET: Admin/PhongChieux/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhongChieu phongChieu = db.PhongChieux.Find(id);
+            PhongChieu phongChieu = db.Database.SqlQuery<PhongChieu>("exec sp_loadChiTietPhongChieu {0}", id).First<PhongChieu>();
             if (phongChieu == null)
             {
                 return HttpNotFound();
@@ -80,40 +91,49 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "maphong,tenphong,soghebandau")] PhongChieu phongChieu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(phongChieu).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.Entry(phongChieu).State = EntityState.Modified;
+                    db.Database.SqlQuery<PhongChieu>("exec sp_editPhongChieu {0},{1},{2}", phongChieu.maphong, phongChieu.tenphong, phongChieu.soghebandau).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
+            
             return View(phongChieu);
         }
 
-        // GET: Admin/PhongChieux/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhongChieu phongChieu = db.PhongChieux.Find(id);
-            if (phongChieu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phongChieu);
-        }
+        //// GET: Admin/PhongChieux/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    PhongChieu phongChieu = db.PhongChieux.Find(id);
+        //    if (phongChieu == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(phongChieu);
+        //}
 
-        // POST: Admin/PhongChieux/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PhongChieu phongChieu = db.PhongChieux.Find(id);
-            db.PhongChieux.Remove(phongChieu);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/PhongChieux/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    PhongChieu phongChieu = db.PhongChieux.Find(id);
+        //    db.PhongChieux.Remove(phongChieu);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,7 +18,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/LoaiVes
         public ActionResult Index()
         {
-            return View(db.LoaiVes.ToList());
+            return View(db.Database.SqlQuery<LoaiVe>("exec sp_loadTatCaLoaiVe").ToList());
         }
 
         // GET: Admin/LoaiVes/Details/5
@@ -27,7 +28,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LoaiVe loaiVe = db.LoaiVes.Find(id);
+            LoaiVe loaiVe = db.Database.SqlQuery<LoaiVe>("exec sp_loadChiTietLoaiVe {0}", id).First<LoaiVe>();
             if (loaiVe == null)
             {
                 return HttpNotFound();
@@ -48,13 +49,20 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "maloaive,tenloaive,giave")] LoaiVe loaiVe)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.LoaiVes.Add(loaiVe);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.LoaiVes.Add(loaiVe);
+                    db.Database.SqlQuery<LoaiVe>("exec sp_addLoaiVe {0},{1}", loaiVe.tenloaive, loaiVe.giave).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch(EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
-
             return View(loaiVe);
         }
 
@@ -65,7 +73,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LoaiVe loaiVe = db.LoaiVes.Find(id);
+            LoaiVe loaiVe = db.Database.SqlQuery<LoaiVe>("exec sp_loadChiTietLoaiVe {0}", id).First<LoaiVe>();
             if (loaiVe == null)
             {
                 return HttpNotFound();
@@ -80,40 +88,49 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "maloaive,tenloaive,giave")] LoaiVe loaiVe)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(loaiVe).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //db.Entry(loaiVe).State = EntityState.Modified;
+                    db.Database.SqlQuery<LoaiVe>("exec sp_editLoaiVe {0},{1},{2}", loaiVe.maloaive, loaiVe.tenloaive, loaiVe.giave).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
+            
             return View(loaiVe);
         }
 
-        // GET: Admin/LoaiVes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LoaiVe loaiVe = db.LoaiVes.Find(id);
-            if (loaiVe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loaiVe);
-        }
+        //// GET: Admin/LoaiVes/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LoaiVe loaiVe = db.LoaiVes.Find(id);
+        //    if (loaiVe == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(loaiVe);
+        //}
 
-        // POST: Admin/LoaiVes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            LoaiVe loaiVe = db.LoaiVes.Find(id);
-            db.LoaiVes.Remove(loaiVe);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/LoaiVes/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    LoaiVe loaiVe = db.LoaiVes.Find(id);
+        //    db.LoaiVes.Remove(loaiVe);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

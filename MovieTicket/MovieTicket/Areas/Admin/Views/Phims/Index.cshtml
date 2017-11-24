@@ -22,7 +22,7 @@
 <br/>
 <br/>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Thêm phim", "Create", "", htmlAttributes: new { @class = "fa fa-plus-circle create" })
 </p>
 <table class="table" style="table-layout: fixed; width:100%">
     <tr>
@@ -93,8 +93,8 @@
                 @Html.DisplayFor(modelItem => item.TheLoai.tentheloai)
             </td>*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.maphim }) |
-                @Html.ActionLink("Details", "Details", new { id = item.maphim }) @*|
+                @Html.ActionLink(" ", "Edit", new { id = item.maphim }, new { @class = "fa fa-edit option" }) | 
+                @Html.ActionLink(" ", "Details", new { id = item.maphim }, new { @class = "fa fa-info-circle option" }) @*|
                 @Html.ActionLink("Delete", "Delete", new { id = item.maphim })*@
             </td>
         </tr>

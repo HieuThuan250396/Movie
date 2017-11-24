@@ -33,13 +33,18 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
+    string paraGioChieu = item.giochieu.ToString(@"hh\:mm");
+    string paraGioKetThuc = item.gioketthuc.ToString(@"hh\:mm");
+    
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.giochieu)
+            @*@Html.DisplayFor(modelItem => item.giochieu):@Html.DisplayFor(modelItem => item.giochieu.Minutes)*@
+            @Html.DisplayFor(modelItem => paraGioChieu)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.gioketthuc)
+            @Html.DisplayFor(modelItem => paraGioKetThuc)@*:@Html.DisplayFor(modelItem => item.gioketthuc.Minutes)*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ngaychieu)
@@ -55,8 +60,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.masuatchieu }) |
-            @Html.ActionLink("Details", "Details", new { id=item.masuatchieu }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.masuatchieu })
+            @Html.ActionLink("Details", "Details", new { id=item.masuatchieu }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id=item.masuatchieu })*@
         </td>
     </tr>
 }

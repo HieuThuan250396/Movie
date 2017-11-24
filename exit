@@ -1,0 +1,166 @@
+[33mcommit 12dec6cfc99a1c5ddc74b16beff975278e5046a0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Tue Nov 21 14:59:51 2017 +0700
+
+    update web
+
+[33mcommit 3876af6507560198c79ac5daffa0f6791097d267[m
+Merge: 9bdcb09 7cee8f9
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Tue Nov 21 14:21:52 2017 +0700
+
+    Merge branch 'master' of https://github.com/HieuThuan250396/Movie
+
+[33mcommit 9bdcb09a75e52b8d0fb5b218b9b98392b2fa9324[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Tue Nov 21 14:21:19 2017 +0700
+
+    update ui code
+
+[33mcommit 7cee8f92267f0ff32a0e8459bd875143607f18f1[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Sat Nov 18 16:58:25 2017 +0700
+
+    phan quyen
+
+[33mcommit af8edc0759f5ab8d29503c930d48f5ba7ce02ac2[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Sat Nov 18 16:40:25 2017 +0700
+
+    edit proc
+
+[33mcommit 0f6a67a10adde8ad17f357cfec798781cb17f1f5[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Thu Nov 16 13:17:31 2017 +0700
+
+    udpate
+
+[33mcommit 111fdb6115bf54a8d23ec0b8f1cc778301dec809[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Thu Nov 16 13:06:07 2017 +0700
+
+    update database and trello
+
+[33mcommit 7397c8f144762113fe7390566faa554acaddc0c7[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Tue Nov 14 14:00:27 2017 +0700
+
+    update slide
+
+[33mcommit 1965fa5ba78c6c8dc1ff9a25736cd4838468b76e[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Sat Nov 11 07:39:18 2017 +0700
+
+    update final dtb and update date proc and task in trello
+
+[33mcommit dcba870a304b28b9b8d2b5d4074c595cf6f86045[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Fri Nov 10 17:41:38 2017 +0700
+
+    update database 3
+
+[33mcommit 37d0033a1df8920d12624ffc1be1b2238659e193[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Fri Nov 10 09:58:54 2017 +0700
+
+    update proc Suatchieu
+
+[33mcommit dba786ae9b6f5f8aa45f22a6587057ab6ab40ce3[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Thu Nov 9 19:08:35 2017 +0700
+
+    database v2
+
+[33mcommit 92ea0316854ce234eb64e7c311f53688bfd40bab[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Thu Nov 9 19:01:18 2017 +0700
+
+    review code proc
+
+[33mcommit 3ba87f792a2222d2b5f043c7929acca5b27db90f[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Thu Nov 9 16:18:59 2017 +0700
+
+    .
+
+[33mcommit d9bd7b4c41ac6104f1ebad1ceee7dd1788398680[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Thu Nov 9 16:15:07 2017 +0700
+
+    admin
+
+[33mcommit b9f43f238dafff7e59621da135b89a978815e397[m
+Author: DESKTOP-72O5CQT\NhanNhan <toi.ten.nhan@gmail.com>
+Date:   Thu Nov 9 10:50:08 2017 +0700
+
+    Update store proceduce (sp dat ve)
+
+[33mcommit efb4f10ba7fac032bdf6dd3dc2c299ea38e442b5[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Wed Nov 8 16:10:24 2017 +0700
+
+    update code preview
+
+[33mcommit 50a50f8f22970583059e6ec20466bef1df3622a4[m
+Author: TMA Solutions <tmasolutions@TMAs-iMac.local>
+Date:   Mon Nov 6 11:20:47 2017 +0700
+
+    update database
+
+[33mcommit 5e9464b58454c55ad1f2a24dcf99ab29d19394a7[m
+Author: DESKTOP-72O5CQT\NhanNhan <toi.ten.nhan@gmail.com>
+Date:   Sat Oct 28 13:18:53 2017 +0700
+
+    update database v1.0:
+    - bỏ bảng [Ghe]
+    - bỏ 2 field trong bảng [Ve]
+    - sửa bảng [LoaiGhe] thành [LoaiVe]
+
+[33mcommit 3f3ab802b0bf14bcc3e2df1f26bfa84827e602ca[m
+Merge: 8a4d280 b605dc0
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Thu Oct 26 19:25:34 2017 +0700
+
+    Merge branch 'master' of https://github.com/HieuThuan250396/Movie.git
+
+[33mcommit 8a4d28011bc4e4488707d291bc231832f5fdac63[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Thu Oct 26 19:25:10 2017 +0700
+
+    MovieInfo
+
+[33mcommit 6cfc06739b404ae1f26f2b2fe4dd9b260a37fff7[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Thu Oct 26 18:10:13 2017 +0700
+
+    home, videos
+
+[33mcommit b605dc0d960dffe0a7723fc5f9e43a6bdd34de8f[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Thu Oct 26 14:41:48 2017 +0700
+
+    SLIDE
+
+[33mcommit 13067cd421f6bcca50a099d531ae7a3e5762f4d5[m
+Author: JEREMY\JeremyPC <trungthejd@gmail.com>
+Date:   Wed Oct 25 13:23:24 2017 +0700
+
+    trang login, register
+
+[33mcommit 10d93710e431370a5087ab780c35ac6bfcaa1ab3[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Fri Oct 13 10:29:06 2017 +0700
+
+    update database add table khuyen mai
+
+[33mcommit 62b8af444e43bc00561c83c8effc706a94f521f4[m
+Author: HoangMinh <vuhoangminh199@gmail.com>
+Date:   Fri Oct 13 08:53:29 2017 +0700
+
+    update database
+
+[33mcommit 8e237b9d762f4e49b550376bddf1bb08b8e62933[m
+Author: MISU\THUAN <hieuthuan250396@gmail.com>
+Date:   Thu Oct 12 15:06:02 2017 +0700
+
+    add database

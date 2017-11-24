@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Thêm phòng chiếu", "Create", "", htmlAttributes: new { @class = "fa fa-plus-circle create" })
 </p>
 <table class="table">
     <tr>
@@ -30,9 +30,9 @@
             @Html.DisplayFor(modelItem => item.soghebandau)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.maphong }) |
-            @Html.ActionLink("Details", "Details", new { id=item.maphong }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.maphong })
+            @Html.ActionLink(" ", "Edit", new { id = item.maphong }, new { @class = "fa fa-edit option" }) |
+            @Html.ActionLink(" ", "Details", new { id = item.maphong}, new { @class = "fa fa-info-circle option" }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id=item.maphong })*@
         </td>
     </tr>
 }

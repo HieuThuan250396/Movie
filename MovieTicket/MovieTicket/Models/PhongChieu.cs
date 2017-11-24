@@ -12,6 +12,7 @@ namespace MovieTicket.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class PhongChieu
     {
@@ -21,10 +22,13 @@ namespace MovieTicket.Models
             this.SuatChieux = new HashSet<SuatChieu>();
         }
 
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mã phòng")]
         public int maphong { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Tên phòng")]
         public string tenphong { get; set; }
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Số ghế ban đầu")]
         public int soghebandau { get; set; }
 

@@ -22,6 +22,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(" Trở về danh sách", "Index", "", htmlAttributes: new { @class = "fa fa-arrow-circle-left create" })
+    @Html.ActionLink(" Chỉnh sửa", "Edit", new { /* id = Model.PrimaryKey */ }, htmlAttributes: new { @class = "fa fa-pencil-square-o create" })
+    
 </p>

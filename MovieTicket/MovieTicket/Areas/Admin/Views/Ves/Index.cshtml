@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
@@ -33,7 +33,7 @@
         <th>
             @Html.DisplayNameFor(model => model.SuatChieu.masuatchieu)
         </th>
-        <th></th>
+        @*<th></th>*@
     </tr>
 
 @foreach (var item in Model) {
@@ -59,11 +59,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.SuatChieu.masuatchieu)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.mave }) |
             @Html.ActionLink("Details", "Details", new { id=item.mave }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.mave })
-        </td>
+        </td>*@
     </tr>
 }
 

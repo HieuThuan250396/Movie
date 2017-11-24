@@ -12,6 +12,7 @@ namespace MovieTicket.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class SuatChieu
     {
@@ -23,22 +24,47 @@ namespace MovieTicket.Models
 
         [DisplayName("Mã suất chiếu")]
         public int masuatchieu { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mã phim")]
         public int maphim { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mã phòng")]
         public int maphong { get; set; }
+
+        
+        //[DataType(DataType.Time)]
+        //[DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Giờ chiếu")]
         public System.TimeSpan giochieu { get; set; }
+
+        //[DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Time)]
         [DisplayName("Giờ kết thúc")]
+        [Required(ErrorMessage = "Không được để trống trường này")]
         public System.TimeSpan gioketthuc { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Ngày chiếu")]
         public System.DateTime ngaychieu { get; set; }
+
+        
         [DisplayName("Số ghế còn trống")]
         public int soghecontrong { get; set; }
+
+        
         [DisplayName("Phim")]
         public virtual Phim Phim { get; set; }
+        
         [DisplayName("Phòng chiếu")]
         public virtual PhongChieu PhongChieu { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
     }

@@ -12,6 +12,7 @@ namespace MovieTicket.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class LoaiVe
     {
@@ -20,10 +21,15 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
+        [Range(0, int.MaxValue, ErrorMessage = "Chỉ nhập số")]
         [DisplayName("Mã loại vé")]
         public int maloaive { get; set; }
+
         [DisplayName("Tên loại vé")]
         public string tenloaive { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường này")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [DisplayName("Giá vé")]
         public int giave { get; set; }
     

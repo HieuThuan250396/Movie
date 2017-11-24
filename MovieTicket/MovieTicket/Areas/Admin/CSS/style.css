@@ -2857,3 +2857,47 @@ ul.dropdown-menu.dropdown-menu-right {
 .table tr~tr:hover{
 	background: #F5F5F5;
 }
+
+.option{
+    padding: 5px;
+    border-radius: 12px;
+    
+}
+.option:hover{
+    text-decoration:none;
+    background:#337ab7;
+    color: #F5F5F5
+}
+.create{
+    padding:7px;
+    font-family:'TUV-Montserrat-Regular';
+    background:#337ab7;
+    color:#fff;
+    border-radius:4px;
+    
+    transition:0s all;
+	-webkit-transition:0s all;
+	-moz-transition:0s all;
+	-o-transition:0s all;
+	-ms-transition:0s all;
+}
+.create:hover{
+    background: #70a6d5;
+    text-decoration:none;
+    color: #fff;
+    transition:0.3s all;
+}
+.create:active{
+    background:#337ab7;
+    color:#fff;
+    text-decoration:none;
+    outline:none;
+    transform: translateY(2px);
+}
+.create:focus{
+    background:#337ab7;
+    color:#fff;
+    transition:0.3s all;
+    text-decoration:none;
+    outline:none;
+}

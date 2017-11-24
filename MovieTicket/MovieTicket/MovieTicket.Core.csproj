@@ -232,7 +232,7 @@
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Areas\Admin\Models\CustomMembershipProvider.cs" />
     <Compile Include="Areas\Admin\Models\Login.cs" />
-    <Compile Include="Controllers\AccountClientController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -246,7 +246,6 @@
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KhachHangAdd.cs" />
     <Compile Include="Models\KhuyenMai.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
@@ -275,7 +274,6 @@
     <Compile Include="Models\Phim.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhimSearchResult.cs" />
     <Compile Include="Models\PhongChieu.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
@@ -561,7 +559,6 @@
     <Content Include="Areas\Admin\Views\SuatChieux\Details.cshtml" />
     <Content Include="Areas\Admin\Views\SuatChieux\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SuatChieux\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Phims\IndexBackup.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

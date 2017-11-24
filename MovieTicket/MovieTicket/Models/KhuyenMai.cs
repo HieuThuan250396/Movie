@@ -21,7 +21,7 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
-
+        
         [DisplayName("Mã khuyến mãi")]
         public int makm { get; set; }
         [DisplayName("Ngày bắt đầu")]

@@ -15,13 +15,13 @@
         <h4>LoaiVe</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.maloaive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.maloaive, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.maloaive, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.tenloaive, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.giave, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.giave, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.giave, new { htmlAttributes = new { @class = "form-control", @step = 1000 } })
                 @Html.ValidationMessageFor(model => model.giave, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,5 +48,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(" Trở về danh sách", "Index", "", htmlAttributes: new { @class = "fa fa-arrow-circle-left create" })
 </div>

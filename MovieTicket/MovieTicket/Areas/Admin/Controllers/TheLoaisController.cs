@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieTicket.Models;
+using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
@@ -17,7 +18,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/TheLoais
         public ActionResult Index()
         {
-            return View(db.TheLoais.ToList());
+            return View(db.Database.SqlQuery<TheLoai>("exec sp_loadTatCaTheLoai").ToList());
         }
 
         // GET: Admin/TheLoais/Details/5
@@ -27,7 +28,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TheLoai theLoai = db.TheLoais.Find(id);
+            TheLoai theLoai = db.Database.SqlQuery<TheLoai>("exec sp_loadTheLoai {0}", id).First<TheLoai>();
             if (theLoai == null)
             {
                 return HttpNotFound();
@@ -48,10 +49,17 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "matheloai,tentheloai")] TheLoai theLoai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TheLoais.Add(theLoai);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Database.SqlQuery<TheLoai>("exec sp_addTheLoai {0}", theLoai.tentheloai).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +73,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TheLoai theLoai = db.TheLoais.Find(id);
+            TheLoai theLoai = db.Database.SqlQuery<TheLoai>("exec sp_loadTheLoai {0}", id).First<TheLoai>();
             if (theLoai == null)
             {
                 return HttpNotFound();
@@ -80,10 +88,17 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "matheloai,tentheloai")] TheLoai theLoai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(theLoai).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Database.SqlQuery<TheLoai>("exec sp_editTheLoai {0}, {1}", theLoai.matheloai, theLoai.tentheloai).ToList();
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (EntityCommandExecutionException ex)
+            {
                 return RedirectToAction("Index");
             }
             return View(theLoai);
