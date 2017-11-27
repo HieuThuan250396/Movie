@@ -675,7 +675,7 @@ begin
 	where NhanVien.manv = @manv
 end
 go
-create proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
+create proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(32))
 as 
 begin 
 	declare @matkhau1 nvarchar(50), @kq int
