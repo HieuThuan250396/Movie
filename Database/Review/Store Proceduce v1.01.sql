@@ -206,9 +206,7 @@ begin
 	declare @maphong int = 1
 	while exists (select * from PhongChieu where maphong = @maphong)
 		set @maphong += 1
-
-	insert into PhongChieu values(@maphong, @tenphong,30, 30)
-
+	insert into PhongChieu values(@maphong, @tenphong, 30)
 end
 
 go
@@ -248,6 +246,15 @@ begin
 	select * from PhongChieu
 end
 
+go
+--Load chi tiet phong chieu
+create proc sp_loadChiTietPhongChieu (@maphong int)
+as
+begin
+	select *
+	from PhongChieu
+	where maphong = @maphong
+end
 go
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -347,6 +354,14 @@ as
 	select * from LoaiVe
 
 go
+-- load chi tiet loai ve
+create proc sp_loadChiTietLoaiVe(@maloaive int)
+as 
+begin 
+	select *
+	from LoaiVe
+	where maloaive = @maloaive
+end 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -433,7 +448,7 @@ begin
 
 	if @matkhau1 is null
 	begin
-		raiserror('khong ton tai sdt', 16, 1)
+		raiserror('Sdt ko ton tai', 16, 1)
 		set @kq = -1
 	end
 	else
@@ -444,7 +459,7 @@ begin
 		end
 		else 
 		begin
-			raiserror('khong dung mat khau', 16, 1)
+			raiserror('Mat khau ko dung,2', 16, 1)
 			set @kq = 0
 		end
 	end
@@ -472,7 +487,7 @@ begin
 	if @ngayketthuc is NULL
 		RAISERROR('Khong ton tai phim', 16, 4)
 	else 
-		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu)
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, (Select soghebandau from PhongChieu where PhongChieu.maphong = @maphong))
 
 	while(@mave<=(select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong = @maphong ))
 	begin 
@@ -514,6 +529,15 @@ as
 begin
 	select * 
 	from SuatChieu
+end
+go
+---load chi tiet suat chieu
+create proc sp_loadChiTietSuatChieu(@masuatchieu int)
+as
+begin
+	select * 
+	from SuatChieu
+	where masuatchieu = @masuatchieu
 end
 go
 --load suat chieu theo phim 
