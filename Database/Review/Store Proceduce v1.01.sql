@@ -637,7 +637,7 @@ go*/
 
 
 -- Add nhanvien
-alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
+create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)
@@ -675,7 +675,7 @@ begin
 	where NhanVien.manv = @manv
 end
 go
-alter proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
+create proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
 as 
 begin 
 	declare @matkhau1 nvarchar(50), @kq int

@@ -220,7 +220,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AccountsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DangNhapController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhuyenMaisController.cs" />
@@ -500,8 +499,6 @@
     <Content Include="Areas\Admin\fonts\Muli-Regular.ttf" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="ClassDiagram1.cd" />
-    <Content Include="Areas\Admin\Views\Accountasd\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Accountasd\Register.cshtml" />
     <Content Include="Areas\Admin\fonts\TUV-Montserrat-Bold.ttf" />
     <Content Include="Areas\Admin\fonts\TUV-Montserrat-Regular.ttf" />
     <Content Include="Areas\Admin\Views\Phims\Create.cshtml" />
@@ -534,7 +531,6 @@
     <Content Include="Areas\Admin\Views\LoaiVes\Details.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiVes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiVes\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <EntityDeploy Include="Models\ModelQLDV.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelQLDV.Designer.cs</LastGenOutput>
