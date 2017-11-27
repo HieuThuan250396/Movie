@@ -637,11 +637,12 @@ go*/
 
 
 -- Add nhanvien
-create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(20), @vaitro char(2))
+alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)
 		set @manv += 1
+	set @matkhau = dbo.maHoaPass (@matkhau)
 	insert into NhanVien values(@manv, @taikhoan, @matkhau, @vaitro)
 
 go
@@ -674,7 +675,7 @@ begin
 	where NhanVien.manv = @manv
 end
 go
-create proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
+alter proc sp_loadThongTinDangNhapNV(@taikhoan varchar(20), @matkhau varchar(20))
 as 
 begin 
 	declare @matkhau1 nvarchar(50), @kq int
@@ -690,7 +691,7 @@ begin
 	end
 	else
 	begin
-		if @matkhau = @matkhau1
+		if dbo.maHoaPass(@matkhau) = @matkhau1
 		begin
 			set @kq = 1
 		end
@@ -702,3 +703,7 @@ begin
 	end
 	select @kq
 end 
+
+exec sp_loadThongTinDangNhapNV 'admin', 'admin'
+
+select dbo.maHoaPass('admin')

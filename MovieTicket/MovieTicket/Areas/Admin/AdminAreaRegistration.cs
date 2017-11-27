@@ -17,7 +17,7 @@ namespace MovieTicket.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "NhanViens", action = "Index", id = UrlParameter.Optional },
+                new { controller = "DangNhap", action = "Login", id = UrlParameter.Optional },
                 namespaces: new[] { "MovieTicket.Areas.Admin.Controllers" }
             );
         }
