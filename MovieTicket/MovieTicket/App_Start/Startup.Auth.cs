@@ -26,6 +26,8 @@ namespace MovieTicket
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
+                LogoutPath = new PathString("/Account/LogOff"),
+                ExpireTimeSpan = TimeSpan.FromMinutes(5.0),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

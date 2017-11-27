@@ -14,7 +14,11 @@ namespace MovieTicket.Areas.Admin.Controllers
     public class NhanViensController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();
-
+        [CustomAuthorization(LoginPage = "~/Admin/NhanVien/Login")]
+        public ActionResult Login()
+        {
+            return View();
+        }
         // GET: Admin/NhanViens
         public ActionResult Index()
         {

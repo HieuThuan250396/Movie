@@ -9,7 +9,7 @@ using System.Web.Security;
 namespace MovieTicket.Areas.Admin.Controllers
 {
     [Authorize()]
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         // GET: Admin/Account
         public ActionResult Index()
@@ -27,9 +27,9 @@ namespace MovieTicket.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (new CustomMembershipProvider().ValidateUser(model.UserName, model.Password))
+                if (new CustomMembershipProvider().ValidateUser(model.Username, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false);
+                    FormsAuthentication.SetAuthCookie(model.Username, false);
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
