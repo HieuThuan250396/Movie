@@ -704,6 +704,8 @@ begin
 	select @kq
 end 
 
-exec sp_loadThongTinDangNhapNV 'admin', 'admin'
+--exec sp_loadThongTinDangNhapNV 'admin', 'admin'
 
-select dbo.maHoaPass('admin')
+--select dbo.maHoaPass('admin')
+
+--exec sp_addNhanVien 'admin', 'admin', 'ad'
