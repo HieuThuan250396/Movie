@@ -428,7 +428,7 @@ end
 go
 
 -- load Chi tiet khach hang theo id
-create proc sp_loadChiTietKhacHang(@makhachhang int)
+create proc sp_loadChiTietKhachHang(@makhachhang int)
 as 
 begin 
 	select *

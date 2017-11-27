@@ -30,7 +30,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhacHang {0}", id).First<KhachHang>();
+            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhachHang {0}", id).First<KhachHang>();
 
             if (khachHang == null)
             {
@@ -77,7 +77,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhacHang {0}", id).First<KhachHang>();
+            KhachHang khachHang = db.Database.SqlQuery<KhachHang>("exec sp_loadChiTietKhachHang {0}", id).First<KhachHang>();
             
             if (khachHang == null)
             {
