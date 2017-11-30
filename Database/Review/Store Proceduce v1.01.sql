@@ -600,14 +600,32 @@ go
 create proc sp_datVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
 as
 begin
-	update Ve 
-	set 
-		makhachhang = @makhachhang,
-		giodat = getdate(),
-		makm = @makm,
-		tinhtrang = 1
-	where
-		mave = @mave and masuatchieu = @masuatchieu
+	begin tran
+		if(@makm = null or @makm = '' )
+		begin
+			update Ve 
+			set 
+				makhachhang = @makhachhang,
+				giodat = getdate(),
+				tinhtrang = 1
+			where
+				mave = @mave and masuatchieu = @masuatchieu	
+		end
+		else 
+		begin
+			update Ve 
+			set 
+				makhachhang = @makhachhang,
+				giodat = getdate(),
+				makm = @makm,
+				tinhtrang = 1,
+				giave = giave - (select LoaiVe.giave from LoaiVe where LoaiVe.maloaive = @makm)
+			where
+				mave = @mave and masuatchieu = @masuatchieu
+		end
+		
+	insert VeDangDat select * from Ve where Ve.mave = @mave 
+	commit tran
 end
 go
 
