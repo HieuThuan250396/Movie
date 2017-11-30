@@ -587,17 +587,17 @@ as
 	-- set giochieu
 	declare @giochieu datetime = (select giochieu from SuatChieu where masuatchieu = @masuatchieu)
 	-- set tinhtrang
-	declare @tinhtrang bit = 1
+	declare @tinhtrang bit = 0
 
 
 	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @giochieu, @tinhtrang, @giodat, @maloaive, @makm)
 	update PhongChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
 
---exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
+-- exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
 go
 
--- Edit ve
-create proc sp_datveVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
+-- Dat ve
+create proc sp_datVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
 as
 begin
 	update Ve 
@@ -610,6 +610,7 @@ begin
 		mave = @mave and masuatchieu = @masuatchieu
 end
 go
+
 --tra ve 
 create proc sp_huyVe (@mave int, @masuatchieu int)
 as
@@ -709,3 +710,4 @@ end
 --select dbo.maHoaPass('admin')
 
 --exec sp_addNhanVien 'admin', 'admin', 'ad'
+
