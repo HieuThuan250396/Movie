@@ -622,6 +622,11 @@ begin
 				giave = giave - (select LoaiVe.giave from LoaiVe where LoaiVe.maloaive = @makm)
 			where
 				mave = @mave and masuatchieu = @masuatchieu
+			update KhuyenMai
+			set
+				KhuyenMai.giatri = 0 
+			where 
+				KhuyenMai.makm = @makm
 		end
 		
 	insert VeDangDat select * from Ve where Ve.mave = @mave 
@@ -630,10 +635,13 @@ end
 go
 
 --tra ve 
-create proc sp_huyVe (@mave int, @masuatchieu int)
+create proc sp_huyVe (@mave int, @masuatchieu int,@makm int)
 as
 begin
-	update Ve 
+	begin tran
+		if(@makm = null or @makm = '' )
+		begin
+			update Ve 
 	set 
 		makhachhang = NULL,
 		giodat =NULL,
@@ -641,6 +649,24 @@ begin
 		tinhtrang = 0
 	where
 		mave = @mave and masuatchieu = @masuatchieu
+		end
+		else
+		begin
+		update Ve 
+	set 
+		makhachhang = NULL,
+		giodat =NULL,
+		makm = NULL,
+		tinhtrang = 0
+	where
+		mave = @mave and masuatchieu = @masuatchieu
+		update KhuyenMai
+		set
+		KhuyenMai.giatri = 10000
+		where 
+		KhuyenMai.makm = @makm
+		end
+		commit tran
 end
 
 go
