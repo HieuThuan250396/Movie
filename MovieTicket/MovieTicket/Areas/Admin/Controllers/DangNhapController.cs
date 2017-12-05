@@ -29,47 +29,36 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string taikhoan, string matkhau)
         {
-            //try
-            //{
-
-            //    //db.NhanViens.Add(nhanVien);
-            //    List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhapNV {0}, {1}", taikhoan, matkhau).ToList();
-            //    ViewBag.Alert = "Đăng nhập thành công";
-            //    return RedirectToAction("Index", "NhanViens");
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (ex.Message == "khong ton tai tai khoan")
-            //    {
-            //        ViewBag.Alert = "Không tồn tại tài khoản này";
-            //        return View("Login");
-            //    }
-            //    else if(ex.Message == "khong dung mat khau")
-            //    {
-            //        ViewBag.Alert = "Không đúng mật khẩu";
-            //        return View("Login");
-            //    }
-            //    else
-            //        return View("Login");
-            //}
-
-            if (ModelState.IsValid)
+            try
             {
-                if (new MyMembershipProvider().ValidateUser(taikhoan, matkhau))
+                //db.NhanViens.Add(nhanVien);
+                List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhapNV {0}, {1}", taikhoan, matkhau).ToList();
+                FormsAuthentication.SetAuthCookie(taikhoan, false);
+                ViewBag.Alert = "Đăng nhập thành công";
+                return RedirectToAction("Index", "NhanViens");
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "khong ton tai tai khoan")
                 {
-                    FormsAuthentication.SetAuthCookie(taikhoan, false);
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Alert = "Không tồn tại tài khoản này";
+                    return View("Login");
+                }
+                else if (ex.Message == "khong dung mat khau")
+                {
+                    ViewBag.Alert = "Không đúng mật khẩu";
+                    return View("Login");
                 }
                 else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                    return View("Login");
             }
- 
-            // If we got this far, something failed, redisplay form
-            return View();
 
-
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Login", "DangNhap");
         }
     }
 }
