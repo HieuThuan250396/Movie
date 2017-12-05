@@ -14,6 +14,7 @@ using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
+    [Authorize()]
     public class PhimsController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();

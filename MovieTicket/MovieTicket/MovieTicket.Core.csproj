@@ -232,8 +232,9 @@
     <Compile Include="Areas\Admin\Controllers\VeDangDatsController.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Areas\Admin\CustomAuthorize.cs" />
-    <Compile Include="Areas\Admin\Models\CustomMembershipProvider.cs" />
     <Compile Include="Areas\Admin\Models\Login.cs" />
+    <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Security\MyMembershipProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
