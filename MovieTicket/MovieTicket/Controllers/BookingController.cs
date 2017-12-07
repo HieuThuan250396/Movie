@@ -15,7 +15,8 @@ namespace MovieTicket.Controllers
         {
             if (!String.IsNullOrEmpty(suatChieu))
             {
-                return View(db.Database.SqlQuery<SuatChieu>("exec sp_loadSuatChieu").ToList());
+                List<Ve> ve = db.Database.SqlQuery<Ve>("exec sp_loadVeTheoSuatChieu {0}", suatChieu).ToList();
+                return View(ve);
             }
             else
                 return View();
