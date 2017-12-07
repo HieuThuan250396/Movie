@@ -17,7 +17,7 @@
             {
                 if (i % 4 == 0)
                 {<div class="content-grid last-grid">
-        @{string imagePath = Url.Content("~/images/" + video.hinh + ".jpg");}
+        @{string imagePath = Url.Content(video.hinh);}
         <a class="play-icon popup-with-zoom-anim" href=@video.trailer><img src=@imagePath title="@video.tenphim" /></a>
         <h3>@video.tenphim</h3>
         <ul>
@@ -30,7 +30,7 @@
             }
             else
             {<div class="content-grid">
-        @{string imagePath = Url.Content("~/images/" + video.hinh + ".jpg");}
+        @{string imagePath = Url.Content(video.hinh);}
         <a class="play-icon popup-with-zoom-anim" href="@video.trailer"><img src=@imagePath title="@video.tenphim" /></a>
         <h3>@video.tenphim</h3>
         <ul>
