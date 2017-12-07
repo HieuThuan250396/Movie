@@ -1,4 +1,5 @@
-﻿@using MovieTicket.Models
+﻿@model IEnumerable<MovieTicket.Models.Phim>
+@using MovieTicket.Models
 @{
     ViewBag.Title = "Index";
     Layout =  "~/Views/Shared/_LayoutVideos.cshtml";
@@ -12,13 +13,13 @@
     </div>
     <div class="content-grids">
         @{ int i = 1;}
-        @{ foreach (var video in (List<Phim>)(ViewData["listphim"]))
+        @{ foreach (var video in Model)
             {
                 if (i % 4 == 0)
                 {<div class="content-grid last-grid">
-        @{string imagePath = Url.Content("~/images/" + video.urlHinh + ".jpg");}
-        <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src=@imagePath title="@video.tenPhim" /></a>
-        <h3>@video.tenPhim</h3>
+        @{string imagePath = Url.Content("~/images/" + video.hinh + ".jpg");}
+        <a class="play-icon popup-with-zoom-anim" href=@video.trailer><img src=@imagePath title="@video.tenphim" /></a>
+        <h3>@video.tenphim</h3>
         <ul>
             <li><a href="#"><img src="~/images/likes.png" title="image-name" /></a></li>
             <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
@@ -29,9 +30,9 @@
             }
             else
             {<div class="content-grid">
-        @{string imagePath = Url.Content("~/images/" + video.urlHinh + ".jpg");}
-        <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src=@imagePath title="@video.tenPhim" /></a>
-        <h3>@video.tenPhim</h3>
+        @{string imagePath = Url.Content("~/images/" + video.hinh + ".jpg");}
+        <a class="play-icon popup-with-zoom-anim" href="@video.trailer"><img src=@imagePath title="@video.tenphim" /></a>
+        <h3>@video.tenphim</h3>
         <ul>
             <li><a href="#"><img src="~/images/likes.png" title="image-name" /></a></li>
             <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
