@@ -10,6 +10,7 @@ using MovieTicket.Models;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "1")]
     public class VeDangDatsController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();
