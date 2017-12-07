@@ -26,60 +26,65 @@
         <div class="main">
             <h2>Multiplex Theatre Showing Screen 1</h2>
             <div class="demo">
-                <div id="seat-map">
-                    <div class="front">SCREEN</div>
-                </div>
-                <div>
-                    <div class="seatCharts-row">
-                        @for (int i = 0; i < 10; i++)
-                        {
-                            string tinhTrang;
+               
+                
+                    <div>
+                        <div class="front">SCREEN</div>
+                        <div class="seatCharts-row">
+                            <div class="seatCharts-cell seatCharts-space">A</div>
+                            @for (int i = 0; i < 10; i++)
+                            {
+                                string tinhTrang;
 
-                            if (@Model.ElementAt(i).tinhtrang)
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                                if (Model.ElementAt(i).tinhtrang)
+                                {
+                                    tinhTrang = "seatCharts-seat" + " seatCharts-cell" + " unavailable";
+                                }
+                                else
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                }
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
                             }
-                            else
+                        </div>
+                        <div class="seatCharts-row">
+                            <div class="seatCharts-cell seatCharts-space">B</div>
+                            @for (int i = 10; i < 20; i++)
                             {
-                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                string tinhTrang;
+
+                                if (Model.ElementAt(i).tinhtrang)
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                                }
+                                else
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                }
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
                             }
-                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
-                        }
+                        </div>
+                        <div class="seatCharts-row">
+                            <div class="seatCharts-cell seatCharts-space">C</div>
+                            @for (int i = 20; i < 30; i++)
+                            {
+                                string tinhTrang;
+                                string id = "" + Model.ElementAt(i).mave;
+                                if (Model.ElementAt(i).tinhtrang)
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                                }
+                                else
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                }
+                                
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "Book", "Booking", new {@mave = id}, null)</div>
+                            }
+                        </div>
                     </div>
-                    <div class="seatCharts-row">
-                        @for (int i = 10; i < 20; i++)
-                        {
-                            string tinhTrang;
+                    
 
-                            if (@Model.ElementAt(i).tinhtrang)
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
-                            }
-                            else
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell available";
-                            }
-                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
-                        }
-                    </div>
-                    <div class="seatCharts-row">
-                        @for (int i = 20; i < 30; i++)
-                        {
-                            string tinhTrang;
-
-                            if (@Model.ElementAt(i).tinhtrang)
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
-                            }
-                            else
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell available";
-                            }
-                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
-                        }
-                    </div>
-
-                </div>
                 <div class="booking-details">
                     <ul class="book-left">
                         <li>Movie </li>

@@ -230,6 +230,7 @@
     <Compile Include="Areas\Admin\Controllers\SuatChieuxController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaisController.cs" />
     <Compile Include="Areas\Admin\Controllers\VeDangDatsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Ves1Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Areas\Admin\CustomAuthorize.cs" />
     <Compile Include="Areas\Admin\Models\Login.cs" />
@@ -619,6 +620,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Ves1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

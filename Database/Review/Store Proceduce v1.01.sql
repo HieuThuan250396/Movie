@@ -677,6 +677,8 @@ as
 		select * from ve where ve.masuatchieu = @masuatchieu
 	end
 
+	
+
 /*
 -- Delete ve
 create proc sp_deleteVe @mave int
