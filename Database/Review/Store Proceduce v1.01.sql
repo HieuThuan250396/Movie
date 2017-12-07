@@ -671,6 +671,12 @@ end
 
 go
 
+create proc sp_loadVeTheoSuatChieu(@masuatchieu int)
+as
+	begin
+		select * from ve where ve.masuatchieu = @masuatchieu
+	end
+
 /*
 -- Delete ve
 create proc sp_deleteVe @mave int

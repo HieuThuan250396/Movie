@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<MovieTicket.Models.Ve>
+ 
 @{
     Layout = null;
 }
@@ -27,6 +28,57 @@
             <div class="demo">
                 <div id="seat-map">
                     <div class="front">SCREEN</div>
+                </div>
+                <div>
+                    <div class="seatCharts-row">
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            string tinhTrang;
+
+                            if (@Model.ElementAt(i).tinhtrang)
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                            }
+                            else
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                            }
+                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
+                        }
+                    </div>
+                    <div class="seatCharts-row">
+                        @for (int i = 10; i < 20; i++)
+                        {
+                            string tinhTrang;
+
+                            if (@Model.ElementAt(i).tinhtrang)
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                            }
+                            else
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                            }
+                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
+                        }
+                    </div>
+                    <div class="seatCharts-row">
+                        @for (int i = 20; i < 30; i++)
+                        {
+                            string tinhTrang;
+
+                            if (@Model.ElementAt(i).tinhtrang)
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                            }
+                            else
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                            }
+                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class=@tinhTrang>@Model.ElementAt(i).mave</div>
+                        }
+                    </div>
+
                 </div>
                 <div class="booking-details">
                     <ul class="book-left">
