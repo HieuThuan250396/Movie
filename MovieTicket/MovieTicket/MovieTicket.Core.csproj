@@ -230,6 +230,7 @@
     <Compile Include="Areas\Admin\Controllers\SuatChieuxController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaisController.cs" />
     <Compile Include="Areas\Admin\Controllers\VeDangDatsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Ves1Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Areas\Admin\CustomAuthorize.cs" />
     <Compile Include="Areas\Admin\Models\Login.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Areas\Admin\Security\MyRoleProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\DangNhap1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieInfoController.cs" />
@@ -616,9 +618,11 @@
     <Content Include="Views\Shared\_LayoutVideos.cshtml" />
     <Content Include="Views\MovieInfo\Index.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\DangNhap1\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Ves1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
