@@ -438,14 +438,15 @@ end
 go
 
 -- load Thong tin dang nhap
-create proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau nvarchar(50))
+alter proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau varchar(32))
 as 
 begin 
-	declare @matkhau1 nvarchar(50), @kq int
+	declare @matkhau1 nvarchar(32), @kq int
 	
 	select @matkhau1 = matkhau 
 	from KhachHang
-	where dienthoai = @dienthoai
+	where dienthoai = 123123
+
 
 	if @matkhau1 is null
 	begin
@@ -468,6 +469,7 @@ begin
 end 
 go
 
+sp_loadThongTinDangNhap 123123, 1
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

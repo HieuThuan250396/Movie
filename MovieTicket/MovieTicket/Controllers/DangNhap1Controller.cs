@@ -25,25 +25,27 @@ namespace MovieTicket.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string taikhoan, string matkhau)
+        public ActionResult Login(string dienthoai, string matkhau)
         {
             try
             {
                 //db.NhanViens.Add(nhanVien);
-                List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhapNV {0}, {1}", taikhoan, matkhau).ToList();
-                FormsAuthentication.SetAuthCookie(taikhoan, false);
-                Session["taikhoan"] = taikhoan;
+                List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhap {0}, {1}", dienthoai, matkhau).ToList();
+                FormsAuthentication.SetAuthCookie(dienthoai, false);
+                KhachHang a = db.KhachHangs.SingleOrDefault(s => s.dienthoai.Equals(dienthoai));
+                Session["taikhoan"] = a.ho + " " + a.tenlot + " " + a.ten;
+                string mk = a.matkhau;
                 ViewBag.Alert = "Đăng nhập thành công";
-                return RedirectToAction("Index", "NhanViens");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                if (ex.Message == "khong ton tai tai khoan")
+                if (ex.Message == "Sdt ko ton tai")
                 {
-                    ViewBag.Alert = "Không tồn tại tài khoản này";
+                    ViewBag.Alert = "Không tồn tại Số điện thoại này";
                     return View("Login");
                 }
-                else if (ex.Message == "khong dung mat khau")
+                else if (ex.Message == "Mat khau ko dung")
                 {
                     ViewBag.Alert = "Không đúng mật khẩu";
                     return View("Login");

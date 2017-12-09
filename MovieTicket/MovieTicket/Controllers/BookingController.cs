@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace MovieTicket.Controllers
 {
+    [Authorize()]
     public class BookingController : Controller
     {
 
