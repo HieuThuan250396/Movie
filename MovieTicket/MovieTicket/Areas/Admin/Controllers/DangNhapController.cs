@@ -34,6 +34,7 @@ namespace MovieTicket.Areas.Admin.Controllers
                 //db.NhanViens.Add(nhanVien);
                 List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhapNV {0}, {1}", taikhoan, matkhau).ToList();
                 FormsAuthentication.SetAuthCookie(taikhoan, false);
+                Session["taikhoan"] = taikhoan;
                 ViewBag.Alert = "Đăng nhập thành công";
                 return RedirectToAction("Index", "NhanViens");
             }

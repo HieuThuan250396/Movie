@@ -26,9 +26,6 @@
         <div class="main">
             <h2>Multiplex Theatre Showing Screen 1</h2>
             <div class="demo">
-               
-                
-                    <div>
                         <div class="front">SCREEN</div>
                         <div class="seatCharts-row">
                             <div class="seatCharts-cell seatCharts-space">A</div>
@@ -44,6 +41,15 @@
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell available";
                                 }
+                                List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
+                                if (dsVeDangDat.Count() != 0)
+                                {
+                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
+                                    {
+                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                    }
+                                }
+
                                 <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
                             }
                         </div>
@@ -52,7 +58,7 @@
                             @for (int i = 10; i < 20; i++)
                             {
                                 string tinhTrang;
-
+                                List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
                                 if (Model.ElementAt(i).tinhtrang)
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
@@ -60,6 +66,13 @@
                                 else
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                }
+                                if (dsVeDangDat.Count() != 0)
+                                {
+                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
+                                    {
+                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                    }
                                 }
                                 <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
                             }
@@ -69,6 +82,7 @@
                             @for (int i = 20; i < 30; i++)
                             {
                                 string tinhTrang;
+                                List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
                                 string id = "" + Model.ElementAt(i).mave;
                                 if (Model.ElementAt(i).tinhtrang)
                                 {
@@ -78,8 +92,19 @@
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell available";
                                 }
-                                
-                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "Book", "Booking", new {@mave = id}, null)</div>
+                                if (dsVeDangDat.Count() != 0)
+                                {
+                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
+                                    {
+                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id }, null)</div>
+                                    }
+                                    else
+                                    {
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                    }
+                                }
+
                             }
                         </div>
                     </div>
