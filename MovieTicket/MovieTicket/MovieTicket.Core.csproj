@@ -230,7 +230,6 @@
     <Compile Include="Areas\Admin\Controllers\SuatChieuxController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaisController.cs" />
     <Compile Include="Areas\Admin\Controllers\VeDangDatsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\Ves1Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Areas\Admin\CustomAuthorize.cs" />
     <Compile Include="Areas\Admin\Models\Login.cs" />
@@ -456,6 +455,7 @@
     <Content Include="images\gridallbum8.jpg" />
     <Content Include="images\gridallbum9.jpg" />
     <Content Include="images\header-bg.jpg" />
+    <Content Include="images\header-bg1.jpg" />
     <Content Include="images\img-sprite.png" />
     <Content Include="images\likes.png" />
     <Content Include="images\link.png" />

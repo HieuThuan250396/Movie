@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System;using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -10,6 +9,7 @@ using MovieTicket.Models;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "1")]
     public class VesController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();

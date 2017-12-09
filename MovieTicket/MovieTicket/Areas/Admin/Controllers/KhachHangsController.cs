@@ -12,6 +12,7 @@ using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "1")]
     public class KhachHangsController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<MovieTicket.Models.Phim>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,7 +34,7 @@
             </ul>
         </div>
         <div class="main">
-            <div class="header">
+            <div class="header" style="background: url('../images/header-bg1.jpg') no-repeat 0px 0px;">
                 <div class="top-header">
                     <div class="logo">
                         <a href="index.html"><img src="~/images/logo.png" alt="" /></a>
@@ -52,14 +54,21 @@
 
                 </div>
                 <div class="header-info">
-                    <h1>BIG HERO 6</h1>
-                    <p class="age"><a href="#">All Age</a> Don Hall, Chris Williams</p>
-                    <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
-                    <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; Animation, Action, Comedy</p>
-                    <p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; 7 November 2014</p>
-                    <p class="special">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>
-                    <a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
-                    <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+                    @foreach (var item in Model)
+                    {
+                        <h1>@Html.DisplayFor(modelItem => item.tenphim)</h1>
+                        <p class="age"><a href="#">All Age</a>@Html.DisplayFor(modelItem => item.daodien)</p>
+                        <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
+                        <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.TheLoai)</p>
+                        <p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.ngaykhoichieu)</p>
+                        <p class="special">@Html.DisplayFor(modelItem => item.mota)</p>
+                        @*<a class="video" href="@Html.DisplayFor(modelItem => item.trailer)"><i class="video1"></i>WATCH TRAILER</a>*@
+                        @Html.DisplayFor(modelItem => item.trailer)<i class="video1"></i>
+
+                        <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+                        break;
+                    }
+                    
                 </div>
             </div>
             @RenderBody()
