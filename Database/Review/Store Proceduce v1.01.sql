@@ -261,7 +261,7 @@ go
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Add khuyen mai
-create proc sp_addKhuyenMai (@ngaybatdau date, @ngayketthuc date, @giatri float)
+create proc sp_addKhuyenMai (@ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
 as
 	declare @makm int = 1
 	while exists(select * from KhuyenMai where makm = @makm)
@@ -269,20 +269,22 @@ as
 
 	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
 		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
+		rollback tran
 
-	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri)
+	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri, @tinhtrang)
 
 --exec sp_addKhuyenMai @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
 go
 
 -- Edit khuyen mai
-create proc sp_editKhuyenMai (@makm int, @ngaybatdau date, @ngayketthuc date, @giatri float)
+create proc sp_editKhuyenMai (@makm int, @ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
 as
 	update KhuyenMai 
 	set 
 		ngaybatdau = @ngaybatdau,
 		ngayketthuc = @ngayketthuc,
-		giatri = @giatri
+		giatri = @giatri,
+		tinhtrang = @tinhtrang
 	where
 		makm = @makm
 
@@ -593,7 +595,7 @@ as
 
 
 	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @giochieu, @tinhtrang, @giodat, @maloaive, @makm)
-	update PhongChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
+	update SuatChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
 
 -- exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
 go
@@ -615,7 +617,9 @@ begin
 		end
 		else 
 		begin
-			update Ve 
+		if ((select tinhtrang from KhuyenMai where makm = @makm) = 1)
+		begin
+		update Ve 
 			set 
 				makhachhang = @makhachhang,
 				giodat = getdate(),
@@ -626,9 +630,14 @@ begin
 				mave = @mave and masuatchieu = @masuatchieu
 			update KhuyenMai
 			set
-				KhuyenMai.giatri = 0 
+				KhuyenMai.tinhtrang = 0 
 			where 
 				KhuyenMai.makm = @makm
+		end
+		else 
+		begin
+			raiserror('ma khuyen mai het han',16,1)
+		end
 		end
 		
 	insert VeDangDat select * from Ve where Ve.mave = @mave 
@@ -643,7 +652,7 @@ begin
 	begin tran
 		if(@makm = null or @makm = '' )
 		begin
-			update Ve 
+		update Ve 
 	set 
 		makhachhang = NULL,
 		giodat =NULL,
@@ -664,7 +673,7 @@ begin
 		mave = @mave and masuatchieu = @masuatchieu
 		update KhuyenMai
 		set
-		KhuyenMai.giatri = 10000
+		KhuyenMai.tinhtrang = 1
 		where 
 		KhuyenMai.makm = @makm
 		end
