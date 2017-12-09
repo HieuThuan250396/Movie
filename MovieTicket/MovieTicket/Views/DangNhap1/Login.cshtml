@@ -1,0 +1,65 @@
+﻿@model MovieTicket.Models.KhachHang
+
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <title>Movie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Login" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <link href="~/Areas/Admin/CSS/bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <link href="~/Areas/Admin/CSS/style.css" rel='stylesheet' type='text/css' />
+        <link href="~/Areas/Admin/CSS/font-awesome.css" rel="stylesheet">
+        <script src="~/Areas/Admin/JS/jquery.min.js"> </script>
+        <script src="~/Areas/Admin/JS/bootstrap.min.js"> </script>
+    </head>
+    <body>
+        <div class="login">
+            <h1><a href="index.html"> Login </a></h1>
+            <div class="login-bottom">
+                <h2>Login</h2>
+
+                <form action="~/Admin/DangNhap/Login" method="post">
+                    <div class="col-md-6">
+                        <div class="login-mail">
+                            @Html.EditorFor(model => model.dienthoai)
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        
+                        <div class="login-mail">
+                            @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @type = "password" } })
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        
+
+                    </div>
+                    <div class="col-md-6 login-do">
+                        <label class="hvr-shutter-in-horizontal login-sub">
+                            <input type="submit" value="Login" class="hvr-shutter-in-horizontal" />
+                        </label>
+                        <p>Do not have an account?</p>
+                        <a href="~/Admin/Account/Register" class="hvr-shutter-in-horizontal">Signup</a>
+                        <a href="~/Admin/DangNhap/Login"><p>Login as Employee</p></a>
+                    </div>
+
+                    <div class="clearfix"> </div>
+                </form>
+                @ViewBag.Alert
+            </div>
+        </div>
+        <!--//scrolling js-->
+    </body>
+</html>
+}

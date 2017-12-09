@@ -25,8 +25,6 @@ namespace MovieTicket
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Admin/DangNhap/Login"),
-                LogoutPath = new PathString("/Account/LogOff"),
                 ExpireTimeSpan = TimeSpan.FromMinutes(5.0),
                 Provider = new CookieAuthenticationProvider
                 {

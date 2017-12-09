@@ -179,6 +179,7 @@ namespace MovieTicket.Areas.Admin.Security
         }
         public override bool ValidateUser(string username, string password)
         {
+            
             NhanVien a = db.NhanViens.SingleOrDefault(s => s.taikhoan.Equals(username) && s.matkhau.Equals(password));
             if (a != null)
                 return true;

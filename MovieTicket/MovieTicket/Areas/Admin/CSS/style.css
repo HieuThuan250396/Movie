@@ -1396,14 +1396,14 @@ label.control-label {
 .login-mail i{
 	color: #999;
 }
-.login-mail input[type="text"],.login-mail input[type="password"]{
-	border: none;
-	outline:none;
-	font-size: 0.9em;
-    color: #999;
-    width: 89%;
-    font-family: 'Muli-Regular';
-}
+    .login-mail input[type="text"], .login-mail input[type="password"], .login-mail input[type="tel"] {
+        border: none;
+        outline: none;
+        font-size: 0.9em;
+        color: #999;
+        width: 89%;
+        font-family: 'Muli-Regular';
+    }
 .login-do input[type="submit"]{
 	border: none;
     outline: none;
