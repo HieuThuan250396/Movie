@@ -11,7 +11,7 @@ using System.Data.Entity.Core;
 
 namespace MovieTicket.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "2")]
+    [Authorize(Roles = "ql")]
     public class TheLoaisController : Controller
     {
         private qldvEntities2 db = new qldvEntities2();
