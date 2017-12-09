@@ -368,19 +368,19 @@ end
 go
 -- Add khach hang
 
-create proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
+alter proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
 @dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
 as
 	declare @makhachhang int = 1
 	while exists(select * from KhachHang where makhachhang = @makhachhang)
 		set @makhachhang += 1
-
+	set @matkhau = dbo.maHoaPass (@matkhau)
 	insert into KhachHang values (@makhachhang, @ho, @tenlot, @ten, @ngaysinh, @gioitinh, @sonha, @tenduong, @quan, 
 	@thanhpho, @dienthoai, @email, @matkhau)
 
---exec sp_addKhachHang @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
---@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
+--exec sp_addKhachHang @ho = 'abc', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
+--@quan = '', @thanhpho = '', @dienthoai = '123123', @email = '', @matkhau = 'aaa'
 go
 
 -- Edit khach hang
@@ -454,13 +454,13 @@ begin
 	end
 	else
 	begin
-		if @matkhau = @matkhau1
+		if dbo.maHoaPass(@matkhau) = @matkhau1
 		begin
 			set @kq = 1
 		end
 		else 
 		begin
-			raiserror('Mat khau ko dung,2', 16, 1)
+			raiserror('Mat khau ko dung', 16, 1)
 			set @kq = 0
 		end
 	end

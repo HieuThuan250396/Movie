@@ -1,5 +1,4 @@
-﻿using MovieTicket.Areas.Admin.Security;
-using MovieTicket.Models;
+﻿using MovieTicket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace MovieTicket.Areas.Admin.Controllers
+namespace MovieTicket.Controllers
 {
-    public class DangNhapController : Controller
+    public class DangNhap1Controller : Controller
     {
-
         private qldvEntities2 db = new qldvEntities2();
-        // GET: Admin/DangNhap
+        // GET: DangNhap
         public ActionResult Index()
         {
             return View();
@@ -27,26 +25,25 @@ namespace MovieTicket.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string sdt, string matkhau)
+        public ActionResult Login(string taikhoan, string matkhau)
         {
             try
             {
                 //db.NhanViens.Add(nhanVien);
-                List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhap {0}, {1}", sdt, matkhau).ToList();
-                FormsAuthentication.SetAuthCookie(sdt, false);
-                KhachHang a = db.KhachHangs.SingleOrDefault(s => s.dienthoai.Equals(sdt));
-                Session["taikhoan"] = a.ho + " " + a.tenlot + " " + a.ten;
+                List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhapNV {0}, {1}", taikhoan, matkhau).ToList();
+                FormsAuthentication.SetAuthCookie(taikhoan, false);
+                Session["taikhoan"] = taikhoan;
                 ViewBag.Alert = "Đăng nhập thành công";
                 return RedirectToAction("Index", "NhanViens");
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Sdt ko ton tai")
+                if (ex.Message == "khong ton tai tai khoan")
                 {
-                    ViewBag.Alert = "Số điện thoại không tồn tại";
+                    ViewBag.Alert = "Không tồn tại tài khoản này";
                     return View("Login");
                 }
-                else if (ex.Message == "Mat khau ko dung")
+                else if (ex.Message == "khong dung mat khau")
                 {
                     ViewBag.Alert = "Không đúng mật khẩu";
                     return View("Login");
