@@ -16,18 +16,19 @@
         @{ foreach (var video in Model)
             {
                 if (i % 4 == 0)
-                {<div class="content-grid last-grid">
-        @{string imagePath = Url.Content(video.hinh);}
-        <a class="play-icon popup-with-zoom-anim" href=@video.trailer><img src=@imagePath title="@video.tenphim" /></a>
-        <h3>@video.tenphim</h3>
-        <ul>
-            <li><a href="#"><img src="~/images/likes.png" title="image-name" /></a></li>
-            <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
-            <li><a href="#"><img src="~/images/link.png" title="image-name" /></a></li>
-        </ul>
-        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Watch now</a>
-    </div>
-            }
+                {
+                    <div class="content-grid last-grid">
+                        @{string imagePath = Url.Content(video.hinh);}
+                        <a class="play-icon popup-with-zoom-anim" href=@video.trailer><img src=@imagePath title="@video.tenphim" /></a>
+                        <h3>@video.tenphim</h3>
+                        <ul>
+                            <li><a href="#"><img src="~/images/likes.png" title="image-name" /></a></li>
+                            <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
+                            <li><a href="#"><img src="~/images/link.png" title="image-name" /></a></li>
+                        </ul>
+                        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Watch now</a>
+                    </div>
+                }
             else
             {<div class="content-grid">
         @{string imagePath = Url.Content(video.hinh);}

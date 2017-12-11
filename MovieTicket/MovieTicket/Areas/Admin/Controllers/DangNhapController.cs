@@ -37,7 +37,7 @@ namespace MovieTicket.Areas.Admin.Controllers
                 NhanVien a = db.NhanViens.SingleOrDefault(s => s.taikhoan.Equals(taikhoan));
                 Session["taikhoan"] = a.taikhoan;
                 ViewBag.Alert = "Đăng nhập thành công";
-                return RedirectToAction("Index", "NhanViens");
+                return RedirectToAction("Index", "Index");
             }
             catch (Exception ex)
             {

@@ -20,6 +20,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         public ActionResult Index()
         {
             //var suatChieux = db.SuatChieux.Include(s => s.Phim).Include(s => s.PhongChieu);
+            
             return View(db.Database.SqlQuery<SuatChieu>("exec sp_loadSuatChieu").ToList());
         }
 

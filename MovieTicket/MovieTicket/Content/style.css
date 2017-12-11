@@ -65,9 +65,10 @@ label{
 }
 .header-info {
 	float:right;
-	padding-top:4em;
+    padding: 4em 0 0 1em;
 	width:25%;
 	margin-right: 2.5%;
+    background: rgba(0, 0, 0, 0.2)
 }
 .header-info h1 {
 	color:#fff;
@@ -83,6 +84,10 @@ p.age {
 	font-weight:400;
 	margin:1.5em 0;
 	margin-bottom: 2.5em;
+}
+p.age a{
+    text-shadow: rgb(0, 0, 0) 1px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
 }
 p.special {
 	color:#f4f4f4;

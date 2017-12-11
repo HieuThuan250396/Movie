@@ -55,8 +55,8 @@
                 </div>
                 <div class="header-info">
                     @foreach (var item in Model)
-                    {
-                        <h1>@Html.DisplayFor(modelItem => item.tenphim)</h1>
+                    { 
+                        <h1>@Html.DisplayFor(modelItem => Model.LastOrDefault())</h1>
                         <p class="age"><a href="#">All Age</a>@Html.DisplayFor(modelItem => item.daodien)</p>
                         <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
                         <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.TheLoai)</p>

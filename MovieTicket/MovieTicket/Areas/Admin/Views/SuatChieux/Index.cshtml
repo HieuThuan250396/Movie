@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Thêm suất chiếu", "Create", "", htmlAttributes: new { @class = "fa fa-plus-circle create" })
 </p>
 <table class="table">
     <tr>
@@ -23,9 +23,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.soghecontrong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phim.daodien)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhongChieu.tenphong)
@@ -47,21 +44,18 @@
             @Html.DisplayFor(modelItem => paraGioKetThuc)@*:@Html.DisplayFor(modelItem => item.gioketthuc.Minutes)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ngaychieu)
+            @Html.DisplayFor(modelItem => item.ngaychieu.Day)-@Html.DisplayFor(modelItem => item.ngaychieu.Month)-@Html.DisplayFor(modelItem => item.ngaychieu.Year)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.soghecontrong)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Phim.daodien)
+       l     @Html.DisplayFor(modelItem => item.PhongChieu.tenphong)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PhongChieu.tenphong)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.masuatchieu }) |
-            @Html.ActionLink("Details", "Details", new { id=item.masuatchieu }) @*|
-            @Html.ActionLink("Delete", "Delete", new { id=item.masuatchieu })*@
+            @Html.ActionLink(" ", "Edit", new { id = item.masuatchieu }, new { @class = "fa fa-edit option" }) |
+            @Html.ActionLink(" ", "Details", new { id = item.masuatchieu}, new { @class = "fa fa-info-circle option" }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id = item.maphim })*@
         </td>
     </tr>
 }
