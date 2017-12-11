@@ -39,36 +39,6 @@ begin
 	where maphim = @maphim
 end 
 go
---trigger kiem tra editphim
-create trigger check_editPhim 
-on Phim for insert
-as
-begin
-	declare @ngayketthuc date = (select Phim.ngayketthuc from Phim where Phim.maphim in (select maphim from inserted))
-	declare @ngaykhoichieu date = (select Phim.ngaykhoichieu from Phim where Phim.maphim in (select maphim from inserted))
-	declare @thoiluong int = (select Phim.thoiluong from Phim where Phim.maphim in (select maphim from inserted))
-	if(@ngaykhoichieu < GETDATE())
-	begin
-		raiserror('ngay khong hop le',16,1)
-		rollback tran
-	end
-	if(@ngayketthuc < GETDATE())
-	begin
-		raiserror('ngay khong hop le',16,1)
-		rollback tran
-	end
-	if(@ngayketthuc < @ngaykhoichieu)
-	begin
-		raiserror('ngay khong hop le',16,1)
-		rollback tran
-	end
-	if(@thoiluong < 0 )
-	begin
-		raiserror('thoi luong khong duoc < 0 ',16,1)
-		rollback tran
-	end
-end
-go
 
 --exec sp_editPhim @maphim = 0, @matheloai = 0, @daodien = '', @tenphim = '', @ngaykhoichieu = '', @ngayketthuc = '', @mota = '', @hinh = '', @nhasanxuat ='',
 --@thoiluong = 0, @trailer = ''
@@ -258,19 +228,6 @@ begin
 	where
 		maphong = @maphong
 end
-go
---trigger check so ghe <0
-create trigger check_editPhongChieu 
-on PhongChieu for insert 
-as
-begin
-	declare @soghe int = (select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong in (select maphong from inserted))
-	if(@soghe < 0 )
-	begin
-	raiserror('so ghe khong duoc am',16,1)
-	rollback tran
-	end
-end
 
 --exec sp_editPhongChieu @maphong = 0, @tenphong = '',@soghebandau = 0
 go
@@ -317,20 +274,6 @@ as
 	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri, @tinhtrang)
 
 --exec sp_addKhuyenMai @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
-go
---check add khuyen mai 
-create trigger check_addKhuyenMai 
-on KhuyenMai for insert 
-as
-begin
-	declare @ngaybatdau int = (select ngaybatdau from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
-	declare @ngayketthuc int = (select ngayketthuc from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
-	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
-	begin
-		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
-		rollback tran
-	end
-end
 go
 
 -- Edit khuyen mai
@@ -394,18 +337,7 @@ begin
 	where
 		maloaive = @maloaive
 end
-go
-create trigger checkeditLoaive
-on LoaiVe for insert
-as
-begin
-	declare @giave int = (select giave from LoaiVe where LoaiVe.maloaive in (select maloaive from inserted))
-	if(@giave <= 0 )
-	begin
-		raiserror('gia ve khong duoc am',16,1)
-		rollback tran
-	end
-end
+
 --exec sp_editLoaiVe @maloaive = 0, @tenloaive = '', @giave = 0
 go
 
@@ -478,18 +410,7 @@ as
 --exec sp_editKhachHang @makhachhang = 0, @ho = '', @tenlot = '', @ten = '', @ngaysinh = '', @gioitinh = '', @sonha = '', @tenduong = '',
 --@quan = '', @thanhpho = '', @dienthoai = '', @email = '', @matkhau = ''
 go
---trigger check ngay sinh 
-create trigger check_addkhachhang
-on KhachHang for insert
-as
-begin
-	declare @ngaysinh date = (select ngaysinh from KhachHang where KhachHang.makhachhang in (select makhachhang from inserted))
-	if(@ngaysinh > GETDATE())
-	begin
-		raiserror('ngay sinh khong hop le',16,1)
-		rollback tran
-	end
-end
+
 /*-- Delete khach hang
 create proc sp_deleteKhachHang @makhachhang int
 as
@@ -725,38 +646,40 @@ end
 go
 
 --tra ve 
-create proc sp_huyVe (@mave int, @masuatchieu int,@makm int)
+create proc sp_traVe (@mave int, @masuatchieu int,@makm int)
 as
 begin
 	begin tran
-		if(@makm = null or @makm = '' )
+	if(@makm = null or @makm = '' )
 		begin
-		update Ve 
-	set 
-		makhachhang = NULL,
-		giodat =NULL,
-		makm = NULL,
-		tinhtrang = 0
-	where
-		mave = @mave and masuatchieu = @masuatchieu
+			update Ve 
+			set 
+			makhachhang = NULL,
+			giodat =NULL,
+			makm = NULL,
+			tinhtrang = 0
+			where
+			mave = @mave and masuatchieu = @masuatchieu
+	delete from  VeDangDat where VeDangDat.mave  = @mave
 		end
-		else
+	else
 		begin
-		update Ve 
-	set 
-		makhachhang = NULL,
-		giodat =NULL,
-		makm = NULL,
-		tinhtrang = 0
-	where
-		mave = @mave and masuatchieu = @masuatchieu
-		update KhuyenMai
-		set
-		KhuyenMai.tinhtrang = 1
-		where 
-		KhuyenMai.makm = @makm
+			update Ve 
+			set 
+			makhachhang = NULL,
+			giodat =NULL,
+			makm = NULL,
+			tinhtrang = 0
+			where
+			mave = @mave and masuatchieu = @masuatchieu
+			delete from  VeDangDat where VeDangDat.mave  = @mave
+			update KhuyenMai
+			set
+			KhuyenMai.tinhtrang = 1
+			where 
+			KhuyenMai.makm = @makm
 		end
-		commit tran
+	commit tran
 end
 
 go
