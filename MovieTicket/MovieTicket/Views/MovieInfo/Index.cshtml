@@ -33,34 +33,11 @@
                 <h3 class="head">Lịch chiếu</h3>
                 @foreach(var s in dsSC)
                 {
-                    <p>@s.Item1</p>
+                    <p>@s.Item1.ToString(@"dd/MM/yyyy")</p>
                     foreach(var gc in s.Item2)
                     {
-                        <a>@gc.ToString(@"hh\:mm")</a>
+                        <a>@gc.ToString(@"hh\:mm")</a><br /><br />
                     }
-                }
-
-
-
-
-
-
-
-
-                @foreach(var s in sc)
-                {
-                    <p>@Html.DisplayFor(modelItem => s.ngaychieu.Day)-@Html.DisplayFor(modelItem => s.ngaychieu.Month)-@Html.DisplayFor(modelItem => s.ngaychieu.Year)</p>
-                    foreach (var c in sc)
-                    {
-                        <p>
-                            @if (c.ngaychieu == s.ngaychieu)
-                            {
-                                <a href="#" class="lichchieu"> @c.giochieu.ToString(@"hh\:mm")</a>
-
-                            }
-                        </p>
-                    }
-
                 }
             </div>
         }
