@@ -27,15 +27,25 @@
             <div class="clearfix"></div>
         </div>
         @{
+       
             var sc = ViewData["SuatChieu"] as List<MovieTicket.Models.SuatChieu>;
             <div class="single">
                 <h3 class="head">Lịch chiếu</h3>
                 @foreach(var s in sc)
                 {
-                    <p>@Html.DisplayFor(modelItem => s.ngaychieu)</p>
-                    
-                }
+                    <p>@Html.DisplayFor(modelItem => s.ngaychieu.Day)-@Html.DisplayFor(modelItem => s.ngaychieu.Month)-@Html.DisplayFor(modelItem => s.ngaychieu.Year)</p>
+                    foreach (var c in sc)
+                    {
+                        <p>
+                            @if (c.ngaychieu == s.ngaychieu)
+                            {
+                                <a href="#" class="lichchieu"> @c.giochieu.ToString(@"hh\:mm")</a>
 
+                            }
+                        </p>
+                    }
+
+                }
             </div>
         }
         
