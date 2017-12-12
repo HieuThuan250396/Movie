@@ -142,3 +142,15 @@ begin
 		end
 end
 go
+--check key nhan vien
+create trigger check_keynhanvien on NhanVien
+instead of insert,update
+as
+begin
+	if exists (select * from NhanVien where NhanVien.manv in (select manv from inserted))
+		begin
+			raiserror('Trung Khoa Chinh',16,1)
+			rollback tran	 
+		end
+end
+go

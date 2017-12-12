@@ -30,11 +30,17 @@ begin
 	if(@loaima = 'maloaive')
 		while exists(select * from LoaiVe where maloaive = @ma)
 		set @ma += 1
+	if(@loaima = 'masuatchieu')
+		while exists(select * from SuatChieu where masuatchieu = @ma)
+		set @ma += 1
 	if(@loaima = 'makhachhang')
 		while exists(select * from KhachHang where makhachhang = @ma)
 		set @ma += 1
 	if(@loaima = 'mave')
 		while exists(select * from Ve where mave = @ma)
+		set @ma += 1
+	if(@loaima = 'manv')
+		while exists(select * from NhanVien where manv = @ma)
 		set @ma += 1
 	return @ma
 end
