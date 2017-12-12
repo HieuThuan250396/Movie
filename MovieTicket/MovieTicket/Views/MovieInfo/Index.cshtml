@@ -27,10 +27,26 @@
             <div class="clearfix"></div>
         </div>
         @{
-       
+            var dsSC = ViewData["dsSC"] as List<Tuple<DateTime, List<TimeSpan>>>;
             var sc = ViewData["SuatChieu"] as List<MovieTicket.Models.SuatChieu>;
             <div class="single">
                 <h3 class="head">Lịch chiếu</h3>
+                @foreach(var s in dsSC)
+                {
+                    <p>@s.Item1</p>
+                    foreach(var gc in s.Item2)
+                    {
+                        <a>@gc.ToString(@"hh\:mm")</a>
+                    }
+                }
+
+
+
+
+
+
+
+
                 @foreach(var s in sc)
                 {
                     <p>@Html.DisplayFor(modelItem => s.ngaychieu.Day)-@Html.DisplayFor(modelItem => s.ngaychieu.Month)-@Html.DisplayFor(modelItem => s.ngaychieu.Year)</p>

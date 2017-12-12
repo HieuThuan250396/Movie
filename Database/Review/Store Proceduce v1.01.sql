@@ -634,6 +634,14 @@ begin
 end
 go
 --exec sp_loadSuatChieuTheoPhim 2
+
+create proc sp_loadNgayChieuSuatChieuTheoPhim(@maphim int)
+as
+begin
+	select distinct ngaychieu 
+	from SuatChieu
+	where maphim = @maphim and (SuatChieu.ngaychieu >= getdate())
+end
 --load suat chieu ngay 
 create proc sp_loadSuatChieuNgay
 as
