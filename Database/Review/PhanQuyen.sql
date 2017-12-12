@@ -13,28 +13,29 @@
 
 use qldv
 go
-create login L_nhanvien1 with password = 'nhanvien1'
+create login L_nhanvienbanhang with password = 'nhanvien1'
 go
-create user U_nhanvien1 for login L_nhanvien1
+create user U_nhanvienbanhang for login L_nhanvienbanhang
 go
-create role R_NhanVien1
-grant select, update, delete on NhanVien to R_NhanVien1
-grant select,update, delete on KhuyenMai to R_NhanVien1 
-grant select,update, delete on PhongChieu to R_NhanVien1 
+create role R_Nhanvienbanhang
+grant select, update, delete on NhanVien to R_Nhanvienbanhang
+grant select,update, delete on KhuyenMai to R_Nhanvienbanhang
+grant select,update, delete on PhongChieu to R_Nhanvienbanhang
+grant select,update, delete on KhachHang to R_NhanVienbanhang 
 go
-Sp_AddRoleMember 'R_NhanVien1', 'U_nhanvien1'
+Sp_AddRoleMember 'R_Nhanvienbanhang', 'U_nhanvienbanhang'
 go
-create login L_nhanvien2 with password = 'nhanvien2'
+create login L_nhanvienquanly with password = 'nhanvien2'
 go
-create user U_nhanvien2 for login L_nhanvien2
+create user U_nhanvienquanly for login L_nhanvienquanly
 go
-create role R_NhanVien2
-grant select, update, delete on KhachHang to R_NhanVien2
-grant select,update, delete on LoaiVe to R_NhanVien2
-grant select,update, delete on Phim to R_NhanVien2
-grant select,update, delete on SuatChieu to R_NhanVien2 
-grant select, update, delete on TheLoai to R_NhanVien2
-grant select,update, delete on Ve to R_NhanVien2
-grant select,update, delete on VeDangDat to R_NhanVien2 
+create role R_NhanVienquanly
+grant select, update, delete on KhachHang to R_NhanVienquanly
+grant select,update, delete on LoaiVe to R_NhanVienquanly
+grant select,update, delete on Phim to R_NhanVienquanly
+grant select,update, delete on SuatChieu to R_NhanVienquanly 
+grant select, update, delete on TheLoai to R_NhanVienquanly
+grant select,update, delete on Ve to R_NhanVienquanly
+grant select,update, delete on VeDangDat to R_NhanVienquanly 
 go
-Sp_AddRoleMember 'R_Nhanvien2', 'U_nhanvien2'
+Sp_AddRoleMember 'R_NhanVienquanly', 'U_nhanvienquanly'

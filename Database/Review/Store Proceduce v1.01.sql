@@ -85,7 +85,7 @@ as
 exec sp_deletePhim 0
 go*/
 
-
+	
 -- Load phim con dang chieu
 create proc sp_loadPhimDangChieu
 as
