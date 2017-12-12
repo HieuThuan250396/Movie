@@ -633,6 +633,7 @@ begin
 	where  SuatChieu.maphim = @maphim and (SuatChieu.ngaychieu >= getdate())
 end
 go
+--exec sp_loadSuatChieuTheoPhim 2
 --load suat chieu ngay 
 create proc sp_loadSuatChieuNgay
 as

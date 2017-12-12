@@ -54,7 +54,6 @@ namespace MovieTicket.Models
         [DisplayName("Mô tả")]
         public string mota { get; set; }
 
-        [DataType(DataType.Url)]
         [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Hình")]
         public string hinh { get; set; }

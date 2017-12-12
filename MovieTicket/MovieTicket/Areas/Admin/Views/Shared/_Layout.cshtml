@@ -66,11 +66,8 @@
                     </div>
                     <ul class="nav_1">
                         <li class="dropdown">
-                            @{if (@Session["taikhoan"].ToString().IsEmpty())
-                                {<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class="name-caret">@Session["taikhoan"].ToString().ToUpper()<i class="caret"></i></span>  </a>}
-                                else
-                                {<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class="name-caret">Admin<i class="caret"></i></span>  </a>} }
-                            <!--<img src="~/Areas/Admin/images/wo.jpg">-->
+                            <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class="name-caret">@Session["taikhoan"].ToString().ToUpper()<i class="caret"></i></span>  </a>
+                            
                           
                             <ul class="dropdown-menu "role="menu">
                                 <li>@Html.ActionLink("Đăng Xuất", "Logout", "DangNhap")</li>

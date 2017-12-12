@@ -15,5 +15,6 @@ namespace MovieTicket.Controllers
         {
             return View(db.Database.SqlQuery<Phim>("exec sp_loadTatCaPhim").ToList());
         }
+        
     }
 }

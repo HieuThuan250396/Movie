@@ -68,7 +68,11 @@ label{
     padding: 4em 0 0 1em;
 	width:25%;
 	margin-right: 2.5%;
-    background: rgba(0, 0, 0, 0.2)
+    background: rgba(0, 0, 0, 0.2);
+    
+}
+.header-info p{
+    text-shadow: rgb(0, 0, 0) 1px 1px 1px;
 }
 .header-info h1 {
 	color:#fff;
@@ -115,6 +119,7 @@ p.review{
 	line-height:1.7em;
 	margin:0.8em 0;	
 }
+
 a.video {
   background: #dfb636;
   font-size: 1.25em;
@@ -742,7 +747,6 @@ p.info {
 	font-weight: 400;
 	color: #000;
 	margin: 15px 0px;
-	height: 22px;
 	overflow: hidden;
 }
 .dropdown {
@@ -1299,7 +1303,7 @@ font-weight: 700;
 	a.video,a.book {
 		font-size: 1.2em;
 		padding: 9px 22px 9px 13px;
-		width: 70%;
+		width: 76%;
 		margin-top: 20px;
 	}
 	.header-info h1 {

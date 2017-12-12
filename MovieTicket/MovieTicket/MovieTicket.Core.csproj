@@ -612,6 +612,7 @@
     <Content Include="Views\MovieInfo\Index.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
     <Content Include="Views\DangNhap1\Login.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Url.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
