@@ -21,11 +21,6 @@ namespace MovieTicket.Controllers
             List<SuatChieu> s = db.Database.SqlQuery<SuatChieu>("exec sp_loadSuatChieuTheoPhim {0}", id).ToList();
             ViewData["SuatChieu"] = s;
 
-            
-
-
-
-
             return View();
         }
     }
