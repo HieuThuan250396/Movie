@@ -22,7 +22,7 @@ EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'CheckVeChuaThanhToan',
 		@delete_level=0, 
 		@description=N'Check các vé gần giờ chiếu và chưa thanh toán', 
 		@category_name=N'[Uncategorized (Local)]', 
-		@owner_login_name=N'trung1', @job_id = @jobId OUTPUT
+		@owner_login_name=N'trung1', @job_id = @jobId OUTPUT -- =username
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 /****** Object:  Step [CheckVeChuaThanhToan]    Script Date: 12/12/2017 3:50:33 PM ******/
 EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'CheckVeChuaThanhToan', 
