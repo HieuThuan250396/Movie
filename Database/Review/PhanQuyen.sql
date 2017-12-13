@@ -13,19 +13,19 @@
 
 use qldv
 go
-create login L_nhanvienbanhang with password = 'nhanvien1'
+create login L_nhanvienbanve with password = 'nhanvienbanve'
 go
-create user U_nhanvienbanhang for login L_nhanvienbanhang
+create user U_nhanvienbanve for login L_nhanvienbanve
 go
-create role R_Nhanvienbanhang
-grant select, update, delete on NhanVien to R_Nhanvienbanhang
-grant select,update, delete on KhuyenMai to R_Nhanvienbanhang
-grant select,update, delete on PhongChieu to R_Nhanvienbanhang
-grant select,update, delete on KhachHang to R_NhanVienbanhang 
+create role R_Nhanvienbanve
+grant select, update on NhanVien to R_Nhanvienbanve
+grant select,update on KhuyenMai to R_Nhanvienbanve
+grant select,update on PhongChieu to R_Nhanvienbanve
+grant select,update on KhachHang to R_Nhanvienbanve 
 go
-Sp_AddRoleMember 'R_Nhanvienbanhang', 'U_nhanvienbanhang'
+Sp_AddRoleMember 'R_Nhanvienbanve', 'U_nhanvienbanve'
 go
-create login L_nhanvienquanly with password = 'nhanvien2'
+create login L_nhanvienquanly with password = 'nhanvienquanly'
 go
 create user U_nhanvienquanly for login L_nhanvienquanly
 go
