@@ -28,6 +28,7 @@
             <div class="demo">
                         <div class="front">SCREEN</div>
                 @{
+                    string sc = ViewBag.SC;
                     List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
                     <div class="seatCharts-row">
                         <div class="seatCharts-cell seatCharts-space">A</div>
@@ -50,16 +51,16 @@
                                 if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id }, null)</div>
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc}, null)</div>
                                 }
                                 else
                                 {
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                 }
                             }
                             else
                             {
-                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                             }
                         }
                     </div>
@@ -82,16 +83,16 @@
                                     if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
                                     {
                                         tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id }, null)</div>
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                     }
                                     else
                                     {
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                     }
                                 }
                                 else
                                 {
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                 }
                             }
                         </div>
@@ -114,11 +115,11 @@
                                     if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
                                     {
                                         tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id }, null)</div>
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                     }
                                     else
                                     {
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                     }
                                 }
                                 else
@@ -150,9 +151,7 @@
                     </ul>
                     <div class="clear"></div>
                     <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
-
-
-                    <button class="checkout-button">Book Now</button>
+                    @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc}, new { @class= "checkout - button" })
                     <div id="legend"></div>
                 </div>
                 <div style="clear:both"></div>
