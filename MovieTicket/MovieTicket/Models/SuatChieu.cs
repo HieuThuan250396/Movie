@@ -35,7 +35,7 @@ namespace MovieTicket.Models
         [DisplayName("Mã phòng")]
         public int maphong { get; set; }
 
-        
+
         //[DataType(DataType.Time)]
         //[DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Không được để trống trường này")]
@@ -54,14 +54,14 @@ namespace MovieTicket.Models
         [DisplayName("Ngày chiếu")]
         public System.DateTime ngaychieu { get; set; }
 
-        
+
         [DisplayName("Số ghế còn trống")]
         public int soghecontrong { get; set; }
 
-        
+
         [DisplayName("Phim")]
         public virtual Phim Phim { get; set; }
-        
+
         [DisplayName("Phòng chiếu")]
         public virtual PhongChieu PhongChieu { get; set; }
 

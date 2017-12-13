@@ -22,7 +22,7 @@ namespace MovieTicket.Models
         {
             this.Ves = new HashSet<Ve>();
         }
-       
+
         [DisplayName("Mã khách hàng")]
         public int makhachhang { get; set; }
 
@@ -78,7 +78,7 @@ namespace MovieTicket.Models
         [DisplayName("Email")]
         public string email { get; set; }
 
-        [StringLength(30, MinimumLength = 4, ErrorMessage = "Mật khẩu quá ngắn")]
+        [StringLength(33, MinimumLength = 4, ErrorMessage = "Mật khẩu quá ngắn")]
         [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayName("Mật khẩu")]
         public string matkhau { get; set; }
@@ -87,7 +87,7 @@ namespace MovieTicket.Models
         public virtual ICollection<Ve> Ves { get; set; }
 
         public Gender gender { get; set; }
-        
+
     }
 }
 public enum Gender

@@ -32,7 +32,7 @@ namespace MovieTicket.Models
         [DisplayFormat(DataFormatString = "{0:C0}")]
         [DisplayName("Giá vé")]
         public int giave { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
     }

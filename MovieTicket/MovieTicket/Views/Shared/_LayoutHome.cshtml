@@ -28,9 +28,9 @@
             <ul>
                 <li><a href="~/Home/Index" class="active"><div class="hm"><i class="home1"></i><i class="home2"></i></div></a></li>
                 <li><a href="~/Videos/Index"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
-                <li><a href="#"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>
+                @*<li><a href="#"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>
                 <li><a href="#"><div class="bk"><i class="booking"></i><i class="booking1"></i></div></a></li>
-                <li><a href="#"><div class="cnt"><i class="contact"></i><i class="contact1"></i></div></a></li>
+                <li><a href="#"><div class="cnt"><i class="contact"></i><i class="contact1"></i></div></a></li>*@
             </ul>
         </div>
         <div class="main">
@@ -41,8 +41,9 @@
                         <p>Movie Theater</p>
                     </div>
                     <div class="search">
-                        <form>
-                            <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" />
+                        <form action="~/Videos/Index">
+                            <input name="searchString" id="searchString" type="text"  autocomplete = "off" placeholder = "Tìm phim..." />
+                            
                             <input type="submit" value="">
                         </form>
                     </div>
@@ -64,7 +65,7 @@
                         <p class="special">@Html.DisplayFor(modelItem => item.mota)</p>
                         <a class="video" target="_blank" href="@Html.DisplayFor(modelItem => item.trailer)"><i class="video1"></i>WATCH TRAILER</a>
 
-                        <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+                        <a class="book" href="~/MovieInfo/Index/@item.maphim"><i class="book1"></i>BOOK TICKET</a>
                        
                     }
                     

@@ -49,14 +49,14 @@ namespace MovieTicket.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri")] KhuyenMai khuyenMai)
+        public ActionResult Create([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri,tinhtrang")] KhuyenMai khuyenMai)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     //db.KhuyenMais.Add(khuyenMai);
-                    db.Database.SqlQuery<KhuyenMai>("exec sp_addKhuyenMai {0},{1},{2}",khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri).ToList();
+                    db.Database.SqlQuery<KhuyenMai>("exec sp_addKhuyenMai {0},{1},{2},{3}",khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri, false).ToList();
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -88,14 +88,14 @@ namespace MovieTicket.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri")] KhuyenMai khuyenMai)
+        public ActionResult Edit([Bind(Include = "makm,ngaybatdau,ngayketthuc,giatri,tinhtrang")] KhuyenMai khuyenMai)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     //db.Entry(khuyenMai).State = EntityState.Modified;
-                    db.Database.SqlQuery<KhuyenMai>("exec sp_editKhuyenMai {0},{1},{2},{3}", khuyenMai.makm, khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri).ToList();
+                    db.Database.SqlQuery<KhuyenMai>("exec sp_editKhuyenMai {0},{1},{2},{3},{4}", khuyenMai.makm, khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri, khuyenMai.tinhtrang).ToList();
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

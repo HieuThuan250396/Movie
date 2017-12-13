@@ -311,9 +311,10 @@ as
 		set @makm += 1
 
 	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
+	begin
 		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
 		rollback tran
-
+	end
 	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri, @tinhtrang)
 
 --exec sp_addKhuyenMai @ngaybatdau = '', @ngayketthuc = '', @giatri = 0
@@ -792,13 +793,14 @@ go*/
 
 go
 -- Add nhanvien
-create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
+alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)
 		set @manv += 1
 	set @matkhau = dbo.maHoaPass (@matkhau)
 	insert into NhanVien values(@manv, @taikhoan, @matkhau, @vaitro)
+	--update NhanVien set matkhau = dbo.maHoaPass (matkhau) where manv = @manv
 go
 go
 -- Edit nhanvien

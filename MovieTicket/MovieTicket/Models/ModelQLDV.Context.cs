@@ -91,7 +91,7 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addKhachHang", hoParameter, tenlotParameter, tenParameter, ngaysinhParameter, gioitinhParameter, sonhaParameter, tenduongParameter, quanParameter, thanhphoParameter, dienthoaiParameter, emailParameter, matkhauParameter);
         }
     
-        public virtual int sp_addKhuyenMai(Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc, Nullable<double> giatri)
+        public virtual int sp_addKhuyenMai(Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc, Nullable<double> giatri, Nullable<bool> tinhtrang)
         {
             var ngaybatdauParameter = ngaybatdau.HasValue ?
                 new ObjectParameter("ngaybatdau", ngaybatdau) :
@@ -105,7 +105,11 @@ namespace MovieTicket.Models
                 new ObjectParameter("giatri", giatri) :
                 new ObjectParameter("giatri", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addKhuyenMai", ngaybatdauParameter, ngayketthucParameter, giatriParameter);
+            var tinhtrangParameter = tinhtrang.HasValue ?
+                new ObjectParameter("tinhtrang", tinhtrang) :
+                new ObjectParameter("tinhtrang", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addKhuyenMai", ngaybatdauParameter, ngayketthucParameter, giatriParameter, tinhtrangParameter);
         }
     
         public virtual int sp_addLoaiVe(string tenloaive, Nullable<double> giave)
@@ -183,6 +187,36 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addPhim", matheloaiParameter, daodienParameter, tenphimParameter, ngaykhoichieuParameter, ngayketthucParameter, motaParameter, hinhParameter, nhasanxuatParameter, thoiluongParameter, trailerParameter);
         }
     
+        public virtual int sp_addPhongChieu(string tenphong)
+        {
+            var tenphongParameter = tenphong != null ?
+                new ObjectParameter("tenphong", tenphong) :
+                new ObjectParameter("tenphong", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addPhongChieu", tenphongParameter);
+        }
+    
+        public virtual int sp_addSuatChieu(Nullable<int> maphim, Nullable<int> maphong, Nullable<System.TimeSpan> giochieu, Nullable<System.DateTime> ngaychieu)
+        {
+            var maphimParameter = maphim.HasValue ?
+                new ObjectParameter("maphim", maphim) :
+                new ObjectParameter("maphim", typeof(int));
+    
+            var maphongParameter = maphong.HasValue ?
+                new ObjectParameter("maphong", maphong) :
+                new ObjectParameter("maphong", typeof(int));
+    
+            var giochieuParameter = giochieu.HasValue ?
+                new ObjectParameter("giochieu", giochieu) :
+                new ObjectParameter("giochieu", typeof(System.TimeSpan));
+    
+            var ngaychieuParameter = ngaychieu.HasValue ?
+                new ObjectParameter("ngaychieu", ngaychieu) :
+                new ObjectParameter("ngaychieu", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addSuatChieu", maphimParameter, maphongParameter, giochieuParameter, ngaychieuParameter);
+        }
+    
         public virtual int sp_addTheLoai(string tentheloai)
         {
             var tentheloaiParameter = tentheloai != null ?
@@ -192,7 +226,32 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addTheLoai", tentheloaiParameter);
         }
     
-        public virtual int sp_datveVe(Nullable<int> mave, Nullable<int> masuatchieu, Nullable<int> makhachhang, Nullable<int> makm)
+        public virtual int sp_addVe(Nullable<int> masuatchieu, Nullable<int> makhachhang, Nullable<System.DateTime> giodat, Nullable<int> maloaive, Nullable<int> makm)
+        {
+            var masuatchieuParameter = masuatchieu.HasValue ?
+                new ObjectParameter("masuatchieu", masuatchieu) :
+                new ObjectParameter("masuatchieu", typeof(int));
+    
+            var makhachhangParameter = makhachhang.HasValue ?
+                new ObjectParameter("makhachhang", makhachhang) :
+                new ObjectParameter("makhachhang", typeof(int));
+    
+            var giodatParameter = giodat.HasValue ?
+                new ObjectParameter("giodat", giodat) :
+                new ObjectParameter("giodat", typeof(System.DateTime));
+    
+            var maloaiveParameter = maloaive.HasValue ?
+                new ObjectParameter("maloaive", maloaive) :
+                new ObjectParameter("maloaive", typeof(int));
+    
+            var makmParameter = makm.HasValue ?
+                new ObjectParameter("makm", makm) :
+                new ObjectParameter("makm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_addVe", masuatchieuParameter, makhachhangParameter, giodatParameter, maloaiveParameter, makmParameter);
+        }
+    
+        public virtual int sp_datVe(Nullable<int> mave, Nullable<int> masuatchieu, Nullable<int> makhachhang, Nullable<int> makm)
         {
             var maveParameter = mave.HasValue ?
                 new ObjectParameter("mave", mave) :
@@ -210,7 +269,7 @@ namespace MovieTicket.Models
                 new ObjectParameter("makm", makm) :
                 new ObjectParameter("makm", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_datveVe", maveParameter, masuatchieuParameter, makhachhangParameter, makmParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_datVe", maveParameter, masuatchieuParameter, makhachhangParameter, makmParameter);
         }
     
         public virtual int sp_editKhachHang(Nullable<int> makhachhang, string ho, string tenlot, string ten, Nullable<System.DateTime> ngaysinh, string gioitinh, string sonha, string tenduong, string quan, string thanhpho, string dienthoai, string email, string matkhau)
@@ -270,7 +329,7 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editKhachHang", makhachhangParameter, hoParameter, tenlotParameter, tenParameter, ngaysinhParameter, gioitinhParameter, sonhaParameter, tenduongParameter, quanParameter, thanhphoParameter, dienthoaiParameter, emailParameter, matkhauParameter);
         }
     
-        public virtual int sp_editKhuyenMai(Nullable<int> makm, Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc, Nullable<double> giatri)
+        public virtual int sp_editKhuyenMai(Nullable<int> makm, Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc, Nullable<double> giatri, Nullable<bool> tinhtrang)
         {
             var makmParameter = makm.HasValue ?
                 new ObjectParameter("makm", makm) :
@@ -288,7 +347,11 @@ namespace MovieTicket.Models
                 new ObjectParameter("giatri", giatri) :
                 new ObjectParameter("giatri", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editKhuyenMai", makmParameter, ngaybatdauParameter, ngayketthucParameter, giatriParameter);
+            var tinhtrangParameter = tinhtrang.HasValue ?
+                new ObjectParameter("tinhtrang", tinhtrang) :
+                new ObjectParameter("tinhtrang", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editKhuyenMai", makmParameter, ngaybatdauParameter, ngayketthucParameter, giatriParameter, tinhtrangParameter);
         }
     
         public virtual int sp_editLoaiVe(Nullable<int> maloaive, string tenloaive, Nullable<double> giave)
@@ -395,7 +458,7 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editPhongChieu", maphongParameter, tenphongParameter, soghebandauParameter);
         }
     
-        public virtual int sp_editSuatChieu(Nullable<int> masuatchieu, Nullable<int> maphim, Nullable<int> maphong, Nullable<System.TimeSpan> giochieu, Nullable<System.DateTime> ngaychieu, Nullable<int> soghecontrong)
+        public virtual int sp_editSuatChieu(Nullable<int> masuatchieu, Nullable<int> maphim, Nullable<int> maphong, Nullable<System.TimeSpan> giochieu, Nullable<System.DateTime> ngaychieu)
         {
             var masuatchieuParameter = masuatchieu.HasValue ?
                 new ObjectParameter("masuatchieu", masuatchieu) :
@@ -417,11 +480,7 @@ namespace MovieTicket.Models
                 new ObjectParameter("ngaychieu", ngaychieu) :
                 new ObjectParameter("ngaychieu", typeof(System.DateTime));
     
-            var soghecontrongParameter = soghecontrong.HasValue ?
-                new ObjectParameter("soghecontrong", soghecontrong) :
-                new ObjectParameter("soghecontrong", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editSuatChieu", masuatchieuParameter, maphimParameter, maphongParameter, giochieuParameter, ngaychieuParameter, soghecontrongParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editSuatChieu", masuatchieuParameter, maphimParameter, maphongParameter, giochieuParameter, ngaychieuParameter);
         }
     
         public virtual int sp_editTheLoai(Nullable<int> matheloai, string tentheloai)
@@ -437,26 +496,22 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editTheLoai", matheloaiParameter, tentheloaiParameter);
         }
     
-        public virtual int sp_huyVe(Nullable<int> mave, Nullable<int> masuatchieu)
-        {
-            var maveParameter = mave.HasValue ?
-                new ObjectParameter("mave", mave) :
-                new ObjectParameter("mave", typeof(int));
-    
-            var masuatchieuParameter = masuatchieu.HasValue ?
-                new ObjectParameter("masuatchieu", masuatchieu) :
-                new ObjectParameter("masuatchieu", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_huyVe", maveParameter, masuatchieuParameter);
-        }
-    
-        public virtual ObjectResult<sp_loadChiTietKhacHang_Result> sp_loadChiTietKhacHang(Nullable<int> makhachhang)
+        public virtual ObjectResult<sp_loadChiTietKhachHang_Result> sp_loadChiTietKhachHang(Nullable<int> makhachhang)
         {
             var makhachhangParameter = makhachhang.HasValue ?
                 new ObjectParameter("makhachhang", makhachhang) :
                 new ObjectParameter("makhachhang", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietKhacHang_Result>("sp_loadChiTietKhacHang", makhachhangParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietKhachHang_Result>("sp_loadChiTietKhachHang", makhachhangParameter);
+        }
+    
+        public virtual ObjectResult<sp_loadChiTietLoaiVe_Result> sp_loadChiTietLoaiVe(Nullable<int> maloaive)
+        {
+            var maloaiveParameter = maloaive.HasValue ?
+                new ObjectParameter("maloaive", maloaive) :
+                new ObjectParameter("maloaive", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietLoaiVe_Result>("sp_loadChiTietLoaiVe", maloaiveParameter);
         }
     
         public virtual ObjectResult<sp_loadChiTietPhim_Result> sp_loadChiTietPhim(Nullable<int> maphim)
@@ -468,9 +523,36 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietPhim_Result>("sp_loadChiTietPhim", maphimParameter);
         }
     
+        public virtual ObjectResult<sp_loadChiTietPhongChieu_Result> sp_loadChiTietPhongChieu(Nullable<int> maphong)
+        {
+            var maphongParameter = maphong.HasValue ?
+                new ObjectParameter("maphong", maphong) :
+                new ObjectParameter("maphong", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietPhongChieu_Result>("sp_loadChiTietPhongChieu", maphongParameter);
+        }
+    
+        public virtual ObjectResult<sp_loadChiTietSuatChieu_Result> sp_loadChiTietSuatChieu(Nullable<int> masuatchieu)
+        {
+            var masuatchieuParameter = masuatchieu.HasValue ?
+                new ObjectParameter("masuatchieu", masuatchieu) :
+                new ObjectParameter("masuatchieu", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadChiTietSuatChieu_Result>("sp_loadChiTietSuatChieu", masuatchieuParameter);
+        }
+    
         public virtual ObjectResult<sp_loadDsNhanVien_Result> sp_loadDsNhanVien()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadDsNhanVien_Result>("sp_loadDsNhanVien");
+        }
+    
+        public virtual ObjectResult<Nullable<System.DateTime>> sp_loadNgayChieuSuatChieuTheoPhim(Nullable<int> maphim)
+        {
+            var maphimParameter = maphim.HasValue ?
+                new ObjectParameter("maphim", maphim) :
+                new ObjectParameter("maphim", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("sp_loadNgayChieuSuatChieuTheoPhim", maphimParameter);
         }
     
         public virtual ObjectResult<sp_loadNhanVien_Result> sp_loadNhanVien(Nullable<int> manv)
@@ -559,18 +641,18 @@ namespace MovieTicket.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadTatCaPhongChieu_Result>("sp_loadTatCaPhongChieu");
         }
     
-        public virtual ObjectResult<string> sp_loadTatCaTheLoai()
+        public virtual ObjectResult<sp_loadTatCaTheLoai_Result> sp_loadTatCaTheLoai()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_loadTatCaTheLoai");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadTatCaTheLoai_Result>("sp_loadTatCaTheLoai");
         }
     
-        public virtual ObjectResult<string> sp_loadTheLoai(Nullable<int> matheloai)
+        public virtual ObjectResult<sp_loadTheLoai_Result> sp_loadTheLoai(Nullable<int> matheloai)
         {
             var matheloaiParameter = matheloai.HasValue ?
                 new ObjectParameter("matheloai", matheloai) :
                 new ObjectParameter("matheloai", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_loadTheLoai", matheloaiParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadTheLoai_Result>("sp_loadTheLoai", matheloaiParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> sp_loadThongTinDangNhap(string dienthoai, string matkhau)
@@ -597,6 +679,32 @@ namespace MovieTicket.Models
                 new ObjectParameter("matkhau", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_loadThongTinDangNhapNV", taikhoanParameter, matkhauParameter);
+        }
+    
+        public virtual ObjectResult<sp_loadVeTheoSuatChieu_Result> sp_loadVeTheoSuatChieu(Nullable<int> masuatchieu)
+        {
+            var masuatchieuParameter = masuatchieu.HasValue ?
+                new ObjectParameter("masuatchieu", masuatchieu) :
+                new ObjectParameter("masuatchieu", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadVeTheoSuatChieu_Result>("sp_loadVeTheoSuatChieu", masuatchieuParameter);
+        }
+    
+        public virtual int sp_traVe(Nullable<int> mave, Nullable<int> masuatchieu, Nullable<int> makm)
+        {
+            var maveParameter = mave.HasValue ?
+                new ObjectParameter("mave", mave) :
+                new ObjectParameter("mave", typeof(int));
+    
+            var masuatchieuParameter = masuatchieu.HasValue ?
+                new ObjectParameter("masuatchieu", masuatchieu) :
+                new ObjectParameter("masuatchieu", typeof(int));
+    
+            var makmParameter = makm.HasValue ?
+                new ObjectParameter("makm", makm) :
+                new ObjectParameter("makm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_traVe", maveParameter, masuatchieuParameter, makmParameter);
         }
     }
 }

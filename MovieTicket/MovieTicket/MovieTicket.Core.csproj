@@ -283,10 +283,19 @@
     <Compile Include="Models\PhongChieu.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_loadChiTietKhacHang_Result.cs">
+    <Compile Include="Models\sp_loadChiTietKhachHang_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_loadChiTietLoaiVe_Result.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_loadChiTietPhim_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_loadChiTietPhongChieu_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_loadChiTietSuatChieu_Result.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_loadDsNhanVien_Result.cs">
@@ -334,6 +343,15 @@
     <Compile Include="Models\sp_loadTatCaPhongChieu_Result.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_loadTatCaTheLoai_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_loadTheLoai_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_loadVeTheoSuatChieu_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SuatChieu.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
@@ -375,6 +393,8 @@
     <Content Include="Areas\Admin\images\ga6.jpg" />
     <Content Include="Areas\Admin\images\ga7.jpg" />
     <Content Include="Areas\Admin\images\ga8.jpg" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="images\header-bg1.jpg" />
     <Content Include="Areas\Admin\images\icons.svg" />
     <Content Include="Areas\Admin\images\in.jpg" />
@@ -527,13 +547,6 @@
     <Content Include="Areas\Admin\Views\LoaiVes\Details.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiVes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiVes\Index.cshtml" />
-    <EntityDeploy Include="Models\ModelQLDV.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelQLDV.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelQLDV.edmx.diagram">
-      <DependentUpon>ModelQLDV.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\VeDangDats\Create.cshtml" />
     <Content Include="Areas\Admin\Views\VeDangDats\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\VeDangDats\Details.cshtml" />
@@ -558,6 +571,22 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\DangNhap\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Index\Index.cshtml" />
+    <EntityDeploy Include="Models\ModelQLDV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelQLDV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelQLDV.edmx.diagram">
+      <DependentUpon>ModelQLDV.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\Montserrat-Regular.ttf" />
+    <Content Include="fonts\Muli-Regular.ttf" />
+    <Content Include="fonts\TUV-Montserrat-Bold.ttf" />
+    <Content Include="fonts\TUV-Montserrat-Regular.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

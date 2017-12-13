@@ -5,12 +5,24 @@
     Layout =  "~/Views/Shared/_LayoutVideos.cshtml";
 
 }
-<div class="right-content">
+<div class="right-content" >
     <div class="right-content-heading">
         <div class="right-content-heading-left">
             <h3 class="head">Latest Colletcion of videos</h3>
         </div>
-    </div>
+        <form class="search v-search">
+            @using (Html.BeginForm("Index", "Phims", FormMethod.Get))
+            {
+                <p>
+                    
+                    @Html.TextBox("SearchString","", ViewBag.CurrentFilter as string, new { @autocomplete = "off", @placeholder = "Tìm phim..." })
+                    <input type="submit" value="" class="">
+                </p>
+            }
+        </form>
+      
+        </div>
+        <br />
     <div class="content-grids">
         @{ int i = 1;}
         @{ foreach (var video in Model)
@@ -26,7 +38,7 @@
                             <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
                             <li><a href="#"><img src="~/images/link.png" title="image-name" /></a></li>
                         </ul>
-                        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Watch now</a>
+                        <a class="button play-icon popup-with-zoom-anim" href="~/MovieInfo/Index/@video.maphim">Watch now</a>
                     </div>
                     i++;
                 }
@@ -41,7 +53,7 @@
             <li><a href="#"><img src="~/images/views.png" title="image-name" /></a></li>
             <li><a href="#"><img src="~/images/link.png" title="image-name" /></a></li>
         </ul>
-        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Watch now</a>
+        <a class="button play-icon popup-with-zoom-anim" href="~/MovieInfo/Index/@video.maphim">Watch now</a>
     </div>}
                 i++;
             }

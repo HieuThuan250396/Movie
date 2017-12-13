@@ -11,12 +11,15 @@ namespace MovieTicket.Models
 {
     using System;
     
-    public partial class sp_loadTatCaKhuyenMai_Result
+    public partial class sp_loadVeTheoSuatChieu_Result
     {
-        public int makm { get; set; }
-        public System.DateTime ngaybatdau { get; set; }
-        public System.DateTime ngayketthuc { get; set; }
-        public double giatri { get; set; }
+        public int mave { get; set; }
+        public int masuatchieu { get; set; }
+        public Nullable<int> makhachhang { get; set; }
+        public int giave { get; set; }
         public bool tinhtrang { get; set; }
+        public Nullable<System.DateTime> giodat { get; set; }
+        public int maloaive { get; set; }
+        public Nullable<int> makm { get; set; }
     }
 }
