@@ -440,7 +440,7 @@ go
 
 create proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
-@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
+@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(32))
 as
 	declare @makhachhang int = 1
 	while exists(select * from KhachHang where makhachhang = @makhachhang)
