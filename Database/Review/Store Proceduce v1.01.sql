@@ -554,6 +554,7 @@ go
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- add suat chieu
+go
 create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
 as
 begin 
@@ -570,9 +571,9 @@ begin
 	if @ngayketthuc is NULL
 		RAISERROR('Khong ton tai phim', 16, 4)
 	else 
-		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, (Select soghebandau from PhongChieu where PhongChieu.maphong = @maphong))
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, 30)
 
-	while(@mave<=(select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong = @maphong ))
+	while(@mave<=30)
 	begin 
 		declare @maloaive INT, @ngaygiochieu DATETIME, @giave int 
 		set @ngaygiochieu = cast(@ngaychieu as datetime) + cast(@giochieu as datetime)
