@@ -438,7 +438,7 @@ end
 go
 -- Add khach hang
 
-alter proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
+create proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
 @dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
 as
@@ -498,7 +498,7 @@ as
 exec sp_deleteKhachHang 0
 go
 */
-
+go
 -- load Tat ca khach hang
 create proc sp_loadTatCaKhachHang
 as 
@@ -519,7 +519,7 @@ end
 go
 
 -- load Thong tin dang nhap
-alter proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau varchar(32))
+create proc sp_loadThongTinDangNhap(@dienthoai nvarchar(50), @matkhau varchar(32))
 as 
 begin 
 	declare @matkhau1 nvarchar(32), @kq int
@@ -550,7 +550,6 @@ begin
 end 
 go
 
-sp_loadThongTinDangNhap 123123, 1
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
