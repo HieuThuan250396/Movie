@@ -34,6 +34,7 @@ namespace MovieTicket.Controllers
                 FormsAuthentication.SetAuthCookie(dienthoai, false);
                 KhachHang a = db.KhachHangs.SingleOrDefault(s => s.dienthoai.Equals(dienthoai));
                 Session["taikhoan"] = a.ho + " " + a.tenlot + " " + a.ten;
+                Session["maKH"] = a.makhachhang;
                 string mk = a.matkhau;
                 ViewBag.Alert = "Đăng nhập thành công";
                 return RedirectToAction("Index", "Home");

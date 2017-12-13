@@ -734,7 +734,19 @@ begin
 	commit tran
 end
 go
-
+--dat ve
+create proc sp_datVe2 (@mave int, @masuatchieu int, @makhachhang int, @makm int)
+as
+begin
+	begin tran
+	update Ve set makhachhang = @makh, makm = @makm, giodat = GETDATE(),tinhtrang = 1 where mave = @mave and masuatchieu = @masuatchieu
+	declare @gia int, @giodat datetime, @maloaive int
+	select @gia = giave, @giodat = giodat, @maloaive = maloaive from Ve where mave = @mave and masuatchieu = @masuatchieu
+	insert into VeDangDat values (@mave, @masuatchieu, @makh, @gia, 0, @giodat, @maloaive, @makm)
+	commit tran
+end
+	
+go
 --tra ve 
 create proc sp_traVe (@mave int, @masuatchieu int,@makm int)
 as

@@ -17,6 +17,7 @@ namespace MovieTicket.Controllers
         // GET: Booking
         public ActionResult Index(string suatChieu)
         {
+            ViewBag.SC = suatChieu;
             int sc = int.Parse(suatChieu);
             if (!String.IsNullOrEmpty(suatChieu))
             {
@@ -28,29 +29,33 @@ namespace MovieTicket.Controllers
                 return View();
         }
 
-        public ActionResult DatVe(int mave)
+        public ActionResult DatVe(int mave, string suatChieu)
         {
             if (!dsVeDangDat.Contains(mave))
             {
                 dsVeDangDat.Add(mave);
                 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
 
-        public ActionResult XoaVe(int mave)
+        public ActionResult XoaVe(int mave, string suatChieu)
         {
             dsVeDangDat.Remove(mave);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
 
-        public ActionResult ThanhToan()
+        public ActionResult ThanhToan(string suatChieu)
         {
+            int sc = Int32.Parse(suatChieu);
+            int makh = (int)Session["maKH"];
+
             foreach(int v in dsVeDangDat)
             {
-                db.Database.SqlQuery<Ve>("exec sp_datVe {0} {1} {2} {3}", v, v, v, v).ToList();
+                db.Database.ExecuteSqlCommand("exec sp_datVe2 {0}, {1}, {2}, {3}", v, sc, makh, null);
             }
-            return RedirectToAction("Index");
+            dsVeDangDat.Clear();
+            return RedirectToAction("Index", "Videos");
         }
     }
 }
