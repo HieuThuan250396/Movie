@@ -100,7 +100,10 @@ namespace MovieTicket.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     //db.NhanViens.Add(nhanVien);
-                    db.Database.SqlQuery<NhanVien>("exec sp_editNhanVien {0},{1},{2}", nhanVien.taikhoan, nhanVien.matkhau, nhanVien.vaitro ).ToList();
+                    db.Database.SqlQuery<NhanVien>("exec sp_editNhanVien {0},{1},{2},{3}",nhanVien.manv.ToString(), 
+                                            nhanVien.taikhoan.ToString(), 
+                                            nhanVien.matkhau.ToString(), 
+                                            nhanVien.vaitro.ToString()).ToList();
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

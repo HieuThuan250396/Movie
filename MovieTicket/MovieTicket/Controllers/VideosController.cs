@@ -13,6 +13,7 @@ namespace MovieTicket.Controllers
         // GET: Videos
         public ActionResult Index()
         {
+
             return View(db.Database.SqlQuery<Phim>("exec sp_loadTatCaPhim").ToList());
         }
         

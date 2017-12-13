@@ -58,9 +58,9 @@
                         var item = (Model as List<MovieTicket.Models.Phim>).Last();
                         <h1>@Html.DisplayFor(modelItem => item.tenphim)</h1>
                         <p class="age"><a href="#">All Age</a>@Html.DisplayFor(modelItem => item.daodien)</p>
-                        <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
-                        <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.TheLoai)</p>
-                        <p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.ngaykhoichieu)</p>
+                        <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
+                        <p class="review reviewgo">Thể loại	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.TheLoai)</p>
+                        <p class="review">Ngày chiếu &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; @Html.DisplayFor(modelItem => item.ngaykhoichieu)</p>
                         <p class="special">@Html.DisplayFor(modelItem => item.mota)</p>
                         <a class="video" target="_blank" href="@Html.DisplayFor(modelItem => item.trailer)"><i class="video1"></i>WATCH TRAILER</a>
 

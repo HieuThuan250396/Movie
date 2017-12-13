@@ -677,12 +677,12 @@ as
 			set @giave -= @giatri
 	end
 	-- set giochieu
-	declare @giochieu datetime = (select giochieu from SuatChieu where masuatchieu = @masuatchieu)
+	-- declare @giochieu datetime = (select giochieu from SuatChieu where masuatchieu = @masuatchieu)
 	-- set tinhtrang
 	declare @tinhtrang bit = 0
 
 
-	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @giochieu, @tinhtrang, @giodat, @maloaive, @makm)
+	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @tinhtrang, @giodat, @maloaive, @makm)
 	update SuatChieu set soghecontrong -= 1 where SuatChieu.masuatchieu = @masuatchieu 
 
 -- exec sp_addVe @masuatchieu = 0, @makhachhang = 0, @giodat = '', @maloaive = 0, @makm = 0
@@ -791,18 +791,17 @@ go*/
 
 go
 -- Add nhanvien
-create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
+alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)
 		set @manv += 1
 	set @matkhau = dbo.maHoaPass (@matkhau)
 	insert into NhanVien values(@manv, @taikhoan, @matkhau, @vaitro)
-
 go
-
+go
 -- Edit nhanvien
-create proc sp_editNhanVien (@manv int, @taikhoan varchar(20), @matkhau varchar(20), @vaitro char(2))
+create proc sp_editNhanVien (@manv int, @taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	update NhanVien 
 	set 
@@ -858,7 +857,7 @@ begin
 	select @kq
 end 
 
---exec sp_loadThongTinDangNhapNV 'admin', 'admin'
+--exec sp_loadThongTinDangNhapNV 'trungbv2', '1234'
 
 --select dbo.maHoaPass('admin')
 

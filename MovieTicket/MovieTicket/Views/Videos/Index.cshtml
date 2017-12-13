@@ -31,8 +31,9 @@
                     i++;
                 }
                 else
-                {<div class="content-grid">
-        @{string imagePath = Url.Content(video.hinh);}
+                {
+                    <div class="content-grid">
+                    @{string imagePath = Url.Content(video.hinh);}
                      <a class="play-icon popup-with-zoom-anim" href="~/MovieInfo/Index/@video.maphim"><img src=@imagePath width=227 height=380 title="@video.tenphim" /></a>
         <h3>@video.tenphim</h3>
         <ul>
@@ -46,48 +47,14 @@
             }
         }
 
-        <div id="small-dialog" class="mfp-hide">
-            <iframe src="https://www.youtube.com/embed/2LqzF5WauAw" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="clearfix"> </div>
+        
         <!---start-pagenation----->
         <div class="pagenation">
-            <ul>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">Next</a></li>
-            </ul>
+            
         </div>
         <div class="clearfix"> </div>
         <!---End-pagenation----->
-        <link href="~/Content/popuo-box.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery.magnific-popup.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.popup-with-zoom-anim').magnificPopup({
-                    type: 'inline',
-                    fixedContentPos: false,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    closeBtnInside: true,
-                    preloader: false,
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in'
-                });
-            });
-        </script>
-    </div>
-</div>
-<div class="footer">
-    <h6>Disclaimer : </h6>
-    <p class="claim">This is a freebies and not an official website, I have no intention of disclose any movie, brand, news.My goal here is to train or excercise my skill and share this freebies.</p>
-    <a href="example@mail.com">example@mail.com</a>
-    <div class="copyright">
-        <p> Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
+        
     </div>
 </div>
 

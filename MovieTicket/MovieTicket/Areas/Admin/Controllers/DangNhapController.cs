@@ -46,7 +46,7 @@ namespace MovieTicket.Areas.Admin.Controllers
                     ViewBag.Alert = "Tài khoản không tồn tại";
                     return View("Login");
                 }
-                else if (ex.Message == "Mat khau ko dung")
+                else if (ex.Message == "khong dung mat khau")
                 {
                     ViewBag.Alert = "Không đúng mật khẩu";
                     return View("Login");
