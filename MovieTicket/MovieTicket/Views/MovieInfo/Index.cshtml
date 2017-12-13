@@ -36,7 +36,7 @@
                     <p>@s.Item1.Item1.ToString(@"dd/MM/yyyy")</p>
                     foreach(var gc in s.Item2)
                     {
-                        @Html.ActionLink(gc.ToString(@"hh\:mm"), "Index", new { controller = "Booking", suatChieu = s.Item1.Item2.ToString()})
+                        @Html.ActionLink(gc.ToString(@"hh\:mm"), "Index", new { controller = "Booking", suatChieu = s.Item1.Item2.ToString()})<br /><br />
                         
                     }
                 }

@@ -323,8 +323,8 @@ create trigger check_addKhuyenMai
 on KhuyenMai for insert 
 as
 begin
-	declare @ngaybatdau int = (select ngaybatdau from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
-	declare @ngayketthuc int = (select ngayketthuc from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
+	declare @ngaybatdau datetime = (select ngaybatdau from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
+	declare @ngayketthuc datetime = (select ngayketthuc from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
 	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
 	begin
 		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
@@ -440,7 +440,7 @@ go
 
 create proc sp_addKhachHang (@ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
-@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
+@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(32))
 as
 	declare @makhachhang int = 1
 	while exists(select * from KhachHang where makhachhang = @makhachhang)
@@ -526,7 +526,7 @@ begin
 	
 	select @matkhau1 = matkhau 
 	from KhachHang
-	where dienthoai = 123123
+	where dienthoai = @dienthoai
 
 
 	if @matkhau1 is null
@@ -554,6 +554,7 @@ go
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- add suat chieu
+go
 create proc sp_addSuatChieu (@maphim int, @maphong int, @giochieu time(7), @ngaychieu date)
 as
 begin 
@@ -570,9 +571,9 @@ begin
 	if @ngayketthuc is NULL
 		RAISERROR('Khong ton tai phim', 16, 4)
 	else 
-		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, (Select soghebandau from PhongChieu where PhongChieu.maphong = @maphong))
+		insert into SuatChieu values(@masuatchieu, @maphim, @maphong, @giochieu, DATEADD(mi, @thoiluong,   @giochieu) ,@ngaychieu, 30)
 
-	while(@mave<=(select PhongChieu.soghebandau from PhongChieu where PhongChieu.maphong = @maphong ))
+	while(@mave<=30)
 	begin 
 		declare @maloaive INT, @ngaygiochieu DATETIME, @giave int 
 		set @ngaygiochieu = cast(@ngaychieu as datetime) + cast(@giochieu as datetime)
@@ -791,7 +792,7 @@ go*/
 
 go
 -- Add nhanvien
-alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
+create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)

@@ -1,5 +1,4 @@
 use qldv 
-
 go
 
 create function maHoaPass (@pass varchar(32))
