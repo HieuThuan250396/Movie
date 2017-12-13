@@ -17,7 +17,7 @@
     <script src="~/Scripts/jquery.min.js"></script>
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><script src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -35,7 +35,7 @@
         </div>
         <div class="main">
             <div class="header" style="background: url('../images/header-bg1.jpg') no-repeat 0px 0px;">
-                <div class="top-header">
+                <div class="top-header ali">
                     <div class="logo">
                         <a href="index.html"><img src="~/images/logo.png" alt="" /></a>
                         <p>Movie Theater</p>
@@ -82,7 +82,25 @@
             </div>
         </div>
     </div>
-
+    <!-- pop-up-box -->
+    <link href="~/Content/popuo-box.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script>
+				$(document).ready(function() {
+				$('.popup-with-zoom-anim').magnificPopup({
+					type: 'inline',
+					fixedContentPos: false,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					closeBtnInside: true,
+					preloader: false,
+					midClick: true,
+					removalDelay: 300,
+					mainClass: 'my-mfp-zoom-in'
+				});
+				});
+    </script>
+    <!--//pop-up-box -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

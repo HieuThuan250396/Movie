@@ -9,14 +9,12 @@
 * http://www.opensource.org/licenses/mit-license.php
 */
 
-
-
 (function ($) {
 
     $.fn.flexisel = function (options) {
 
         var defaults = $.extend({
-            visibleItems: 4,
+    		visibleItems: 4,
     		animationSpeed: 200,
     		autoPlay: false,
     		autoPlaySpeed: 3000,    		

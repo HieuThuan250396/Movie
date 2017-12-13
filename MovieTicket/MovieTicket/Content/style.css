@@ -356,6 +356,12 @@ i.contact1 {
 .top-header input{
     text-shadow: 1px 1px 1px black;
 }
+.ali p{
+    text-shadow: 1px 1px 1px black;
+}
+.ali a{
+    text-shadow: 1px 1px 09px white;
+}
 /*--start-search--*/
 .search {
 	position: relative;

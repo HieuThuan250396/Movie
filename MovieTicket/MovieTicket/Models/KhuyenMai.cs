@@ -42,5 +42,14 @@ namespace MovieTicket.Models
         public bool tinhtrang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (ngayketthuc < DateTime.Today)
+            {
+                yield return
+                  new ValidationResult(errorMessage: "Ngày kết thúc phải lớn hơn hoặc bằng hôm nay!",
+                                       memberNames: new[] { "ngayketthuc" });
+            }
+        }
     }
 }

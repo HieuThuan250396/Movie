@@ -56,9 +56,16 @@ namespace MovieTicket.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     //db.KhuyenMais.Add(khuyenMai);
-                    db.Database.SqlQuery<KhuyenMai>("exec sp_addKhuyenMai {0},{1},{2},{3}",khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri, false).ToList();
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (khuyenMai.ngayketthuc < DateTime.Today)
+                    {
+                        ViewBag.LoiNgay = "Ngày kết thúc phải lớn hơn hoặc bằng hôm nay!";
+                        return View("Create");
+                    }
+                    else
+                    {
+                        db.Database.SqlQuery<KhuyenMai>("exec sp_addKhuyenMai {0},{1},{2},{3}", khuyenMai.ngaybatdau, khuyenMai.ngayketthuc, khuyenMai.giatri, false).ToList();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (EntityCommandExecutionException ex)

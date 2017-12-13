@@ -138,12 +138,12 @@ opacity: 0;
   display: inline-block;
   vertical-align: middle;
   margin: 0 auto;
-  text-align: left;
+  /*text-align: left;*/
   z-index: 1045; }
 
 .mfp-inline-holder .mfp-content,
 .mfp-ajax-holder .mfp-content {
-  width: 100%;
+  width: 73.6%;
   cursor: auto; }
 
 .mfp-ajax-cur {
@@ -177,7 +177,7 @@ opacity: 0;
 .mfp-hide {
   display: none !important; }
 .mfp-content iframe{
-	width:100%;
+	width:90.7%;
 	min-height:500px;
 }
 .mfp-preloader {

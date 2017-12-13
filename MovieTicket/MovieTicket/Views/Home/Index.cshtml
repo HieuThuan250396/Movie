@@ -12,34 +12,32 @@
         <li><img src="~/images/r6.jpg" alt="" /></li>
     </ul>
     <script type="text/javascript">
-        $(window).load(function () {
-
-            $("#flexiselDemo1").flexisel({
-                visibleItems: 6,
-                animationSpeed: 1000,
-                autoPlay: true,
-                autoPlaySpeed: 3000,
-                pauseOnHover: false,
-                enableResponsiveBreakpoints: true,
-                responsiveBreakpoints: {
-                    portrait: {
-                        changePoint: 480,
-                        visibleItems: 2
-                    },
-                    landscape: {
-                        changePoint: 640,
-                        visibleItems: 3
-                    },
-                    tablet: {
-                        changePoint: 768,
-                        visibleItems: 4
-                    }
-                }
-            });
-        });
-
+		$(window).load(function() {
+		  $("#flexiselDemo1").flexisel({
+				visibleItems: 6,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: false,
+				enableResponsiveBreakpoints: true,
+				responsiveBreakpoints: {
+					portrait: {
+						changePoint:480,
+						visibleItems: 2
+					},
+					landscape: {
+						changePoint:640,
+						visibleItems: 3
+					},
+					tablet: {
+						changePoint:768,
+						visibleItems: 4
+					}
+				}
+			});
+			});
     </script>
-    <script src="~/Scripts/jquery.flexisel.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
 </div>
 <div class="news">
     <div class="col-md-6 news-left-grid">
@@ -77,7 +75,7 @@
 
             $("#flexiselDemo2").flexisel({
                 visibleItems: 4,
-                display: block,
+                display: "block",
                 animationSpeed: 1000,
                 autoPlay: true,
                 autoPlaySpeed: 3000,
@@ -100,5 +98,5 @@
             });
         });
     </script>
-    <script src="~/Scripts/jquery.flexisel.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
 </div>
