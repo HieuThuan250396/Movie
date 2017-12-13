@@ -323,8 +323,8 @@ create trigger check_addKhuyenMai
 on KhuyenMai for insert 
 as
 begin
-	declare @ngaybatdau int = (select ngaybatdau from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
-	declare @ngayketthuc int = (select ngayketthuc from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
+	declare @ngaybatdau datetime = (select ngaybatdau from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
+	declare @ngayketthuc datetime = (select ngayketthuc from KhuyenMai where KhuyenMai.makm in (select makm from inserted))
 	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
 	begin
 		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
