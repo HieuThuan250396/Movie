@@ -526,7 +526,7 @@ begin
 	
 	select @matkhau1 = matkhau 
 	from KhachHang
-	where dienthoai = 123123
+	where dienthoai = @dienthoai
 
 
 	if @matkhau1 is null
