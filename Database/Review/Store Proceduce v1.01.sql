@@ -642,6 +642,7 @@ begin
 	from SuatChieu
 	where maphim = @maphim and (SuatChieu.ngaychieu >= getdate())
 end
+go
 --load suat chieu ngay 
 create proc sp_loadSuatChieuNgay
 as
@@ -789,7 +790,7 @@ as
 exec sp_deleteVe 0
 go*/
 
-
+go
 -- Add nhanvien
 create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as

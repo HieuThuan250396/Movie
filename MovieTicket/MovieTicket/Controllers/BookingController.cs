@@ -15,12 +15,14 @@ namespace MovieTicket.Controllers
         
         qldvEntities2 db = new qldvEntities2();
         // GET: Booking
-        public ActionResult Index(string suatChieu = "5")
+        public ActionResult Index(string suatChieu)
         {
+            int sc = int.Parse(suatChieu);
             if (!String.IsNullOrEmpty(suatChieu))
             {
                 ViewData["dsVeDangDat"] = dsVeDangDat;
-                return View(db.Database.SqlQuery<Ve>("exec sp_loadVeTheoSuatChieu {0}", suatChieu).ToList());
+                List<Ve> dsVe = db.Database.SqlQuery<Ve>("exec sp_loadVeTheoSuatChieu {0}", sc).ToList();
+                return View(dsVe);
             }
             else
                 return View();
@@ -46,7 +48,7 @@ namespace MovieTicket.Controllers
         {
             foreach(int v in dsVeDangDat)
             {
-                ;
+                db.Database.SqlQuery<Ve>("exec sp_datVe {0} {1} {2} {3}", v, v, v, v).ToList();
             }
             return RedirectToAction("Index");
         }
