@@ -12,13 +12,16 @@ namespace MovieTicket.Controllers
     {
 
         static private List<int> dsVeDangDat = new List<int>();
+        static private int sL;
         static private float tongTien;
         qldvEntities2 db = new qldvEntities2();
         // GET: Booking
         public ActionResult Index(string suatChieu)
         {
             ViewBag.SC = suatChieu;
-            ViewBag.TongTien = tongTien;
+            ViewBag.TongTien = tongTien > 0 ? tongTien : 0;
+            ViewBag.SL = sL > 0 ? sL : 0;
+
             int sc = int.Parse(suatChieu);
             if (!String.IsNullOrEmpty(suatChieu))
             {
@@ -30,24 +33,36 @@ namespace MovieTicket.Controllers
                 return View();
         }
 
-        public ActionResult DatVe(int mave, string suatChieu)
+        public ActionResult DatVe(int mave, string suatChieu, int gia)
         {
             if (!dsVeDangDat.Contains(mave))
             {
-                dsVeDangDat.Add(mave);                
-            }
+                dsVeDangDat.Add(mave);
+                tongTien += gia;
+                sL++;
+                ViewBag.SL = sL > 0 ? sL : 0;
+                ViewBag.TongTien = tongTien;
+            }                
             return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
 
-        public ActionResult XoaVe(int mave, string suatChieu)
+        public ActionResult XoaVe(int mave, string suatChieu, int gia)
         {
-            dsVeDangDat.Remove(mave);
+            if (dsVeDangDat.Contains(mave))
+            {
+                dsVeDangDat.Remove(mave);
+                tongTien -= gia;
+                sL--;
+                ViewBag.SL = sL > 0 ? sL : 0;
+                ViewBag.TongTien = tongTien;
+            }
             return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
 
         public ActionResult ThanhToan(string suatChieu)
         {
             int sc = Int32.Parse(suatChieu);
+
             int makh = (int)Session["maKH"];
 
             foreach(int v in dsVeDangDat)
