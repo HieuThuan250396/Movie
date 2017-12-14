@@ -103,7 +103,7 @@ p.copy_rights a:hover{
 	}
 .booking-details {
     float: right;
-    width: 38%;
+    width: 43%;
 }
 .booking-details h3 {
 	margin: 5px 5px 0 0;
@@ -229,11 +229,11 @@ span.seatCharts-legendDescription {
 }
 ul.book-left {
     float: left;
-    width: 35%;
+    width: 41%;
 }
 ul.book-right {
     float: right;
-    width: 63%;
+    width: 55%;
 }
 ul.book-left li {
     font-size: 16px;
@@ -262,7 +262,7 @@ ul.book-right li {
 }
 @media (max-width: 1366px){
 	.main {
-		width: 53%;
+		    width: 55%;
 	}	
 }
 @media (max-width: 1280px){
