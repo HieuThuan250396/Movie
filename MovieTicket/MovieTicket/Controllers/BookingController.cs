@@ -32,7 +32,6 @@ namespace MovieTicket.Controllers
             else
                 return View();
         }
-
         public ActionResult DatVe(int mave, string suatChieu, int gia)
         {
             if (!dsVeDangDat.Contains(mave))
@@ -59,18 +58,35 @@ namespace MovieTicket.Controllers
             return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
 
-        public ActionResult ThanhToan(string suatChieu)
+        public ActionResult ThanhToan(string suatChieu, string makm)
         {
-            int sc = Int32.Parse(suatChieu);
-
-            int makh = (int)Session["maKH"];
-
-            foreach(int v in dsVeDangDat)
+            try
             {
-                db.Database.ExecuteSqlCommand("exec sp_datVe2 {0}, {1}, {2}, {3}", v, sc, makh, null);
+                int sc = Int32.Parse(suatChieu);
+                string maKM = makm;
+                int makh = (int)Session["maKH"];
+                if (dsVeDangDat.Count > 0)
+                {
+                    foreach (int v in dsVeDangDat)
+                    {
+                        db.Database.ExecuteSqlCommand("exec sp_datVe2 {0}, {1}, {2}, {3}", v, sc, makh, makm);
+                    }
+                    tongTien = 0;
+                    sL = 0;
+                    dsVeDangDat.Clear();
+                    return RedirectToAction("Index", "Videos");
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { @suatChieu = suatChieu });
+                }
             }
-            dsVeDangDat.Clear();
-            return RedirectToAction("Index", "Videos");
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index", new { @suatChieu = suatChieu });
+            }
+            
+            
         }
     }
 }

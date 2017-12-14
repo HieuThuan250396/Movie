@@ -41,80 +41,11 @@
                             if (Model.ElementAt(i).tinhtrang)
                             {
                                 tinhTrang = "seatCharts-seat" + " seatCharts-cell" + " unavailable";
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
                             }
                             else
                             {
                                 tinhTrang = "seatCharts-seat seatCharts-cell available";
-                            }
-
-                            if (dsVeDangDat.Count() != 0)
-                            {
-                                if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                }
-                                else
-                                {
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                }
-                            }
-                            else
-                            {
-                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                            }
-                        }
-                    </div>
-                    <div class="seatCharts-row">
-                        <div class="seatCharts-cell seatCharts-space">B</div>
-                        @for (int i = 10; i < 20; i++)
-                        {
-                            string tinhTrang;
-                            int gia = Model.ElementAt(i).giave;
-                            string id = "" + Model.ElementAt(i).mave;
-
-                            if (Model.ElementAt(i).tinhtrang)
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
-                            }
-                            else
-                            {
-                                tinhTrang = "seatCharts-seat seatCharts-cell available";
-                            }
-                            if (dsVeDangDat.Count() != 0)
-                            {
-                                if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                }
-                                else
-                                {
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                }
-                            }
-                            else
-                            {
-                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                            }
-                        }
-                    </div>
-                        <div class="seatCharts-row">
-                            <div class="seatCharts-cell seatCharts-space">C</div>
-                            @for (int i = 20; i < 30; i++)
-                            {
-                                string tinhTrang;
-                                int gia = Model.ElementAt(i).giave;
-                                string id = "" + Model.ElementAt(i).mave;
-
-                                if (Model.ElementAt(i).tinhtrang)
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
-                                }
-                                else
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
-                                }
                                 if (dsVeDangDat.Count() != 0)
                                 {
                                     if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
@@ -131,6 +62,81 @@
                                 {
                                     <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                                 }
+                            }
+
+
+                        }
+                    </div>
+                    <div class="seatCharts-row">
+                        <div class="seatCharts-cell seatCharts-space">B</div>
+                        @for (int i = 10; i < 20; i++)
+                        {
+                            string tinhTrang;
+                            int gia = Model.ElementAt(i).giave;
+                            string id = "" + Model.ElementAt(i).mave;
+
+                            if (Model.ElementAt(i).tinhtrang)
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
+                            }
+                            else
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                if (dsVeDangDat.Count() != 0)
+                                {
+                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
+                                    {
+                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                    }
+                                    else
+                                    {
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                }
+                            }
+
+                        }
+                    </div>
+                        <div class="seatCharts-row">
+                            <div class="seatCharts-cell seatCharts-space">C</div>
+                            @for (int i = 20; i < 30; i++)
+                            {
+                                string tinhTrang;
+                                int gia = Model.ElementAt(i).giave;
+                                string id = "" + Model.ElementAt(i).mave;
+
+                                if (Model.ElementAt(i).tinhtrang)
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
+                                }
+                                else
+                                {
+                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
+                                    if (dsVeDangDat.Count() != 0)
+                                    {
+                                        if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
+                                        {
+                                            tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                        }
+                                        else
+                                        {
+                                            <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                                    }
+
+                                }
 
                             }
                         </div>
@@ -138,27 +144,32 @@
 
             </div>
 
-            <div class="booking-details">
-                <ul class="book-left">
-                    <li>Movie </li>
-                    <li>Time </li>
-                    <li>Tickets</li>
-                    <li>Total :</li>
-                    <li>Voucher :</li>
-                </ul>
-                <ul class="book-right">
-                    <li>: Gingerclown</li>
-                    <li>: April 3, 21:00</li>
-                    <li>: <span id="counter">@ViewBag.SL</span></li>
-                    <li>: <b><span id="total">@ViewBag.TongTien</span><i>VNĐ</i></b></li>
-                    <li><input type="text" id="makm" /></li>
-                </ul>
-                <div class="clear"></div>
-                <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
+            @using (Html.BeginForm("ThanhToan", "Booking", new { @suatChieu = sc }, FormMethod.Post))
+            {
+                <div class="booking-details">
+                    <ul class="book-left">
+                        <li>Movie </li>
+                        <li>Time </li>
+                        <li>Tickets</li>
+                        <li>Total :</li>
+                        <li>Voucher :</li>
+                    </ul>
+                    <ul class="book-right">
+                        <li>: Gingerclown</li>
+                        <li>: April 3, 21:00</li>
+                        <li>: <span id="counter">@ViewBag.SL</span></li>
+                        <li>: <b><span id="total">@ViewBag.TongTien</span><i>VNĐ</i></b></li>
+                        <li><input type="text" id="makm" name="makm" /></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
 
-                @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc }, new { @class = "checkout-button" })
-                <div id="legend"></div>
-            </div>
+                    <input type="submit" class="checkout-button" value="Book Now" />
+                    <div id="legend"></div>
+                </div>
+            }
+
+            
             <div style="clear:both"></div>
         </div>
 

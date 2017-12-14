@@ -735,13 +735,26 @@ create proc sp_datVe2 (@mave int, @masuatchieu int, @makhachhang int, @makm int)
 as
 begin
 	begin tran
-	update Ve set makhachhang = @makh, makm = @makm, giodat = GETDATE(),tinhtrang = 1 where mave = @mave and masuatchieu = @masuatchieu
 	declare @gia int, @giodat datetime, @maloaive int
-	select @gia = giave, @giodat = giodat, @maloaive = maloaive from Ve where mave = @mave and masuatchieu = @masuatchieu
-	insert into VeDangDat values (@mave, @masuatchieu, @makh, @gia, 0, @giodat, @maloaive, @makm)
+	if @makm is not null
+	begin
+		declare @giatri int, @giavemoi int
+		select @giatri = giatri from KhuyenMai where @makm = makm
+		select @giavemoi = giave from Ve where mave = @mave and masuatchieu = @masuatchieu
+		set @giavemoi = @giavemoi - @giatri
+		update Ve set giave = @giavemoi, makhachhang = @makhachhang, makm = @makm, giodat = GETDATE(),tinhtrang = 1 where mave = @mave and masuatchieu = @masuatchieu
+		select @gia = giave, @giodat = giodat, @maloaive = maloaive from Ve where mave = @mave and masuatchieu = @masuatchieu
+		insert into VeDangDat values (@mave, @masuatchieu, @makhachhang, @giavemoi, 0, @giodat, @maloaive, @makm)
+	end
+	else
+	begin
+		update Ve set makhachhang = @makhachhang, makm = @makm, giodat = GETDATE(),tinhtrang = 1 where mave = @mave and masuatchieu = @masuatchieu
+		select @gia = giave, @giodat = giodat, @maloaive = maloaive from Ve where mave = @mave and masuatchieu = @masuatchieu
+		insert into VeDangDat values (@mave, @masuatchieu, @makhachhang, @gia, 0, @giodat, @maloaive, @makm)
+	end
+	
 	commit tran
 end
-	
 go
 --tra ve 
 create proc sp_traVe (@mave int, @masuatchieu int)
