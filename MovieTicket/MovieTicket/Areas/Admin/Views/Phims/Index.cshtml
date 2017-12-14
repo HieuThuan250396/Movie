@@ -10,7 +10,7 @@
     {
         <p>
             <!--@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)-->
-            @Html.TextBox("SearchString", "Tìm theo tên phim", ViewBag.CurrentFilter as string, new {  @autocomplete = "off", @placeholder = "Tìm phim..."})
+            @Html.TextBox("SearchString", "Tìm theo tên phim", ViewBag.CurrentFilter as string, new {  @autocomplete = "off", @value = "Tìm theo tên phim", @onfocus = "this.value = '';", @onblur = "if (this.value == '') {this.value = 'Tìm theo tên phim';}" })
             <input type="submit" value="" class="fa fa-search">
         </p>
     }

@@ -66,7 +66,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         //}
         public ActionResult Index(string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) )
             {
                 return View(db.Database.SqlQuery<Phim>("exec sp_loadPhimTheoTen {0}", searchString).ToList());
             }

@@ -79,6 +79,7 @@ label{
     margin-bottom: 30px;
     text-transform: capitalize;
     font-weight: 500;
+    font-family:'Open Sans', sans-serif ;
 }
 p.copy_rights {
     color: #fff;
@@ -177,8 +178,10 @@ span.seatCharts-legendDescription {
 	line-height: 30px;
 	}
 .checkout-button {
+    float: right;
+    width: fit-content;
     display: block;
-    margin: 16px 0 22px;
+    margin: 16px 3px 22px;
     border:none;
     font-size: 16px;
     cursor: pointer;
@@ -479,4 +482,7 @@ ul.book-right li {
 }
 .demo a:visited{
     color:  #0000ee;
+}
+.demo a{
+    padding:7px;
 }

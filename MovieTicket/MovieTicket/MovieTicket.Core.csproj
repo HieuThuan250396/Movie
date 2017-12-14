@@ -393,6 +393,7 @@
     <Content Include="Areas\Admin\images\ga6.jpg" />
     <Content Include="Areas\Admin\images\ga7.jpg" />
     <Content Include="Areas\Admin\images\ga8.jpg" />
+    <Content Include="Content\b\jquery-1.11.0.min.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="images\header-bg1.jpg" />
