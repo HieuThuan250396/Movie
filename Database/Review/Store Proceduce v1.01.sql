@@ -744,39 +744,19 @@ end
 	
 go
 --tra ve 
-create proc sp_traVe (@mave int, @masuatchieu int,@makm int)
+create proc sp_traVe (@mave int, @masuatchieu int)
 as
 begin
 	begin tran
-	if(@makm = null or @makm = '' )
-		begin
-			update Ve 
-			set 
+		update Ve 
+		set 
 			makhachhang = NULL,
 			giodat =NULL,
 			makm = NULL,
 			tinhtrang = 0
-			where
+		where
 			mave = @mave and masuatchieu = @masuatchieu
-	delete from  VeDangDat where VeDangDat.mave  = @mave
-		end
-	else
-		begin
-			update Ve 
-			set 
-			makhachhang = NULL,
-			giodat =NULL,
-			makm = NULL,
-			tinhtrang = 0
-			where
-			mave = @mave and masuatchieu = @masuatchieu
-			delete from  VeDangDat where VeDangDat.mave  = @mave
-			update KhuyenMai
-			set
-			KhuyenMai.tinhtrang = 1
-			where 
-			KhuyenMai.makm = @makm
-		end
+		delete from  VeDangDat where VeDangDat.mave  = @mave
 	commit tran
 end
 

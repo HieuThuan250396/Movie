@@ -11,8 +11,7 @@
     <div class="col-md-9 reviews-grids">
         <div class="review">
             <div class="movie-pic">
-                               
-                <a href="single.html"><img src="@item.hinh" alt="" /></a>
+                <img src="@item.hinh" alt="" />
             </div>
             <div class="review-info">
                 @*<p class="dirctr"><a href="">Reagan Gavin Rasquinha, </a>TNN, Mar 12, 2015, 12.47PM IST</p>*@
@@ -27,16 +26,15 @@
             <div class="clearfix"></div>
         </div>
         @{
-            var dsSC = ViewData["dsSC"] as List<Tuple<Tuple<DateTime, int>, List<TimeSpan>>>;
-            var sc = ViewData["SuatChieu"] as List<MovieTicket.Models.SuatChieu>;
+            var sc = ViewData["SuatChieu"] as List<IGrouping<DateTime, MovieTicket.Models.SuatChieu>>;
             <div class="single">
                 <h3 class="head">Lịch chiếu</h3>
-                @foreach(var s in dsSC)
+                @foreach(var s in sc)
                 {
-                    <p>@s.Item1.Item1.ToString(@"dd/MM/yyyy")</p>
-                    foreach(var gc in s.Item2)
+                    <p>@s.Key.ToShortDateString()</p>
+                    foreach(var i in s)
                     {
-                        @Html.ActionLink(gc.ToString(@"hh\:mm"), "Index", new { controller = "Booking", suatChieu = s.Item1.Item2.ToString()})<br /><br />
+                        @Html.ActionLink(i.giochieu.ToString(@"hh\:mm"), "Index", new { controller = "Booking", suatChieu = i.masuatchieu })<br /><br />
                         
                     }
                 }

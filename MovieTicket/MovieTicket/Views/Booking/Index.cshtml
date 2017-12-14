@@ -124,7 +124,7 @@
                                 }
                                 else
                                 {
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id }, null)</div>
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
                                 }
 
                             }
@@ -132,9 +132,7 @@
                 }
                         
                     </div>
-                
-                    
-
+               
                 <div class="booking-details">
                     <ul class="book-left">
                         <li>Movie </li>
@@ -151,13 +149,13 @@
                     </ul>
                     <div class="clear"></div>
                     <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
-                    @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc}, new { @class= "checkout - button" })
+                    @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc}, new { @class= "checkout-button" })
                     <div id="legend"></div>
                 </div>
                 <div style="clear:both"></div>
             </div>
 
-            <script type="text/javascript">
+            @*<script type="text/javascript">
 				var price = 10; //price
 				$(document).ready(function() {
 					var $cart = $('#selected-seats'), //Sitting Area
@@ -232,7 +230,7 @@
 
 					return total;
 				}
-            </script>
+            </script>*@
         </div>
         <p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>
     </div>
