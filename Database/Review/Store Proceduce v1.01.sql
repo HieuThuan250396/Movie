@@ -681,7 +681,7 @@ as
 	-- set giochieu
 	-- declare @giochieu datetime = (select giochieu from SuatChieu where masuatchieu = @masuatchieu)
 	-- set tinhtrang
-	declare @tinhtrang bit = 0
+	declare @tinhtrang int = 0
 
 
 	insert into Ve values(@mave, @masuatchieu, @makhachhang, @giave, @tinhtrang, @giodat, @maloaive, @makm)

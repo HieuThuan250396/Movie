@@ -139,7 +139,7 @@ begin
 	declare @masuatchieu int = (select masuatchieu from inserted)
 	declare @makhachhang int = (select makhachhang from inserted)
 	declare @giave int = (select giave from inserted)
-	declare @tinhtrang bit = (select tinhtrang from inserted)
+	declare @tinhtrang int = (select tinhtrang from inserted)
 	declare @giodat datetime = (select giodat from inserted)
 	declare @maloaive int = (select maloaive from inserted)
 	declare @makm int = (select makm from inserted)
