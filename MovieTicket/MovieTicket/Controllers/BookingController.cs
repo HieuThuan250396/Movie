@@ -12,12 +12,13 @@ namespace MovieTicket.Controllers
     {
 
         static private List<int> dsVeDangDat = new List<int>();
-        
+        static private float tongTien;
         qldvEntities2 db = new qldvEntities2();
         // GET: Booking
         public ActionResult Index(string suatChieu)
         {
             ViewBag.SC = suatChieu;
+            ViewBag.TongTien = tongTien;
             int sc = int.Parse(suatChieu);
             if (!String.IsNullOrEmpty(suatChieu))
             {
@@ -33,8 +34,7 @@ namespace MovieTicket.Controllers
         {
             if (!dsVeDangDat.Contains(mave))
             {
-                dsVeDangDat.Add(mave);
-                
+                dsVeDangDat.Add(mave);                
             }
             return RedirectToAction("Index", new { @suatChieu = suatChieu });
         }
