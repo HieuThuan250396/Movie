@@ -103,7 +103,8 @@ p.copy_rights a:hover{
 	}
 .booking-details {
     float: right;
-    width: 38%;
+    width: 43%;
+        margin-left: 1em;
 }
 .booking-details h3 {
 	margin: 5px 5px 0 0;
@@ -157,7 +158,7 @@ div.seatCharts-seat.unavailable {
 	}
 div.seatCharts-container {
     border-right: 1px solid #adadad;
-    width: 54%;
+    /*width: 54%;*/
     padding: 0 20px 0 0;
     float: left;
 }
@@ -229,11 +230,11 @@ span.seatCharts-legendDescription {
 }
 ul.book-left {
     float: left;
-    width: 35%;
+    width: 41%;
 }
 ul.book-right {
     float: right;
-    width: 63%;
+    width: 55%;
 }
 ul.book-left li {
     font-size: 16px;
@@ -262,7 +263,7 @@ ul.book-right li {
 }
 @media (max-width: 1366px){
 	.main {
-		width: 53%;
+		    width: 55%;
 	}	
 }
 @media (max-width: 1280px){
@@ -475,4 +476,7 @@ ul.book-right li {
 		line-height: 0px;
 		font-size: 13px;
 	}
+}
+.demo a:visited{
+    color:  #0000ee;
 }
