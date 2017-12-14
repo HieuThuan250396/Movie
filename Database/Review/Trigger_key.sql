@@ -24,21 +24,6 @@ begin
 end
 go
 
--- tang ma khuyen mai
-create trigger trig_tangMaKM on KhuyenMai
-instead of insert
-as
-begin
-	declare @makm int = dbo.func_tangMa('makm')
-	declare @ngaybatdau datetime = (select ngaybatdau from inserted)
-	declare @ngayketthuc nvarchar(20) = (select ngayketthuc from inserted)
-	declare @giatri float = (select giatri from inserted)
-	declare @tinhtrang bit = (select tinhtrang from inserted)
-	
-	insert into KhuyenMai values(@makm, @ngaybatdau, @ngayketthuc, @giatri, @tinhtrang)
-end
-go
-
 -- tang ma loai ve
 create trigger trig_tangMaLV on LoaiVe
 instead of insert

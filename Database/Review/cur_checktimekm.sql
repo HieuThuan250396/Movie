@@ -5,7 +5,7 @@ declare cur cursor
 dynamic
 for 
 	select makm from KhuyenMai where KhuyenMai.ngayketthuc <= GETDATE()
-declare @makm int
+declare @makm varchar(10)
 open cur
 fetch next from cur into @makm
 while @@FETCH_STATUS=0
