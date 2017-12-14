@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MovieTicket.Models.Ve>
- 
+
 @{
     Layout = null;
 }
@@ -26,13 +26,12 @@
         <div class="main">
             <h2>Multiplex Theatre Showing Screen 1</h2>
             <div class="demo">
-<<<<<<< HEAD
-                        <div class="front">SCREEN</div>
+                <div class="front">SCREEN</div>
                 @{
                     string sc = ViewBag.SC;
                     List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
                     <div class="seatCharts-row">
-                        <div class="seatCharts-cell seatCharts-space" >A</div>
+                        <div class="seatCharts-cell seatCharts-space">A</div>
                         @for (int i = 0; i < 10; i++)
                         {
                             string tinhTrang;
@@ -49,95 +48,57 @@
                             }
 
                             if (dsVeDangDat.Count() != 0)
-=======
-                <div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1">
-                    <div class="front">SCREEN</div>
-                    @{
-                        string sc = ViewBag.SC;
-                        List<int> dsVeDangDat = (List<int>)ViewData["dsVeDangDat"];
-                        <div class="seatCharts-row">
-                            <div class="seatCharts-cell seatCharts-space">A</div>
-                            @for (int i = 0; i < 10; i++)
->>>>>>> 00961febc65306874b6c199a63afcd95fe97f036
                             {
-                                string tinhTrang;
-
-                                if (Model.ElementAt(i).tinhtrang)
+                                if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
                                 {
-                                    tinhTrang = "seatCharts-seat" + " seatCharts-cell" + " unavailable";
-                                }
-                                else
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
-                                }
-
-                                string id = "" + Model.ElementAt(i).mave;
-                                if (dsVeDangDat.Count() != 0)
-                                {
-<<<<<<< HEAD
                                     tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia}, null)</div>
-=======
-                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
-                                    {
-                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
-                                    }
-                                    else
-                                    {
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc }, null)</div>
-                                    }
->>>>>>> 00961febc65306874b6c199a63afcd95fe97f036
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                                 }
                                 else
                                 {
                                     <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                                 }
                             }
-<<<<<<< HEAD
                             else
                             {
                                 <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                             }
                         }
                     </div>
-=======
-                        </div>
->>>>>>> 00961febc65306874b6c199a63afcd95fe97f036
-                        <div class="seatCharts-row">
-                            <div class="seatCharts-cell seatCharts-space">B</div>
-                            @for (int i = 10; i < 20; i++)
-                            {
-                                string tinhTrang;
-                                int gia = Model.ElementAt(i).giave;
-                                string id = "" + Model.ElementAt(i).mave;
+                    <div class="seatCharts-row">
+                        <div class="seatCharts-cell seatCharts-space">B</div>
+                        @for (int i = 10; i < 20; i++)
+                        {
+                            string tinhTrang;
+                            int gia = Model.ElementAt(i).giave;
+                            string id = "" + Model.ElementAt(i).mave;
 
-                                if (Model.ElementAt(i).tinhtrang)
+                            if (Model.ElementAt(i).tinhtrang)
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
+                            }
+                            else
+                            {
+                                tinhTrang = "seatCharts-seat seatCharts-cell available";
+                            }
+                            if (dsVeDangDat.Count() != 0)
+                            {
+                                if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
                                 {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
-                                }
-                                else
-                                {
-                                    tinhTrang = "seatCharts-seat seatCharts-cell available";
-                                }
-                                if (dsVeDangDat.Count() != 0)
-                                {
-                                    if (dsVeDangDat.Contains(Model.ElementAt(i).mave))
-                                    {
-                                        tinhTrang = "seatCharts-seat seatCharts-cell focused";
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                    }
-                                    else
-                                    {
-                                        <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
-                                    }
+                                    tinhTrang = "seatCharts-seat seatCharts-cell focused";
+                                    <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "XoaVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                                 }
                                 else
                                 {
                                     <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
                                 }
                             }
-                        </div>
+                            else
+                            {
+                                <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Html.ActionLink(id, "DatVe", "Booking", new { @mave = id, @suatChieu = sc, @gia = gia }, null)</div>
+                            }
+                        }
+                    </div>
                         <div class="seatCharts-row">
                             <div class="seatCharts-cell seatCharts-space">C</div>
                             @for (int i = 20; i < 30; i++)
@@ -173,134 +134,112 @@
 
                             }
                         </div>
-                    }
-                </div>
-                    <div class="booking-details">
-                        <ul class="book-left">
-                            <li>Movie </li>
-                            <li>Time </li>
-                            <li>Tickets</li>
-                            <li>Total</li>
-                            <li>Seats :</li>
-                            <li>Mã khuyến mãi: </li>
-                        </ul>
-                        <ul class="book-right">
-                            <li>: Gingerclown</li>
-                            <li>: April 3, 21:00</li>
-                            <li>: <span id="counter">0</span></li>
-                            <li>: <b><i>$</i><span id="total">0</span></b></li>
-                            <li>: </li>
-                            <li><input type="text" id="makm" /></li>
-                        </ul>
-                        <div class="clear"></div>
-                        <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
-                        @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc }, new { @class = "checkout-button" })
-                        <div id="legend"></div>
-                    </div>
-<<<<<<< HEAD
-               
-                <div class="booking-details">
-                    <ul class="book-left">
-                        <li>Movie </li>
-                        <li>Time </li>
-                        <li>Tickets</li>
-                        <li>Total :</li>
-                    </ul>
-                    <ul class="book-right">
-                        <li>: Gingerclown</li>
-                        <li>: April 3, 21:00</li>
-                        <li>: <span id="counter">@ViewBag.SL</span></li>
-                        <li>: <b><span id="total">@ViewBag.TongTien</span><i>VNĐ</i></b></li>
-                    </ul>
-                    <div class="clear"></div>
-                    <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
-                    @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc}, new { @class= "checkout-button" })
-                    <div id="legend"></div>
-=======
->>>>>>> 00961febc65306874b6c199a63afcd95fe97f036
-                </div>
-                
-                <div style="clear:both"></div>
+                }
+
             </div>
 
-            @*<script type="text/javascript">
-				var price = 10; //price
-				$(document).ready(function() {
-					var $cart = $('#selected-seats'), //Sitting Area
-					$counter = $('#counter'), //Votes
-					$total = $('#total'); //Total money
+            <div class="booking-details">
+                <ul class="book-left">
+                    <li>Movie </li>
+                    <li>Time </li>
+                    <li>Tickets</li>
+                    <li>Total :</li>
+                    <li>Voucher :</li>
+                </ul>
+                <ul class="book-right">
+                    <li>: Gingerclown</li>
+                    <li>: April 3, 21:00</li>
+                    <li>: <span id="counter">@ViewBag.SL</span></li>
+                    <li>: <b><span id="total">@ViewBag.TongTien</span><i>VNĐ</i></b></li>
+                    <li><input type="text" id="makm" /></li>
+                </ul>
+                <div class="clear"></div>
+                <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
 
-					var sc = $('#seat-map').seatCharts({
-						map: [  //Seating chart
-							'aaaaaaaaaa',
-							'aaaaaaaaaa',
-							'__________',
-							'aaaaaaaa__',
-							'aaaaaaaaaa',
-							'aaaaaaaaaa',
-							'aaaaaaaaaa',
-							'aaaaaaaaaa',
-							'aaaaaaaaaa',
-							'__aaaaaa__'
-						],
-						naming : {
-							top : false,
-							getLabel : function (character, row, column) {
-								return column;
-							}
-						},
-						legend : { //Definition legend
-							node : $('#legend'),
-							items : [
-								[ 'a', 'available',   'Available' ],
-								[ 'a', 'unavailable', 'Sold'],
-								[ 'a', 'selected', 'Selected']
-							]
-						},
-						click: function () { //Click event
-							if (this.status() == 'available') { //optional seat
-								$('<li>Row'+(this.settings.row+1)+' Seat'+this.settings.label+'</li>')
-									.attr('id', 'cart-item-'+this.settings.id)
-									.data('seatId', this.settings.id)
-									.appendTo($cart);
-
-								$counter.text(sc.find('selected').length+1);
-								$total.text(recalculateTotal(sc)+price);
-
-								return 'selected';
-							} else if (this.status() == 'selected') { //Checked
-									//Update Number
-									$counter.text(sc.find('selected').length-1);
-									//update totalnum
-									$total.text(recalculateTotal(sc)-price);
-
-									//Delete reservation
-									$('#cart-item-'+this.settings.id).remove();
-									//optional
-									return 'available';
-							} else if (this.status() == 'unavailable') { //sold
-								return 'unavailable';
-							} else {
-								return this.style();
-							}
-						}
-					});
-					//sold seat
-					sc.get(['1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
-
-				});
-				//sum total money
-				function recalculateTotal(sc) {
-					var total = 0;
-					sc.find('selected').each(function () {
-						total += price;
-					});
-
-					return total;
-				}
-            </script>*@
+                @Html.ActionLink("Book Now", "ThanhToan", "Booking", new { @suatChieu = sc }, new { @class = "checkout-button" })
+                <div id="legend"></div>
+            </div>
+            <div style="clear:both"></div>
         </div>
-        <p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>
+
+        @*<script type="text/javascript">
+                var price = 10; //price
+                $(document).ready(function() {
+                    var $cart = $('#selected-seats'), //Sitting Area
+                    $counter = $('#counter'), //Votes
+                    $total = $('#total'); //Total money
+
+                    var sc = $('#seat-map').seatCharts({
+                        map: [  //Seating chart
+                            'aaaaaaaaaa',
+                            'aaaaaaaaaa',
+                            '__________',
+                            'aaaaaaaa__',
+                            'aaaaaaaaaa',
+                            'aaaaaaaaaa',
+                            'aaaaaaaaaa',
+                            'aaaaaaaaaa',
+                            'aaaaaaaaaa',
+                            '__aaaaaa__'
+                        ],
+                        naming : {
+                            top : false,
+                            getLabel : function (character, row, column) {
+                                return column;
+                            }
+                        },
+                        legend : { //Definition legend
+                            node : $('#legend'),
+                            items : [
+                                [ 'a', 'available',   'Available' ],
+                                [ 'a', 'unavailable', 'Sold'],
+                                [ 'a', 'selected', 'Selected']
+                            ]
+                        },
+                        click: function () { //Click event
+                            if (this.status() == 'available') { //optional seat
+                                $('<li>Row'+(this.settings.row+1)+' Seat'+this.settings.label+'</li>')
+                                    .attr('id', 'cart-item-'+this.settings.id)
+                                    .data('seatId', this.settings.id)
+                                    .appendTo($cart);
+
+                                $counter.text(sc.find('selected').length+1);
+                                $total.text(recalculateTotal(sc)+price);
+
+                                return 'selected';
+                            } else if (this.status() == 'selected') { //Checked
+                                    //Update Number
+                                    $counter.text(sc.find('selected').length-1);
+                                    //update totalnum
+                                    $total.text(recalculateTotal(sc)-price);
+
+                                    //Delete reservation
+                                    $('#cart-item-'+this.settings.id).remove();
+                                    //optional
+                                    return 'available';
+                            } else if (this.status() == 'unavailable') { //sold
+                                return 'unavailable';
+                            } else {
+                                return this.style();
+                            }
+                        }
+                    });
+                    //sold seat
+                    sc.get(['1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
+
+                });
+                //sum total money
+                function recalculateTotal(sc) {
+                    var total = 0;
+                    sc.find('selected').each(function () {
+                        total += price;
+                    });
+
+                    return total;
+                }
+            </script>*@
+    </div>
+    <p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>
     </div>
     <!--<script src="js/jquery.nicescroll.js"></script>-->
     <script src="~/Scripts/scripts.js"></script>
