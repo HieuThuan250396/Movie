@@ -13,7 +13,7 @@ namespace MovieTicket.Models
     
     public partial class sp_loadTatCaKhuyenMai_Result
     {
-        public int makm { get; set; }
+        public string makm { get; set; }
         public System.DateTime ngaybatdau { get; set; }
         public System.DateTime ngayketthuc { get; set; }
         public double giatri { get; set; }

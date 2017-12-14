@@ -42,8 +42,8 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/SuatChieux/Create
         public ActionResult Create()
         {
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim");
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong");
+            ViewBag.maphim = new SelectList(db.Phim, "maphim", "tenphim");
+            ViewBag.maphong = new SelectList(db.PhongChieu, "maphong", "tenphong");
             return View();
         }
 
@@ -88,8 +88,8 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
+            ViewBag.maphim = new SelectList(db.Phim, "maphim", "tenphim", suatChieu.maphim);
+            ViewBag.maphong = new SelectList(db.PhongChieu, "maphong", "tenphong", suatChieu.maphong);
             return View(suatChieu);
         }
 
@@ -113,36 +113,36 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            ViewBag.maphim = new SelectList(db.Phims, "maphim", "tenphim", suatChieu.maphim);
-            ViewBag.maphong = new SelectList(db.PhongChieux, "maphong", "tenphong", suatChieu.maphong);
+            ViewBag.maphim = new SelectList(db.Phim, "maphim", "tenphim", suatChieu.maphim);
+            ViewBag.maphong = new SelectList(db.PhongChieu, "maphong", "tenphong", suatChieu.maphong);
             return View(suatChieu);
         }
 
-        // GET: Admin/SuatChieux/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            if (suatChieu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(suatChieu);
-        }
+        //// GET: Admin/SuatChieux/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    SuatChieu suatChieu = db.SuatChieux.Find(id);
+        //    if (suatChieu == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(suatChieu);
+        //}
 
-        // POST: Admin/SuatChieux/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            SuatChieu suatChieu = db.SuatChieux.Find(id);
-            db.SuatChieux.Remove(suatChieu);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/SuatChieux/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    SuatChieu suatChieu = db.SuatChieu.Find(id);
+        //    db.SuatChieu.Remove(suatChieu);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -19,7 +19,7 @@ namespace MovieTicket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SuatChieu()
         {
-            this.Ves = new HashSet<Ve>();
+            this.Ve = new HashSet<Ve>();
         }
 
         [DisplayName("Mã suất chiếu")]
@@ -66,6 +66,6 @@ namespace MovieTicket.Models
         public virtual PhongChieu PhongChieu { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ve> Ves { get; set; }
+        public virtual ICollection<Ve> Ve { get; set; }
     }
 }

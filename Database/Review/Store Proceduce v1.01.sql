@@ -453,7 +453,7 @@ go
 -- Edit khach hang
 create proc sp_editKhachHang (@makhachhang int, @ho nvarchar(50), @tenlot nvarchar(50), @ten nvarchar(50), @ngaysinh date, 
 @gioitinh char(2), @sonha nvarchar(50), @tenduong nvarchar(50), @quan nvarchar(50), @thanhpho nvarchar(50), 
-@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(50))
+@dienthoai nvarchar(50), @email nvarchar(50), @matkhau nvarchar(32))
 as
 	update KhachHang 
 	set 
@@ -653,7 +653,7 @@ go
 
 
 -- Add ve // kiem tra lam lai
-create proc sp_addVe (@masuatchieu int, @makhachhang int, @giodat datetime, @maloaive int, @makm int)
+create proc sp_addVe (@masuatchieu int, @makhachhang int, @giodat datetime, @maloaive int, @makm varchar(10))
 as
 	
 	-- set mave
@@ -687,56 +687,56 @@ as
 go
 
 -- Dat ve
-create proc sp_datVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
-as
-begin
-	begin tran
-		if(@makm = null or @makm = '' )
-		begin
-			update Ve 
-			set 
-				makhachhang = @makhachhang,
-				giodat = getdate(),
-				tinhtrang = 1
-			where
-				mave = @mave and masuatchieu = @masuatchieu	
-		end
-		else 
-		begin
-		if ((select tinhtrang from KhuyenMai where makm = @makm) = 1)
-		begin
-		update Ve 
-			set 
-				makhachhang = @makhachhang,
-				giodat = getdate(),
-				makm = @makm,
-				tinhtrang = 1,
-				giave = giave - (select LoaiVe.giave from LoaiVe where LoaiVe.maloaive = @makm)
-			where
-				mave = @mave and masuatchieu = @masuatchieu
-			update KhuyenMai
-			set
-				KhuyenMai.tinhtrang = 0 
-			where 
-				KhuyenMai.makm = @makm
-		end
-		else 
-		begin
-			raiserror('ma khuyen mai het han',16,1)
-		end
-		end
+--create proc sp_datVe (@mave int, @masuatchieu int, @makhachhang int, @makm int)
+--as
+--begin
+--	begin tran
+--		if(@makm = null or @makm = '' )
+--		begin
+--			update Ve 
+--			set 
+--				makhachhang = @makhachhang,
+--				giodat = getdate(),
+--				tinhtrang = 1
+--			where
+--				mave = @mave and masuatchieu = @masuatchieu	
+--		end
+--		else 
+--		begin
+--		if ((select tinhtrang from KhuyenMai where makm = @makm) = 1)
+--		begin
+--		update Ve 
+--			set 
+--				makhachhang = @makhachhang,
+--				giodat = getdate(),
+--				makm = @makm,
+--				tinhtrang = 1,
+--				giave = giave - (select LoaiVe.giave from LoaiVe where LoaiVe.maloaive = @makm)
+--			where
+--				mave = @mave and masuatchieu = @masuatchieu
+--			update KhuyenMai
+--			set
+--				KhuyenMai.tinhtrang = 0 
+--			where 
+--				KhuyenMai.makm = @makm
+--		end
+--		else 
+--		begin
+--			raiserror('ma khuyen mai het han',16,1)
+--		end
+--		end
 		
-	insert VeDangDat select * from Ve where Ve.mave = @mave 
-	commit tran
-end
-go
+--	insert VeDangDat select * from Ve where Ve.mave = @mave 
+--	commit tran
+--end
+--go
 --dat ve
-create proc sp_datVe2 (@mave int, @masuatchieu int, @makhachhang int, @makm int)
+create proc sp_datVe2 (@mave int, @masuatchieu int, @makhachhang int, @makm varchar(10))
 as
 begin
 	begin tran
 	declare @gia int, @giodat datetime, @maloaive int
-	if @makm is not null
+	if ( @makm is not null or @makm != '' ) 
 	begin
 		declare @giatri int, @giavemoi int
 		select @giatri = giatri from KhuyenMai where @makm = makm
@@ -780,8 +780,12 @@ as
 	begin
 		select * from ve where ve.masuatchieu = @masuatchieu
 	end
-
-	
+	go
+create proc sp_loadTatCaVe
+as
+	begin
+		select * from ve
+		end	
 
 /*
 -- Delete ve
@@ -794,7 +798,7 @@ go*/
 
 go
 -- Add nhanvien
-alter proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
+create proc sp_addNhanVien (@taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))
 as
 	declare @manv int = 1
 	while exists(select * from NhanVien where manv = @manv)
@@ -802,7 +806,7 @@ as
 	set @matkhau = dbo.maHoaPass (@matkhau)
 	insert into NhanVien values(@manv, @taikhoan, @matkhau, @vaitro)
 	--update NhanVien set matkhau = dbo.maHoaPass (matkhau) where manv = @manv
-go
+
 go
 -- Edit nhanvien
 create proc sp_editNhanVien (@manv int, @taikhoan varchar(20), @matkhau varchar(32), @vaitro char(2))

@@ -19,7 +19,7 @@ namespace MovieTicket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiVe()
         {
-            this.Ves = new HashSet<Ve>();
+            this.Ve = new HashSet<Ve>();
         }
         [Range(0, int.MaxValue, ErrorMessage = "Chỉ nhập số")]
         [DisplayName("Mã loại vé")]
@@ -34,6 +34,6 @@ namespace MovieTicket.Models
         public int giave { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ve> Ves { get; set; }
+        public virtual ICollection<Ve> Ve { get; set; }
     }
 }

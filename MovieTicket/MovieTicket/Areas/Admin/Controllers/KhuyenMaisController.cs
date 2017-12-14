@@ -82,7 +82,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            KhuyenMai khuyenMai = db.Database.SqlQuery<KhuyenMai>("exec sp_loadChiTietKhuyenMai {0}", id).First<KhuyenMai>();
             if (khuyenMai == null)
             {
                 return HttpNotFound();

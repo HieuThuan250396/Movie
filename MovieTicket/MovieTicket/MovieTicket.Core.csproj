@@ -346,6 +346,9 @@
     <Compile Include="Models\sp_loadTatCaTheLoai_Result.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_loadTatCaVe_Result.cs">
+      <DependentUpon>ModelQLDV.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_loadTheLoai_Result.cs">
       <DependentUpon>ModelQLDV.tt</DependentUpon>
     </Compile>
@@ -571,13 +574,6 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\DangNhap\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Index\Index.cshtml" />
-    <EntityDeploy Include="Models\ModelQLDV.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelQLDV.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelQLDV.edmx.diagram">
-      <DependentUpon>ModelQLDV.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -587,6 +583,13 @@
     <Content Include="fonts\Muli-Regular.ttf" />
     <Content Include="fonts\TUV-Montserrat-Bold.ttf" />
     <Content Include="fonts\TUV-Montserrat-Regular.ttf" />
+    <EntityDeploy Include="Models\ModelQLDV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelQLDV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelQLDV.edmx.diagram">
+      <DependentUpon>ModelQLDV.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.flexisel.js" />
     <Content Include="Scripts\jquery.magnific-popup.js" />

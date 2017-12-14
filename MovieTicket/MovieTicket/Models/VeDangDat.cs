@@ -30,6 +30,6 @@ namespace MovieTicket.Models
         [DisplayName("Mã loại vé")]
         public int maloaive { get; set; }
         [DisplayName("Mã khuyến mãi ")]
-        public Nullable<int> makm { get; set; }
+        public string makm { get; set; }
     }
 }

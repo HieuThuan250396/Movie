@@ -19,7 +19,7 @@ namespace MovieTicket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhongChieu()
         {
-            this.SuatChieux = new HashSet<SuatChieu>();
+            this.SuatChieu = new HashSet<SuatChieu>();
         }
 
         [Required(ErrorMessage = "Không được để trống trường này")]
@@ -33,6 +33,6 @@ namespace MovieTicket.Models
         public int soghebandau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuatChieu> SuatChieux { get; set; }
+        public virtual ICollection<SuatChieu> SuatChieu { get; set; }
     }
 }

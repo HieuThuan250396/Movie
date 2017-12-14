@@ -64,7 +64,7 @@ namespace MovieTicket.Areas.Admin.Security
         {
             using (qldvEntities2 db = new qldvEntities2())
             {
-                NhanVien user = db.NhanViens.FirstOrDefault(u => u.taikhoan.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+                NhanVien user = db.NhanVien.FirstOrDefault(u => u.taikhoan.Equals(username, StringComparison.CurrentCultureIgnoreCase));
 
                 var roles = user.vaitro;
                 return new string[] { roles }; 
@@ -85,7 +85,7 @@ namespace MovieTicket.Areas.Admin.Security
         {
             using (qldvEntities2 db = new qldvEntities2())
             {
-                NhanVien user = db.NhanViens.FirstOrDefault(u => u.taikhoan.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+                NhanVien user = db.NhanVien.FirstOrDefault(u => u.taikhoan.Equals(username, StringComparison.CurrentCultureIgnoreCase));
 
                 var roles = user.vaitro;
                 if (user != null)

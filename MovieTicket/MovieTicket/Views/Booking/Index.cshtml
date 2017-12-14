@@ -38,7 +38,7 @@
                             int gia = Model.ElementAt(i).giave;
                             string id = "" + Model.ElementAt(i).mave;
 
-                            if (Model.ElementAt(i).tinhtrang)
+                            if (Model.ElementAt(i).tinhtrang!=0)
                             {
                                 tinhTrang = "seatCharts-seat" + " seatCharts-cell" + " unavailable";
                                 <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
@@ -75,7 +75,7 @@
                             int gia = Model.ElementAt(i).giave;
                             string id = "" + Model.ElementAt(i).mave;
 
-                            if (Model.ElementAt(i).tinhtrang)
+                            if (Model.ElementAt(i).tinhtrang!=0)
                             {
                                 tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
                                 <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>
@@ -111,7 +111,7 @@
                                 int gia = Model.ElementAt(i).giave;
                                 string id = "" + Model.ElementAt(i).mave;
 
-                                if (Model.ElementAt(i).tinhtrang)
+                                if (Model.ElementAt(i).tinhtrang!=0)
                                 {
                                     tinhTrang = "seatCharts-seat seatCharts-cell unavailable";
                                     <div id=@Model.ElementAt(i).mave role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="@tinhTrang">@Model.ElementAt(i).mave</div>

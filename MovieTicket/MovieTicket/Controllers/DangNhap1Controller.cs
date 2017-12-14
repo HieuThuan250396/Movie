@@ -32,7 +32,7 @@ namespace MovieTicket.Controllers
                 //db.NhanViens.Add(nhanVien);
                 List<int> kq = db.Database.SqlQuery<int>("exec sp_loadThongTinDangNhap {0}, {1}", dienthoai, matkhau).ToList();
                 FormsAuthentication.SetAuthCookie(dienthoai, false);
-                KhachHang a = db.KhachHangs.SingleOrDefault(s => s.dienthoai.Equals(dienthoai));
+                KhachHang a = db.KhachHang.SingleOrDefault(s => s.dienthoai.Equals(dienthoai));
                 Session["taikhoan"] = a.ho + " " + a.tenlot + " " + a.ten;
                 Session["maKH"] = a.makhachhang;
                 string mk = a.matkhau;

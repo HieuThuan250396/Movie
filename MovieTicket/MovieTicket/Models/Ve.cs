@@ -22,18 +22,17 @@ namespace MovieTicket.Models
         public int masuatchieu { get; set; }
         [DisplayName("Mã khách hàng")]
         public Nullable<int> makhachhang { get; set; }
-        [Required(ErrorMessage = "Không được để trống trường này")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         [DisplayName("Giá vé")]
         public int giave { get; set; }
         [DisplayName("Tình trạng")]
-        public bool tinhtrang { get; set; }
+        public int tinhtrang { get; set; }
         [DisplayName("Giờ đặt")]
         public Nullable<System.DateTime> giodat { get; set; }
         [DisplayName("Mã loại vé")]
         public int maloaive { get; set; }
         [DisplayName("Mã khuyến mãi")]
-        public Nullable<int> makm { get; set; }
+        public string makm { get; set; }
         [DisplayName("Khách hàng")]
         public virtual KhachHang KhachHang { get; set; }
         [DisplayName("Khuyến mãi")]

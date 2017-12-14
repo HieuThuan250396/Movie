@@ -11,7 +11,7 @@ namespace MovieTicket.Models
 {
     using System;
     
-    public partial class sp_loadVeTheoSuatChieu_Result
+    public partial class sp_loadTatCaVe_Result
     {
         public int mave { get; set; }
         public int masuatchieu { get; set; }

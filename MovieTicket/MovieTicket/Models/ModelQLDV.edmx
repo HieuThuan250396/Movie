@@ -27,7 +27,7 @@
           <Key>
             <PropertyRef Name="makm" />
           </Key>
-          <Property Name="makm" Type="int" Nullable="false" />
+          <Property Name="makm" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ngaybatdau" Type="datetime" Nullable="false" />
           <Property Name="ngayketthuc" Type="datetime" Nullable="false" />
           <Property Name="giatri" Type="float" Nullable="false" />
@@ -102,10 +102,10 @@
           <Property Name="masuatchieu" Type="int" Nullable="false" />
           <Property Name="makhachhang" Type="int" />
           <Property Name="giave" Type="int" Nullable="false" />
-          <Property Name="tinhtrang" Type="bit" Nullable="false" />
+          <Property Name="tinhtrang" Type="int" Nullable="false" />
           <Property Name="giodat" Type="datetime" />
           <Property Name="maloaive" Type="int" Nullable="false" />
-          <Property Name="makm" Type="int" />
+          <Property Name="makm" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -126,12 +126,10 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="tinhtrang" Type="bit" Nullable="false" />
           <Property Name="giodat" Type="datetime" Nullable="false" />
           <Property Name="maloaive" Type="int" Nullable="false" />
-          <Property Name="makm" Type="int" />
+          <Property Name="makm" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_Phim_TheLoai">
-          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="1" />
           <End Role="Phim" Type="Self.Phim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TheLoai">
@@ -235,6 +233,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_addKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makm" Type="nvarchar" Mode="In" />
           <Parameter Name="ngaybatdau" Type="date" Mode="In" />
           <Parameter Name="ngayketthuc" Type="date" Mode="In" />
           <Parameter Name="giatri" Type="float" Mode="In" />
@@ -278,13 +277,13 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Parameter Name="makhachhang" Type="int" Mode="In" />
           <Parameter Name="giodat" Type="datetime" Mode="In" />
           <Parameter Name="maloaive" Type="int" Mode="In" />
-          <Parameter Name="makm" Type="int" Mode="In" />
+          <Parameter Name="makm" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="sp_datVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="sp_datVe2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="mave" Type="int" Mode="In" />
           <Parameter Name="masuatchieu" Type="int" Mode="In" />
           <Parameter Name="makhachhang" Type="int" Mode="In" />
-          <Parameter Name="makm" Type="int" Mode="In" />
+          <Parameter Name="makm" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_editKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="makhachhang" Type="int" Mode="In" />
@@ -302,7 +301,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_editKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="makm" Type="int" Mode="In" />
+          <Parameter Name="makm" Type="nvarchar" Mode="In" />
           <Parameter Name="ngaybatdau" Type="date" Mode="In" />
           <Parameter Name="ngayketthuc" Type="date" Mode="In" />
           <Parameter Name="giatri" Type="float" Mode="In" />
@@ -390,6 +389,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
         <Function Name="sp_loadTatCaPhim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_loadTatCaPhongChieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_loadTatCaTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadTatCaVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_loadTheLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="matheloai" Type="int" Mode="In" />
         </Function>
@@ -407,7 +407,6 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
         <Function Name="sp_traVe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="mave" Type="int" Mode="In" />
           <Parameter Name="masuatchieu" Type="int" Mode="In" />
-          <Parameter Name="makm" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="qldvModelStoreContainer">
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -482,18 +481,18 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="dienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="matkhau" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Ves" Relationship="Self.FK_Ve_KhachHang" FromRole="KhachHang" ToRole="Ve" />
+          <NavigationProperty Name="Ve" Relationship="Self.FK_Ve_KhachHang" FromRole="KhachHang" ToRole="Ve" />
         </EntityType>
         <EntityType Name="KhuyenMai">
           <Key>
             <PropertyRef Name="makm" />
           </Key>
-          <Property Name="makm" Type="Int32" Nullable="false" />
+          <Property Name="makm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ngaybatdau" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ngayketthuc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="giatri" Type="Double" Nullable="false" />
           <Property Name="tinhtrang" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Ves" Relationship="Self.FK_Ve_KhuyenMai" FromRole="KhuyenMai" ToRole="Ve" />
+          <NavigationProperty Name="Ve" Relationship="Self.FK_Ve_KhuyenMai" FromRole="KhuyenMai" ToRole="Ve" />
         </EntityType>
         <EntityType Name="LoaiVe">
           <Key>
@@ -502,7 +501,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="maloaive" Type="Int32" Nullable="false" />
           <Property Name="tenloaive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="giave" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ves" Relationship="Self.FK_Ve_LoaiVe" FromRole="LoaiVe" ToRole="Ve" />
+          <NavigationProperty Name="Ve" Relationship="Self.FK_Ve_LoaiVe" FromRole="LoaiVe" ToRole="Ve" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -529,7 +528,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="thoiluong" Type="Int32" Nullable="false" />
           <Property Name="trailer" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="TheLoai" Relationship="Self.FK_Phim_TheLoai" FromRole="Phim" ToRole="TheLoai" />
-          <NavigationProperty Name="SuatChieux" Relationship="Self.FK_SuatChieu_Phim" FromRole="Phim" ToRole="SuatChieu" />
+          <NavigationProperty Name="SuatChieu" Relationship="Self.FK_SuatChieu_Phim" FromRole="Phim" ToRole="SuatChieu" />
         </EntityType>
         <EntityType Name="PhongChieu">
           <Key>
@@ -538,7 +537,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="maphong" Type="Int32" Nullable="false" />
           <Property Name="tenphong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="soghebandau" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SuatChieux" Relationship="Self.FK_SuatChieu_PhongChieu" FromRole="PhongChieu" ToRole="SuatChieu" />
+          <NavigationProperty Name="SuatChieu" Relationship="Self.FK_SuatChieu_PhongChieu" FromRole="PhongChieu" ToRole="SuatChieu" />
         </EntityType>
         <EntityType Name="SuatChieu">
           <Key>
@@ -553,7 +552,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="soghecontrong" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_SuatChieu_Phim" FromRole="SuatChieu" ToRole="Phim" />
           <NavigationProperty Name="PhongChieu" Relationship="Self.FK_SuatChieu_PhongChieu" FromRole="SuatChieu" ToRole="PhongChieu" />
-          <NavigationProperty Name="Ves" Relationship="Self.FK_Ve_SuatChieu" FromRole="SuatChieu" ToRole="Ve" />
+          <NavigationProperty Name="Ve" Relationship="Self.FK_Ve_SuatChieu" FromRole="SuatChieu" ToRole="Ve" />
         </EntityType>
         <EntityType Name="TheLoai">
           <Key>
@@ -561,7 +560,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           </Key>
           <Property Name="matheloai" Type="Int32" Nullable="false" />
           <Property Name="tentheloai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Phims" Relationship="Self.FK_Phim_TheLoai" FromRole="TheLoai" ToRole="Phim" />
+          <NavigationProperty Name="Phim" Relationship="Self.FK_Phim_TheLoai" FromRole="TheLoai" ToRole="Phim" />
         </EntityType>
         <EntityType Name="Ve">
           <Key>
@@ -572,10 +571,10 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="masuatchieu" Type="Int32" Nullable="false" />
           <Property Name="makhachhang" Type="Int32" />
           <Property Name="giave" Type="Int32" Nullable="false" />
-          <Property Name="tinhtrang" Type="Boolean" Nullable="false" />
+          <Property Name="tinhtrang" Type="Int32" Nullable="false" />
           <Property Name="giodat" Type="DateTime" Precision="3" />
           <Property Name="maloaive" Type="Int32" Nullable="false" />
-          <Property Name="makm" Type="Int32" />
+          <Property Name="makm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_Ve_KhachHang" FromRole="Ve" ToRole="KhachHang" />
           <NavigationProperty Name="KhuyenMai" Relationship="Self.FK_Ve_KhuyenMai" FromRole="Ve" ToRole="KhuyenMai" />
           <NavigationProperty Name="LoaiVe" Relationship="Self.FK_Ve_LoaiVe" FromRole="Ve" ToRole="LoaiVe" />
@@ -598,7 +597,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Name="tinhtrang" Type="Boolean" Nullable="false" />
           <Property Name="giodat" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="maloaive" Type="Int32" Nullable="false" />
-          <Property Name="makm" Type="Int32" />
+          <Property Name="makm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Ve_KhachHang">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
@@ -637,9 +636,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phim_TheLoai">
-          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="1" />
           <End Role="Phim" Type="Self.Phim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TheLoai">
@@ -687,43 +684,43 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="qldvEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
-          <EntitySet Name="KhuyenMais" EntityType="Self.KhuyenMai" />
-          <EntitySet Name="LoaiVes" EntityType="Self.LoaiVe" />
-          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
-          <EntitySet Name="Phims" EntityType="Self.Phim" />
-          <EntitySet Name="PhongChieux" EntityType="Self.PhongChieu" />
-          <EntitySet Name="SuatChieux" EntityType="Self.SuatChieu" />
-          <EntitySet Name="TheLoais" EntityType="Self.TheLoai" />
-          <EntitySet Name="Ves" EntityType="Self.Ve" />
-          <EntitySet Name="VeDangDats" EntityType="Self.VeDangDat" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" />
+          <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" />
+          <EntitySet Name="LoaiVe" EntityType="Self.LoaiVe" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" />
+          <EntitySet Name="Phim" EntityType="Self.Phim" />
+          <EntitySet Name="PhongChieu" EntityType="Self.PhongChieu" />
+          <EntitySet Name="SuatChieu" EntityType="Self.SuatChieu" />
+          <EntitySet Name="TheLoai" EntityType="Self.TheLoai" />
+          <EntitySet Name="Ve" EntityType="Self.Ve" />
+          <EntitySet Name="VeDangDat" EntityType="Self.VeDangDat" />
           <AssociationSet Name="FK_Ve_KhachHang" Association="Self.FK_Ve_KhachHang">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="Ve" EntitySet="Ves" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
           <AssociationSet Name="FK_Ve_KhuyenMai" Association="Self.FK_Ve_KhuyenMai">
-            <End Role="KhuyenMai" EntitySet="KhuyenMais" />
-            <End Role="Ve" EntitySet="Ves" />
+            <End Role="KhuyenMai" EntitySet="KhuyenMai" />
+            <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
           <AssociationSet Name="FK_Ve_LoaiVe" Association="Self.FK_Ve_LoaiVe">
-            <End Role="LoaiVe" EntitySet="LoaiVes" />
-            <End Role="Ve" EntitySet="Ves" />
+            <End Role="LoaiVe" EntitySet="LoaiVe" />
+            <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
           <AssociationSet Name="FK_Phim_TheLoai" Association="Self.FK_Phim_TheLoai">
-            <End Role="TheLoai" EntitySet="TheLoais" />
-            <End Role="Phim" EntitySet="Phims" />
+            <End Role="TheLoai" EntitySet="TheLoai" />
+            <End Role="Phim" EntitySet="Phim" />
           </AssociationSet>
           <AssociationSet Name="FK_SuatChieu_Phim" Association="Self.FK_SuatChieu_Phim">
-            <End Role="Phim" EntitySet="Phims" />
-            <End Role="SuatChieu" EntitySet="SuatChieux" />
+            <End Role="Phim" EntitySet="Phim" />
+            <End Role="SuatChieu" EntitySet="SuatChieu" />
           </AssociationSet>
           <AssociationSet Name="FK_SuatChieu_PhongChieu" Association="Self.FK_SuatChieu_PhongChieu">
-            <End Role="PhongChieu" EntitySet="PhongChieux" />
-            <End Role="SuatChieu" EntitySet="SuatChieux" />
+            <End Role="PhongChieu" EntitySet="PhongChieu" />
+            <End Role="SuatChieu" EntitySet="SuatChieu" />
           </AssociationSet>
           <AssociationSet Name="FK_Ve_SuatChieu" Association="Self.FK_Ve_SuatChieu">
-            <End Role="SuatChieu" EntitySet="SuatChieux" />
-            <End Role="Ve" EntitySet="Ves" />
+            <End Role="SuatChieu" EntitySet="SuatChieu" />
+            <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
           <FunctionImport Name="sp_addKhachHang">
             <Parameter Name="ho" Mode="In" Type="String" />
@@ -740,6 +737,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
             <Parameter Name="matkhau" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_addKhuyenMai">
+            <Parameter Name="makm" Mode="In" Type="String" />
             <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
             <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
             <Parameter Name="giatri" Mode="In" Type="Double" />
@@ -783,13 +781,13 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
             <Parameter Name="makhachhang" Mode="In" Type="Int32" />
             <Parameter Name="giodat" Mode="In" Type="DateTime" />
             <Parameter Name="maloaive" Mode="In" Type="Int32" />
-            <Parameter Name="makm" Mode="In" Type="Int32" />
+            <Parameter Name="makm" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_datVe">
+          <FunctionImport Name="sp_datVe2">
             <Parameter Name="mave" Mode="In" Type="Int32" />
             <Parameter Name="masuatchieu" Mode="In" Type="Int32" />
             <Parameter Name="makhachhang" Mode="In" Type="Int32" />
-            <Parameter Name="makm" Mode="In" Type="Int32" />
+            <Parameter Name="makm" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_editKhachHang">
             <Parameter Name="makhachhang" Mode="In" Type="Int32" />
@@ -807,7 +805,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
             <Parameter Name="matkhau" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_editKhuyenMai">
-            <Parameter Name="makm" Mode="In" Type="Int32" />
+            <Parameter Name="makm" Mode="In" Type="String" />
             <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
             <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
             <Parameter Name="giatri" Mode="In" Type="Double" />
@@ -895,6 +893,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <FunctionImport Name="sp_loadTatCaPhim" ReturnType="Collection(qldvModel.sp_loadTatCaPhim_Result)" />
           <FunctionImport Name="sp_loadTatCaPhongChieu" ReturnType="Collection(qldvModel.sp_loadTatCaPhongChieu_Result)" />
           <FunctionImport Name="sp_loadTatCaTheLoai" ReturnType="Collection(qldvModel.sp_loadTatCaTheLoai_Result)" />
+          <FunctionImport Name="sp_loadTatCaVe" ReturnType="Collection(qldvModel.sp_loadTatCaVe_Result)" />
           <FunctionImport Name="sp_loadTheLoai" ReturnType="Collection(qldvModel.sp_loadTheLoai_Result)">
             <Parameter Name="matheloai" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -912,7 +911,6 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <FunctionImport Name="sp_traVe">
             <Parameter Name="mave" Mode="In" Type="Int32" />
             <Parameter Name="masuatchieu" Mode="In" Type="Int32" />
-            <Parameter Name="makm" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_loadChiTietKhachHang_Result">
@@ -1082,7 +1080,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Type="String" Name="matkhau" Nullable="false" MaxLength="32" />
         </ComplexType>
         <ComplexType Name="sp_loadTatCaKhuyenMai_Result">
-          <Property Type="Int32" Name="makm" Nullable="false" />
+          <Property Type="String" Name="makm" Nullable="false" MaxLength="10" />
           <Property Type="DateTime" Name="ngaybatdau" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="ngayketthuc" Nullable="false" Precision="23" />
           <Property Type="Double" Name="giatri" Nullable="false" />
@@ -1115,6 +1113,16 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Type="Int32" Name="matheloai" Nullable="false" />
           <Property Type="String" Name="tentheloai" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="sp_loadTatCaVe_Result">
+          <Property Type="Int32" Name="mave" Nullable="false" />
+          <Property Type="Int32" Name="masuatchieu" Nullable="false" />
+          <Property Type="Int32" Name="makhachhang" Nullable="true" />
+          <Property Type="Int32" Name="giave" Nullable="false" />
+          <Property Type="Int32" Name="tinhtrang" Nullable="false" />
+          <Property Type="DateTime" Name="giodat" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="maloaive" Nullable="false" />
+          <Property Type="String" Name="makm" Nullable="true" MaxLength="10" />
+        </ComplexType>
         <ComplexType Name="sp_loadTheLoai_Result">
           <Property Type="Int32" Name="matheloai" Nullable="false" />
           <Property Type="String" Name="tentheloai" Nullable="false" MaxLength="50" />
@@ -1124,10 +1132,10 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <Property Type="Int32" Name="masuatchieu" Nullable="false" />
           <Property Type="Int32" Name="makhachhang" Nullable="true" />
           <Property Type="Int32" Name="giave" Nullable="false" />
-          <Property Type="Boolean" Name="tinhtrang" Nullable="false" />
+          <Property Type="Int32" Name="tinhtrang" Nullable="false" />
           <Property Type="DateTime" Name="giodat" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="maloaive" Nullable="false" />
-          <Property Type="Int32" Name="makm" Nullable="true" />
+          <Property Type="String" Name="makm" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1135,7 +1143,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="qldvModelStoreContainer" CdmEntityContainer="qldvEntities2">
-          <EntitySetMapping Name="KhachHangs">
+          <EntitySetMapping Name="KhachHang">
             <EntityTypeMapping TypeName="qldvModel.KhachHang">
               <MappingFragment StoreEntitySet="KhachHang">
                 <ScalarProperty Name="makhachhang" ColumnName="makhachhang" />
@@ -1154,7 +1162,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KhuyenMais">
+          <EntitySetMapping Name="KhuyenMai">
             <EntityTypeMapping TypeName="qldvModel.KhuyenMai">
               <MappingFragment StoreEntitySet="KhuyenMai">
                 <ScalarProperty Name="makm" ColumnName="makm" />
@@ -1165,7 +1173,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiVes">
+          <EntitySetMapping Name="LoaiVe">
             <EntityTypeMapping TypeName="qldvModel.LoaiVe">
               <MappingFragment StoreEntitySet="LoaiVe">
                 <ScalarProperty Name="maloaive" ColumnName="maloaive" />
@@ -1174,7 +1182,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NhanViens">
+          <EntitySetMapping Name="NhanVien">
             <EntityTypeMapping TypeName="qldvModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
                 <ScalarProperty Name="manv" ColumnName="manv" />
@@ -1184,7 +1192,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Phims">
+          <EntitySetMapping Name="Phim">
             <EntityTypeMapping TypeName="qldvModel.Phim">
               <MappingFragment StoreEntitySet="Phim">
                 <ScalarProperty Name="maphim" ColumnName="maphim" />
@@ -1201,7 +1209,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PhongChieux">
+          <EntitySetMapping Name="PhongChieu">
             <EntityTypeMapping TypeName="qldvModel.PhongChieu">
               <MappingFragment StoreEntitySet="PhongChieu">
                 <ScalarProperty Name="maphong" ColumnName="maphong" />
@@ -1210,7 +1218,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SuatChieux">
+          <EntitySetMapping Name="SuatChieu">
             <EntityTypeMapping TypeName="qldvModel.SuatChieu">
               <MappingFragment StoreEntitySet="SuatChieu">
                 <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
@@ -1223,7 +1231,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TheLoais">
+          <EntitySetMapping Name="TheLoai">
             <EntityTypeMapping TypeName="qldvModel.TheLoai">
               <MappingFragment StoreEntitySet="TheLoai">
                 <ScalarProperty Name="matheloai" ColumnName="matheloai" />
@@ -1231,7 +1239,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ves">
+          <EntitySetMapping Name="Ve">
             <EntityTypeMapping TypeName="qldvModel.Ve">
               <MappingFragment StoreEntitySet="Ve">
                 <ScalarProperty Name="mave" ColumnName="mave" />
@@ -1245,7 +1253,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VeDangDats">
+          <EntitySetMapping Name="VeDangDat">
             <EntityTypeMapping TypeName="qldvModel.VeDangDat">
               <MappingFragment StoreEntitySet="VeDangDat">
                 <ScalarProperty Name="mave" ColumnName="mave" />
@@ -1268,7 +1276,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
           <FunctionImportMapping FunctionImportName="sp_addSuatChieu" FunctionName="qldvModel.Store.sp_addSuatChieu" />
           <FunctionImportMapping FunctionImportName="sp_addTheLoai" FunctionName="qldvModel.Store.sp_addTheLoai" />
           <FunctionImportMapping FunctionImportName="sp_addVe" FunctionName="qldvModel.Store.sp_addVe" />
-          <FunctionImportMapping FunctionImportName="sp_datVe" FunctionName="qldvModel.Store.sp_datVe" />
+          <FunctionImportMapping FunctionImportName="sp_datVe2" FunctionName="qldvModel.Store.sp_datVe2" />
           <FunctionImportMapping FunctionImportName="sp_editKhachHang" FunctionName="qldvModel.Store.sp_editKhachHang" />
           <FunctionImportMapping FunctionImportName="sp_editKhuyenMai" FunctionName="qldvModel.Store.sp_editKhuyenMai" />
           <FunctionImportMapping FunctionImportName="sp_editLoaiVe" FunctionName="qldvModel.Store.sp_editLoaiVe" />
@@ -1562,6 +1570,20 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadTatCaVe" FunctionName="qldvModel.Store.sp_loadTatCaVe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qldvModel.sp_loadTatCaVe_Result">
+                <ScalarProperty Name="mave" ColumnName="mave" />
+                <ScalarProperty Name="masuatchieu" ColumnName="masuatchieu" />
+                <ScalarProperty Name="makhachhang" ColumnName="makhachhang" />
+                <ScalarProperty Name="giave" ColumnName="giave" />
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
+                <ScalarProperty Name="giodat" ColumnName="giodat" />
+                <ScalarProperty Name="maloaive" ColumnName="maloaive" />
+                <ScalarProperty Name="makm" ColumnName="makm" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_loadTheLoai" FunctionName="qldvModel.Store.sp_loadTheLoai">
             <ResultMapping>
               <ComplexTypeMapping TypeName="qldvModel.sp_loadTheLoai_Result">
@@ -1601,7 +1623,7 @@ warning 6002: The table/view 'qldv.dbo.VeDangDat' does not have a primary key de
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

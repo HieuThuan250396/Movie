@@ -91,7 +91,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/Phims/Create
         public ActionResult Create()
         {
-            ViewBag.matheloai = new SelectList(db.TheLoais, "matheloai", "tentheloai");
+            ViewBag.matheloai = new SelectList(db.TheLoai, "matheloai", "tentheloai");
             return View();
         }
 
@@ -123,7 +123,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             }
 
 
-            ViewBag.matheloai = new SelectList(db.TheLoais, "matheloai", "tentheloai", phim.matheloai);
+            ViewBag.matheloai = new SelectList(db.TheLoai, "matheloai", "tentheloai", phim.matheloai);
             return View(phim);
         }
 
@@ -139,7 +139,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.matheloai = new SelectList(db.TheLoais, "matheloai", "tentheloai", phim.matheloai);
+            ViewBag.matheloai = new SelectList(db.TheLoai, "matheloai", "tentheloai", phim.matheloai);
             return View(phim);
         }
 
@@ -171,7 +171,7 @@ namespace MovieTicket.Areas.Admin.Controllers
                 return RedirectToAction("Index");
 
             }
-            ViewBag.matheloai = new SelectList(db.TheLoais, "matheloai", "tentheloai", phim.matheloai);
+            ViewBag.matheloai = new SelectList(db.TheLoai, "matheloai", "tentheloai", phim.matheloai);
             return View(phim);
         }
 

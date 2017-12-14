@@ -17,8 +17,9 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/Ves
         public ActionResult Index()
         {
-            var ves = db.Ves.Include(v => v.KhachHang).Include(v => v.KhuyenMai).Include(v => v.LoaiVe).Include(v => v.SuatChieu);
-            return View(ves.ToList());
+            //var ves = db.Ves.Include(v => v.KhachHang).Include(v => v.KhuyenMai).Include(v => v.LoaiVe).Include(v => v.SuatChieu);
+            //return View(ves.ToList());
+            return View(db.Database.SqlQuery<Ve>("exec sp_loadTatCaVe").ToList());
         }
 
         // GET: Admin/Ves/Details/5

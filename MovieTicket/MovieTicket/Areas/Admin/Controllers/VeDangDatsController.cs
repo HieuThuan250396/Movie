@@ -18,7 +18,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         // GET: Admin/VeDangDats
         public ActionResult Index()
         {
-            return View(db.VeDangDats.ToList());
+            return View(db.VeDangDat.ToList());
         }
 
         // GET: Admin/VeDangDats/Details/5
@@ -28,7 +28,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            VeDangDat veDangDat = db.VeDangDat.Find(id);
             if (veDangDat == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace MovieTicket.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.VeDangDats.Add(veDangDat);
+                db.VeDangDat.Add(veDangDat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            VeDangDat veDangDat = db.VeDangDat.Find(id);
             if (veDangDat == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VeDangDat veDangDat = db.VeDangDats.Find(id);
+            VeDangDat veDangDat = db.VeDangDat.Find(id);
             if (veDangDat == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VeDangDat veDangDat = db.VeDangDats.Find(id);
-            db.VeDangDats.Remove(veDangDat);
+            VeDangDat veDangDat = db.VeDangDat.Find(id);
+            db.VeDangDat.Remove(veDangDat);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

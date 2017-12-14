@@ -112,7 +112,7 @@ namespace MovieTicket.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TheLoai theLoai = db.TheLoais.Find(id);
+            TheLoai theLoai = db.TheLoai.Find(id);
             if (theLoai == null)
             {
                 return HttpNotFound();
@@ -125,8 +125,8 @@ namespace MovieTicket.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TheLoai theLoai = db.TheLoais.Find(id);
-            db.TheLoais.Remove(theLoai);
+            TheLoai theLoai = db.TheLoai.Find(id);
+            db.TheLoai.Remove(theLoai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
