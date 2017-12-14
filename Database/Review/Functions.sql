@@ -24,9 +24,6 @@ begin
 	if(@loaima = 'maphongchieu')
 		while exists (select * from PhongChieu where maphong = @ma)
 			set @ma += 1
-	if(@loaima = 'makhuyenmai')
-		while exists(select * from KhuyenMai where makm = @ma)
-			set @ma += 1
 	if(@loaima = 'maloaive')
 		while exists(select * from LoaiVe where maloaive = @ma)
 		set @ma += 1

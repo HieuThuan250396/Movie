@@ -304,12 +304,8 @@ go
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Add khuyen mai
-create proc sp_addKhuyenMai (@ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
+create proc sp_addKhuyenMai (@makm nvarchar(10), @ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
 as
-	declare @makm int = 1
-	while exists(select * from KhuyenMai where makm = @makm)
-		set @makm += 1
-
 	if (getdate() < @ngaybatdau or getdate() > @ngayketthuc)
 	begin
 		raiserror('Khong the tao khuyen mai. Loi thoi gian khuyen mai', 16, 1)
@@ -335,7 +331,7 @@ end
 go
 
 -- Edit khuyen mai
-create proc sp_editKhuyenMai (@makm int, @ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
+create proc sp_editKhuyenMai (@makm nvarchar(10), @ngaybatdau date, @ngayketthuc date, @giatri float,@tinhtrang bit)
 as
 	update KhuyenMai 
 	set 
